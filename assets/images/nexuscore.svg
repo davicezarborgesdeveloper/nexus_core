@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="grad" x1="180" y1="250" x2="844" y2="750" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#23F0FF"/>
+      <stop offset="1" stop-color="#B04CFF"/>
+    </linearGradient>
+
+    <linearGradient id="gradText" x1="260" y1="790" x2="764" y2="790" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#23F0FF"/>
+      <stop offset="1" stop-color="#B04CFF"/>
+    </linearGradient>
+
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3.2" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <style>
+      .stroke { stroke: url(#grad); stroke-width: 10; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .thin   { stroke: url(#grad); stroke-width: 6;  fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: .95; }
+      .node   { fill: #0b0f1a; stroke: url(#grad); stroke-width: 6; }
+    </style>
+  </defs>
+
+  <!-- transparent background (SVG já é "sem fundo") -->
+
+  <!-- CIRCUITOS (radiais) -->
+  <g filter="url(#glow)" opacity="0.95">
+    <!-- usei 16 linhas principais para manter o SVG leve -->
+    <g>
+      <path class="thin" d="M512 220 L512 160"/>
+      <circle class="node" cx="512" cy="142" r="12"/>
+
+      <path class="thin" d="M646 250 L698 206"/>
+      <circle class="node" cx="712" cy="194" r="12"/>
+
+      <path class="thin" d="M738 342 L806 312"/>
+      <circle class="node" cx="824" cy="304" r="12"/>
+
+      <path class="thin" d="M770 468 L848 468"/>
+      <circle class="node" cx="868" cy="468" r="12"/>
+
+      <path class="thin" d="M738 594 L806 624"/>
+      <circle class="node" cx="824" cy="632" r="12"/>
+
+      <path class="thin" d="M646 686 L698 730"/>
+      <circle class="node" cx="712" cy="742" r="12"/>
+
+      <path class="thin" d="M512 716 L512 776"/>
+      <circle class="node" cx="512" cy="794" r="12"/>
+
+      <path class="thin" d="M378 686 L326 730"/>
+      <circle class="node" cx="312" cy="742" r="12"/>
+
+      <path class="thin" d="M286 594 L218 624"/>
+      <circle class="node" cx="200" cy="632" r="12"/>
+
+      <path class="thin" d="M254 468 L176 468"/>
+      <circle class="node" cx="156" cy="468" r="12"/>
+
+      <path class="thin" d="M286 342 L218 312"/>
+      <circle class="node" cx="200" cy="304" r="12"/>
+
+      <path class="thin" d="M378 250 L326 206"/>
+      <circle class="node" cx="312" cy="194" r="12"/>
+    </g>
+  </g>
+
+  <!-- EMBLEMA: HEX + CUBO INTERNO -->
+  <g filter="url(#glow)">
+    <!-- Hex externo -->
+    <polygon class="stroke"
+      points="
+        512,260
+        716,378
+        716,558
+        512,676
+        308,558
+        308,378
+      "/>
+
+    <!-- diagonais do hex (estrutura) -->
+    <path class="thin" d="M512 260 L512 676"/>
+    <path class="thin" d="M308 378 L716 558"/>
+    <path class="thin" d="M716 378 L308 558"/>
+
+    <!-- “cubo” interno (isométrico simplificado) -->
+    <polygon class="thin"
+      points="
+        512,360
+        600,412
+        600,516
+        512,568
+        424,516
+        424,412
+      "/>
+
+    <path class="thin" d="M512 360 L512 568"/>
+    <path class="thin" d="M424 412 L512 468 L600 412"/>
+    <path class="thin" d="M424 516 L512 468 L600 516"/>
+
+    <!-- núcleo brilhante -->
+    <circle cx="512" cy="468" r="10" fill="url(#grad)"/>
+  </g>
+
+  <!-- TEXTO -->
+  <text x="512" y="900"
+        text-anchor="middle"
+        font-family="Montserrat, Poppins, Inter, Arial, sans-serif"
+        font-size="92"
+        letter-spacing="4"
+        fill="url(#gradText)">
+    NEXUSCORE
+  </text>
+</svg>

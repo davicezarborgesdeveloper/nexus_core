@@ -8,6 +8,7 @@ ThemeData getApplicationTheme() {
     useMaterial3: true,
     brightness: Brightness.dark, // Definimos como Dark por ser a base do design
     colorScheme: ColorScheme.fromSeed(
+      brightness: Brightness.dark,
       seedColor: ColorManager.accent,
       primary: ColorManager.accent,
       onPrimary: Colors.white,

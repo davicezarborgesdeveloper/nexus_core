@@ -33,6 +33,6 @@ class ColorManager {
     '900': const Color(0xFF0f172a), //Texto principal
   };
 
-  static Color textPrimary = neutral['50']!;
-  static Color textSecondary = neutral['400']!;
+  static Color textPrimary = foreground;
+  static Color textSecondary = secondary;
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nexus_core/l10n/app_localizations.dart';
+import 'package:nexus_core/src/core/resources/locale_controller.dart';
 import 'package:nexus_core/src/core/resources/theme_manager.dart';
 
 class MyApp extends StatefulWidget {
@@ -18,7 +20,11 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Nexus Core',
       debugShowCheckedModeBanner: false,
+      locale: LocaleController.instance.locale,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: getApplicationTheme(),
+      home: Container(),
     );
   }
 }

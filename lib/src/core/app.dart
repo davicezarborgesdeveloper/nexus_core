@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:nexus_core/src/core/resources/theme_manager.dart';
 
 class MyApp extends StatefulWidget {
-  MyApp._internal(); // private named constructor
-  int appState = 0;
-  static MyApp get instance =>
-      MyApp._internal(); // single instance -- singleton
+  static const MyApp _instance = MyApp._internal();
 
-  factory MyApp() => instance; // factory for the class instance
+  const MyApp._internal(); // private named constructor
+
+  factory MyApp() => _instance; // factory for the class instance
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -16,9 +16,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Nexus Core',
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: RouteGenerator.getRoute,
-      initialRoute: Routes.splashRoute,
       theme: getApplicationTheme(),
     );
   }

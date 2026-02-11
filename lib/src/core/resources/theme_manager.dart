@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_core/src/core/resources/color_manager.dart';
+import 'package:nexus_core/src/core/resources/font_manager.dart';
+import 'package:nexus_core/src/core/resources/style_manager.dart';
 
 ThemeData getApplicationTheme() {
   return ThemeData(
@@ -19,32 +21,27 @@ ThemeData getApplicationTheme() {
     // Tipografia
     textTheme: TextTheme(
       // Headings: Space Grotesk
-      displayLarge: GoogleFonts.spaceGrotesk(
+      displayLarge: getBoldStyle(
         fontSize: 48,
-        fontWeight: FontWeight.bold,
         color: ColorManager.textPrimary,
-      ),
-      headlineMedium: GoogleFonts.spaceGrotesk(
+      ).spaceGrotesk,
+      headlineMedium: getSemiBoldStyle(
         fontSize: 32,
-        fontWeight: FontWeight.w600,
         color: ColorManager.textPrimary,
-      ),
-      titleLarge: GoogleFonts.spaceGrotesk(
+      ).spaceGrotesk,
+      titleLarge: getMediumStyle(
         fontSize: 20,
-        fontWeight: FontWeight.w500,
         color: ColorManager.textPrimary,
-      ),
+      ).spaceGrotesk,
       // Body: Inter
-      bodyLarge: GoogleFonts.inter(
-        fontSize: 18,
-        fontWeight: FontWeight.normal,
+      bodyLarge: getRegularStyle(
+        fontSize: FontSize.s18,
         color: ColorManager.textPrimary,
-      ),
-      bodyMedium: GoogleFonts.inter(
-        fontSize: 16,
-        fontWeight: FontWeight.normal,
+      ).inter,
+      bodyMedium: getRegularStyle(
+        fontSize: FontSize.s16,
         color: ColorManager.textSecondary,
-      ),
+      ).inter,
     ),
 
     // Customização de Componentes
@@ -59,13 +56,16 @@ ThemeData getApplicationTheme() {
       style: ElevatedButton.styleFrom(
         backgroundColor: ColorManager.accent,
         foregroundColor: Colors.white,
-        textStyle: GoogleFonts.inter(fontWeight: FontWeight.w600, fontSize: 16),
+        textStyle: getSemiBoldStyle(
+          fontSize: FontSize.s16,
+          color: Colors.white,
+        ).inter,
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
     ),
 
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: ColorManager.neutral['800'],
       elevation: 0,
       shape: RoundedRectangleBorder(

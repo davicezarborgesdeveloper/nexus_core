@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nexus_core/l10n/app_localizations.dart';
 import 'package:nexus_core/src/core/resources/locale_controller.dart';
 import 'package:nexus_core/src/core/resources/theme_manager.dart';
+import 'package:nexus_core/src/features/portfolio/main/main_page.dart';
 
 class MyApp extends StatefulWidget {
   static const MyApp _instance = MyApp._internal();
@@ -24,7 +25,7 @@ class _MyAppState extends State<MyApp> {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: getApplicationTheme(),
-      home: Container(),
+      home: const MainPage(),
     );
   }
 }

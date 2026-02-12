@@ -67,7 +67,7 @@ ThemeData getApplicationTheme() {
     ),
 
     cardTheme: CardThemeData(
-      color: ColorManager.neutral['800'],
+      color: ColorManager.neutral[800],
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),

@@ -4,6 +4,9 @@ import 'package:nexus_core/src/core/resources/font_manager.dart';
 import 'package:nexus_core/src/core/resources/size_screen_manager.dart';
 import 'package:nexus_core/src/core/resources/style_manager.dart';
 import 'package:nexus_core/src/features/portfolio/models/menu_item.dart';
+import 'package:nexus_core/src/features/portfolio/widgets/language/language_switcher.dart';
+import 'package:nexus_core/src/features/portfolio/widgets/social/social_button.dart';
+import 'package:nexus_core/src/features/portfolio/widgets/social/social_enum.dart';
 
 class AppBarWeb extends StatelessWidget implements PreferredSizeWidget {
   final String name;
@@ -29,8 +32,63 @@ class AppBarWeb extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ),
-      title: Row(children: []),
-      actions: [],
+      title: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: menus.map((m) => _buildNavButton(m)).toList(),
+      ),
+      actions: [
+        const LanguageSwitcher(),
+        const SizedBox(width: 8),
+        const SocialButton(
+          link: 'https://github.com/davicezarborgesdeveloper',
+          tipo: SocialEnum.github,
+        ),
+        const SizedBox(width: 16),
+        const SocialButton(
+          link: 'https://www.linkedin.com/in/daviborgesdeveloper/',
+          tipo: SocialEnum.linkedin,
+        ),
+        const SizedBox(width: 16),
+        const SocialButton(
+          link: 'daviborges.sistemas@gmail.com',
+          tipo: SocialEnum.email,
+        ),
+        VerticalDivider(
+          color: ColorManager.neutral[300]!,
+          thickness: 0.5,
+          indent: 16,
+          endIndent: 16,
+          width: 20,
+        ),
+        GestureDetector(
+          onTap: () {},
+          child: Icon(Icons.settings_outlined, color: ColorManager.secondary),
+        ),
+        const SizedBox(width: 16),
+      ],
+    );
+  }
+
+  Widget _buildNavButton(MenuItem item) {
+    return TextButton(
+      style: ButtonStyle(
+        overlayColor: WidgetStateProperty.all(Colors.transparent),
+        foregroundColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.hovered)) {
+            return Colors.red;
+          }
+          return ColorManager.textPrimary;
+        }),
+      ),
+      onPressed: () => Scrollable.ensureVisible(item.key.currentContext!),
+      child: Text(
+        item.label,
+        style: const TextStyle(
+          fontFamily: FontConstants.inter,
+          fontSize: FontSize.s16,
+          fontWeight: FontWeightManager.regular,
+        ),
+      ),
     );
   }
 

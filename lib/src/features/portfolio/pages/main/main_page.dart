@@ -4,7 +4,7 @@ import 'package:nexus_core/src/features/portfolio/models/menu_item.dart';
 import 'package:nexus_core/src/features/portfolio/widgets/app_bar_web.dart';
 
 class MainPage extends StatefulWidget {
-  MainPage({super.key});
+  const MainPage({super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -19,7 +19,7 @@ class _MainPageState extends State<MainPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _menu ??= [
+    _menu = [
       MenuItem(AppLocalizations.of(context)!.navHome, GlobalKey()),
       MenuItem(AppLocalizations.of(context)!.navAbout, GlobalKey()),
       MenuItem(AppLocalizations.of(context)!.navExperience, GlobalKey()),

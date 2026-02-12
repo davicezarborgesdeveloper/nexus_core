@@ -18,14 +18,19 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Nexus Core',
-      debugShowCheckedModeBanner: false,
-      locale: LocaleController.instance.locale,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      theme: getApplicationTheme(),
-      home: MainPage(),
+    return AnimatedBuilder(
+      animation: LocaleController.instance,
+      builder: (context, child) {
+        return MaterialApp(
+          title: 'Nexus Core',
+          debugShowCheckedModeBanner: false,
+          locale: LocaleController.instance.locale,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          theme: getApplicationTheme(),
+          home: const MainPage(),
+        );
+      },
     );
   }
 }

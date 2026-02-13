@@ -20,21 +20,18 @@ class LanguageButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(50),
             onTap: () =>
                 controller.isOpen ? controller.close() : controller.open(),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              child: Row(
-                children: [
-                  Icon(Icons.language, color: ColorManager.secondary),
-                  const SizedBox(width: 8),
-                  Text(
-                    currentLocale.languageCode.toUpperCase(),
-                    style: getBoldStyle(
-                      color: ColorManager.secondary,
-                      fontSize: FontSize.s14,
-                    ).inter,
-                  ),
-                ],
-              ),
+            child: Row(
+              children: [
+                Icon(Icons.language, color: ColorManager.secondary),
+                const SizedBox(width: 8),
+                Text(
+                  currentLocale.languageCode.toUpperCase(),
+                  style: getBoldStyle(
+                    color: ColorManager.secondary,
+                    fontSize: FontSize.s14,
+                  ).inter,
+                ),
+              ],
             ),
           ),
         );

@@ -31,6 +31,11 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBarWeb(name, menu), body: Container());
+    return Scaffold(
+      appBar: AppBarWeb(name, menu),
+      drawer: Drawer(),
+
+      body: Container(),
+    );
   }
 }

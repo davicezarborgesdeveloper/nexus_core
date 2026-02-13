@@ -5,6 +5,7 @@ import 'package:nexus_core/src/core/resources/size_screen_manager.dart';
 import 'package:nexus_core/src/core/resources/style_manager.dart';
 import 'package:nexus_core/src/features/portfolio/models/menu_item.dart';
 import 'package:nexus_core/src/features/portfolio/widgets/language/language_switcher.dart';
+import 'package:nexus_core/src/features/portfolio/widgets/menu_text_widget.dart';
 import 'package:nexus_core/src/features/portfolio/widgets/social/social_button.dart';
 import 'package:nexus_core/src/features/portfolio/widgets/social/social_enum.dart';
 
@@ -17,76 +18,98 @@ class AppBarWeb extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: ColorManager.background,
+      automaticallyImplyLeading: false,
+      titleSpacing: 0,
       centerTitle: true,
-      leadingWidth: context.screenWidth < 1200 ? 240 : 300,
-      leading: Padding(
-        padding: const EdgeInsets.only(left: 24),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            name,
-            style: getBoldStyle(
-              color: ColorManager.textPrimary,
-              fontSize: FontSize.s20,
-            ).spaceGrotesk,
-          ),
-        ),
-      ),
-      title: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: menus.map((m) => _buildNavButton(m)).toList(),
-      ),
-      actions: [
-        const LanguageSwitcher(),
-        const SizedBox(width: 8),
-        const SocialButton(
-          link: 'https://github.com/davicezarborgesdeveloper',
-          tipo: SocialEnum.github,
-        ),
-        const SizedBox(width: 16),
-        const SocialButton(
-          link: 'https://www.linkedin.com/in/daviborgesdeveloper/',
-          tipo: SocialEnum.linkedin,
-        ),
-        const SizedBox(width: 16),
-        const SocialButton(
-          link: 'daviborges.sistemas@gmail.com',
-          tipo: SocialEnum.email,
-        ),
-        VerticalDivider(
-          color: ColorManager.neutral[300]!,
-          thickness: 0.5,
-          indent: 16,
-          endIndent: 16,
-          width: 20,
-        ),
-        GestureDetector(
-          onTap: () {},
-          child: Icon(Icons.settings_outlined, color: ColorManager.secondary),
-        ),
-        const SizedBox(width: 16),
-      ],
-    );
-  }
+      title: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 24),
+        width: context.screenWidth < 1200 ? null : 1200,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: SizedBox(
+                width: context.screenWidth < 955 && context.screenWidth > 883
+                    ? 120
+                    : null,
+                child: Text(
+                  name,
+                  style: getBoldStyle(
+                    color: ColorManager.textPrimary,
+                    fontSize: FontSize.s20,
+                  ).spaceGrotesk,
+                  softWrap: true,
+                  maxLines: null,
+                  overflow: TextOverflow.visible,
+                ),
+              ),
+            ),
+            Offstage(
+              offstage: context.screenWidth < 883,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: menus
+                    .asMap()
+                    .entries
+                    .map(
+                      (item) => Padding(
+                        padding: EdgeInsets.only(left: item.key == 0 ? 0 : 16),
+                        child: MenuTextWidget(item.value),
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
 
-  Widget _buildNavButton(MenuItem item) {
-    return TextButton(
-      style: ButtonStyle(
-        overlayColor: WidgetStateProperty.all(Colors.transparent),
-        foregroundColor: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.hovered)) {
-            return Colors.red;
-          }
-          return ColorManager.textPrimary;
-        }),
-      ),
-      onPressed: () => Scrollable.ensureVisible(item.key.currentContext!),
-      child: Text(
-        item.label,
-        style: const TextStyle(
-          fontFamily: FontConstants.inter,
-          fontSize: FontSize.s16,
-          fontWeight: FontWeightManager.regular,
+            Row(
+              children: [
+                const LanguageSwitcher(),
+                const SizedBox(width: 8),
+                // Drawer(),
+                Visibility(
+                  visible: context.screenWidth > 885,
+                  replacement: IconButton(
+                    icon: Icon(Icons.menu, color: ColorManager.secondary),
+                    onPressed: () => Scaffold.of(context).openDrawer(),
+                  ),
+                  child: Row(
+                    children: [
+                      const SocialButton(
+                        link: 'https://github.com/davicezarborgesdeveloper',
+                        tipo: SocialEnum.github,
+                      ),
+                      const SizedBox(width: 16),
+                      const SocialButton(
+                        link:
+                            'https://www.linkedin.com/in/daviborgesdeveloper/',
+                        tipo: SocialEnum.linkedin,
+                      ),
+                      const SizedBox(width: 16),
+                      const SocialButton(
+                        link: 'daviborges.sistemas@gmail.com',
+                        tipo: SocialEnum.email,
+                      ),
+                      VerticalDivider(
+                        color: ColorManager.neutral[300]!,
+                        thickness: 5,
+                        indent: 16,
+                        endIndent: 16,
+                        width: 20,
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Icon(
+                          Icons.settings_outlined,
+                          color: ColorManager.secondary,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

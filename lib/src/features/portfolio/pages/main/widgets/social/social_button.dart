@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_core/src/core/resources/color_manager.dart';
-import 'package:nexus_core/src/features/portfolio/widgets/social/social_enum.dart';
+import 'package:nexus_core/src/features/portfolio/pages/main/widgets/social/social_enum.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_svg/svg.dart';
 

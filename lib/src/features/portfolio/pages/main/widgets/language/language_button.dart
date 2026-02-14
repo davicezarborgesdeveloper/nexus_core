@@ -3,7 +3,7 @@ import 'package:nexus_core/src/core/resources/color_manager.dart';
 import 'package:nexus_core/src/core/resources/font_manager.dart';
 import 'package:nexus_core/src/core/resources/locale_controller.dart';
 import 'package:nexus_core/src/core/resources/style_manager.dart';
-import 'package:nexus_core/src/features/portfolio/widgets/language/menu_language_enum.dart';
+import 'package:nexus_core/src/features/portfolio/pages/main/widgets/language/menu_language_enum.dart';
 
 class LanguageButton extends StatelessWidget {
   final Locale currentLocale;

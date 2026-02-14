@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_core/src/core/resources/locale_controller.dart';
-import 'package:nexus_core/src/features/portfolio/widgets/language/language_button.dart';
+import 'package:nexus_core/src/features/portfolio/pages/main/widgets/language/language_button.dart';
 
 class LanguageSwitcher extends StatelessWidget {
   const LanguageSwitcher({super.key});

@@ -1,18 +1,25 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nexus_core/src/core/resources/color_manager.dart';
 import 'package:nexus_core/src/core/resources/font_manager.dart';
 import 'package:nexus_core/src/core/resources/size_screen_manager.dart';
 import 'package:nexus_core/src/core/resources/style_manager.dart';
 import 'package:nexus_core/src/features/portfolio/models/menu_item.dart';
-import 'package:nexus_core/src/features/portfolio/widgets/language/language_switcher.dart';
-import 'package:nexus_core/src/features/portfolio/widgets/menu_text_widget.dart';
-import 'package:nexus_core/src/features/portfolio/widgets/social/social_button.dart';
-import 'package:nexus_core/src/features/portfolio/widgets/social/social_enum.dart';
+import 'package:nexus_core/src/features/portfolio/pages/main/widgets/language/language_switcher.dart';
+import 'package:nexus_core/src/features/portfolio/pages/main/widgets/menu_text_widget.dart';
+import 'package:nexus_core/src/features/portfolio/pages/main/widgets/social/social_button.dart';
+import 'package:nexus_core/src/features/portfolio/pages/main/widgets/social/social_enum.dart';
 
-class AppBarWeb extends StatelessWidget implements PreferredSizeWidget {
+class AppBarNexusCore extends StatelessWidget implements PreferredSizeWidget {
   final String name;
   final List<MenuItem> menus;
-  const AppBarWeb(this.name, this.menus, {super.key});
+  final bool isDrawerOpen;
+  const AppBarNexusCore(
+    this.name,
+    this.menus, {
+    this.isDrawerOpen = false,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +29,7 @@ class AppBarWeb extends StatelessWidget implements PreferredSizeWidget {
       titleSpacing: 0,
       centerTitle: true,
       title: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 24),
+        margin: const EdgeInsets.symmetric(horizontal: kIsWeb ? 24 : 16),
         width: context.screenWidth < 1200 ? null : 1200,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,18 +68,38 @@ class AppBarWeb extends StatelessWidget implements PreferredSizeWidget {
                     .toList(),
               ),
             ),
-
             Row(
               children: [
                 const LanguageSwitcher(),
-                const SizedBox(width: 8),
-                // Drawer(),
+                const SizedBox(width: 16),
                 Visibility(
                   visible: context.screenWidth > 885,
-                  replacement: IconButton(
-                    icon: Icon(Icons.menu, color: ColorManager.secondary),
-                    onPressed: () => Scaffold.of(context).openDrawer(),
+                  replacement: GestureDetector(
+                    onTap: () {
+                      if (isDrawerOpen) {
+                        Navigator.of(context).pop();
+                      } else {
+                        Scaffold.of(context).openDrawer();
+                      }
+                    },
+                    child: Icon(
+                      isDrawerOpen ? Icons.close : Icons.menu,
+                      color: ColorManager.secondary,
+                    ),
                   ),
+                  // replacement: IconButton(
+                  // icon: Icon(
+                  //   isDrawerOpen ? Icons.close : Icons.menu,
+                  //   color: ColorManager.secondary,
+                  // ),
+                    // onPressed: () {
+                    //   if (isDrawerOpen) {
+                    //     Navigator.of(context).pop();
+                    //   } else {
+                    //     Scaffold.of(context).openDrawer();
+                    //   }
+                    // },
+                  // ),
                   child: Row(
                     children: [
                       const SocialButton(
@@ -90,12 +117,13 @@ class AppBarWeb extends StatelessWidget implements PreferredSizeWidget {
                         link: 'daviborges.sistemas@gmail.com',
                         tipo: SocialEnum.email,
                       ),
-                      VerticalDivider(
-                        color: ColorManager.neutral[300]!,
-                        thickness: 5,
-                        indent: 16,
-                        endIndent: 16,
-                        width: 20,
+                      SizedBox(
+                        height: 24,
+                        child: VerticalDivider(
+                          color: ColorManager.neutral[300]!,
+                          thickness: 1,
+                          width: 32,
+                        ),
                       ),
                       GestureDetector(
                         onTap: () {},

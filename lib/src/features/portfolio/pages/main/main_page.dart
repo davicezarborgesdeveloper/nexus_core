@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_core/l10n/app_localizations.dart';
+import 'package:nexus_core/src/core/resources/size_screen_manager.dart';
 import 'package:nexus_core/src/features/portfolio/models/menu_item.dart';
-import 'package:nexus_core/src/features/portfolio/widgets/app_bar_web.dart';
+import 'package:nexus_core/src/features/portfolio/pages/main/widgets/app_bar_nexus_core.dart';
+import 'package:nexus_core/src/features/portfolio/pages/main/widgets/main_drawer.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -15,6 +17,7 @@ class _MainPageState extends State<MainPage> {
   List<MenuItem> get menu => _menu!;
 
   final String name = 'Davi Cezário Borges';
+  bool _isDrawerOpen = false;
 
   @override
   void didChangeDependencies() {
@@ -32,10 +35,14 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWeb(name, menu),
-      drawer: Drawer(),
+      drawerScrimColor: Colors.transparent,
+      onDrawerChanged: (isOpen) => setState(() => _isDrawerOpen = isOpen),
+      appBar: AppBarNexusCore(name, menu, isDrawerOpen: _isDrawerOpen),
+      drawer: MainDrawer(menu: menu),
 
       body: Container(),
     );
   }
 }
+
+

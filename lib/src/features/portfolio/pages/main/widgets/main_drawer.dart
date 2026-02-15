@@ -75,7 +75,7 @@ class MainDrawer extends StatelessWidget {
                   SizedBox(
                     height: 24,
                     child: VerticalDivider(
-                      color: ColorManager.neutral[800]!,
+                      color: ColorManager.neutral.shade800,
                       thickness: 1,
                       width: 32,
                     ),

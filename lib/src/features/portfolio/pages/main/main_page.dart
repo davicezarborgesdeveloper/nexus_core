@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_core/l10n/app_localizations.dart';
-import 'package:nexus_core/src/core/resources/size_screen_manager.dart';
+import 'package:nexus_core/src/core/resources/color_manager.dart';
 import 'package:nexus_core/src/features/portfolio/models/menu_item.dart';
+import 'package:nexus_core/src/features/portfolio/pages/home/home_page.dart';
 import 'package:nexus_core/src/features/portfolio/pages/main/widgets/app_bar_nexus_core.dart';
 import 'package:nexus_core/src/features/portfolio/pages/main/widgets/main_drawer.dart';
 
@@ -39,10 +40,13 @@ class _MainPageState extends State<MainPage> {
       onDrawerChanged: (isOpen) => setState(() => _isDrawerOpen = isOpen),
       appBar: AppBarNexusCore(name, menu, isDrawerOpen: _isDrawerOpen),
       drawer: MainDrawer(menu: menu),
-
-      body: Container(),
+      backgroundColor: ColorManager.background,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [HomePage(menu[0])],
+        ),
+      ),
     );
   }
 }
-
-

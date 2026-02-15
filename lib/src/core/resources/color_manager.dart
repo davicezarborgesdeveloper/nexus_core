@@ -20,18 +20,18 @@ class ColorManager {
     0xFFffffff,
   ); //Texto principal, conteúdo importante
 
-  static final Map<int, Color> neutral = {
-    50: const Color(0xFFf8fafc), //TextPrimary-Background sutil
-    100: const Color(0xFFf1f5f9), //Background seção
-    200: const Color(0xFFe2e8f0), //Bordas
-    300: const Color(0xFFcbd5e1), //Bordas hover
-    400: const Color(0xFF94a3b8), //Texto desabilitado
-    500: const Color(0xFF64748b), //Texto secundário
-    600: const Color(0xFF475569), //Texto normal
-    700: const Color(0xFF334155), //Texto destaque
-    800: const Color(0xFF1e293b), //surfaceBlue-Texto escuro
-    900: const Color(0xFF0f172a), //Texto principal
-  };
+  static const MaterialColor neutral = MaterialColor(0xFF64748b, {
+    50: Color(0xFFf8fafc), //TextPrimary-Background sutil
+    100: Color(0xFFf1f5f9), //Background seção
+    200: Color(0xFFe2e8f0), //Bordas
+    300: Color(0xFFcbd5e1), //Bordas hover
+    400: Color(0xFF94a3b8), //Texto desabilitado
+    500: Color(0xFF64748b), //Texto secundário
+    600: Color(0xFF475569), //Texto normal
+    700: Color(0xFF334155), //Texto destaque
+    800: Color(0xFF1e293b), //surfaceBlue-Texto escuro
+    900: Color(0xFF0f172a), //Texto principal
+  });
 
   static Color textPrimary = foreground;
   static Color textSecondary = secondary;

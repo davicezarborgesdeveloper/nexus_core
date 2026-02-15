@@ -28,88 +28,91 @@ class AppBarNexusCore extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       titleSpacing: 0,
       centerTitle: true,
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(1),
+        child: Divider(height: 1, thickness: 1, color: ColorManager.neutral.shade200),
+      ),
       title: Container(
         margin: const EdgeInsets.symmetric(horizontal: kIsWeb ? 24 : 16),
         width: context.screenWidth < 1200 ? null : 1200,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: SizedBox(
-                width: context.screenWidth < 955 && context.screenWidth > 883
-                    ? 120
-                    : null,
-                child: Text(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final availableWidth = constraints.maxWidth;
+            final nameStyle = getBoldStyle(
+              color: ColorManager.textPrimary,
+              fontSize: FontSize.s20,
+            ).spaceGrotesk;
+            final namePainter = TextPainter(
+              text: TextSpan(text: name, style: nameStyle),
+              maxLines: 1,
+              textDirection: TextDirection.ltr,
+            )..layout();
+            final nameWidth = namePainter.width + 32; // + margem
+
+            // Mede cada item do menu
+            final menuStyle = getRegularStyle(
+              color: ColorManager.textPrimary,
+              fontSize: FontSize.s16, 
+            ).inter;
+            var menuWidth = 0.0;
+            for (var i = 0; i < menus.length; i++) {
+              final painter = TextPainter(
+                text: TextSpan(text: menus[i].label, style: menuStyle),
+                maxLines: 1,
+                textDirection: TextDirection.ltr,
+              )..layout();
+              menuWidth += painter.width + (i > 0 ? 16 : 0); // padding entre itens
+            }
+            menuWidth += 48; // margem extra do InkWell/Material
+
+            // Tamanhos fixos do lado direito (ícones)
+            const rightCompactWidth = 90.0; // language(~50) + gap(16) + hamburger(24)
+            const rightFullWidth = 270.0; // language + gap + 3 socials + divider + settings
+
+            final showSocials = availableWidth >= nameWidth + menuWidth + rightFullWidth;
+            final showMenu = availableWidth >= nameWidth + menuWidth + rightCompactWidth;
+
+            return Row(
+              children: [
+                Text(
                   name,
                   style: getBoldStyle(
                     color: ColorManager.textPrimary,
                     fontSize: FontSize.s20,
                   ).spaceGrotesk,
-                  softWrap: true,
-                  maxLines: null,
                   overflow: TextOverflow.visible,
+                  softWrap: true,
                 ),
-              ),
-            ),
-            Offstage(
-              offstage: context.screenWidth < 883,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: menus
-                    .asMap()
-                    .entries
-                    .map(
-                      (item) => Padding(
-                        padding: EdgeInsets.only(left: item.key == 0 ? 0 : 16),
-                        child: MenuTextWidget(item.value),
-                      ),
-                    )
-                    .toList(),
-              ),
-            ),
-            Row(
-              children: [
-                const LanguageSwitcher(),
-                const SizedBox(width: 16),
-                Visibility(
-                  visible: context.screenWidth > 885,
-                  replacement: GestureDetector(
-                    onTap: () {
-                      if (isDrawerOpen) {
-                        Navigator.of(context).pop();
-                      } else {
-                        Scaffold.of(context).openDrawer();
-                      }
-                    },
-                    child: Icon(
-                      isDrawerOpen ? Icons.close : Icons.menu,
-                      color: ColorManager.secondary,
-                    ),
+                if (showMenu) ...[
+                  const Spacer(),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: menus
+                        .asMap()
+                        .entries
+                        .map(
+                          (item) => Padding(
+                            padding: EdgeInsets.only(left: item.key == 0 ? 0 : 16),
+                            child: MenuTextWidget(item.value),
+                          ),
+                        )
+                        .toList(),
                   ),
-                  // replacement: IconButton(
-                  // icon: Icon(
-                  //   isDrawerOpen ? Icons.close : Icons.menu,
-                  //   color: ColorManager.secondary,
-                  // ),
-                    // onPressed: () {
-                    //   if (isDrawerOpen) {
-                    //     Navigator.of(context).pop();
-                    //   } else {
-                    //     Scaffold.of(context).openDrawer();
-                    //   }
-                    // },
-                  // ),
-                  child: Row(
-                    children: [
+                ],
+                const Spacer(),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const LanguageSwitcher(),
+                    const SizedBox(width: 16),
+                    if (showSocials) ...[
                       const SocialButton(
                         link: 'https://github.com/davicezarborgesdeveloper',
                         tipo: SocialEnum.github,
                       ),
                       const SizedBox(width: 16),
                       const SocialButton(
-                        link:
-                            'https://www.linkedin.com/in/daviborgesdeveloper/',
+                        link: 'https://www.linkedin.com/in/daviborgesdeveloper/',
                         tipo: SocialEnum.linkedin,
                       ),
                       const SizedBox(width: 16),
@@ -120,7 +123,7 @@ class AppBarNexusCore extends StatelessWidget implements PreferredSizeWidget {
                       SizedBox(
                         height: 24,
                         child: VerticalDivider(
-                          color: ColorManager.neutral[300]!,
+                          color: ColorManager.neutral.shade300,
                           thickness: 1,
                           width: 32,
                         ),
@@ -132,17 +135,30 @@ class AppBarNexusCore extends StatelessWidget implements PreferredSizeWidget {
                           color: ColorManager.secondary,
                         ),
                       ),
-                    ],
-                  ),
+                    ] else
+                      GestureDetector(
+                        onTap: () {
+                          if (isDrawerOpen) {
+                            Navigator.of(context).pop();
+                          } else {
+                            Scaffold.of(context).openDrawer();
+                          }
+                        },
+                        child: Icon(
+                          isDrawerOpen ? Icons.close : Icons.menu,
+                          color: ColorManager.secondary,
+                        ),
+                      ),
+                  ],
                 ),
               ],
-            ),
-          ],
+            );
+          },
         ),
       ),
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 1);
 }

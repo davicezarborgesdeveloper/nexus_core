@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nexus_core/l10n/app_localizations.dart';
 import 'package:nexus_core/src/core/resources/color_manager.dart';
 import 'package:nexus_core/src/core/resources/font_manager.dart';
 import 'package:nexus_core/src/core/resources/size_screen_manager.dart';
@@ -19,6 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       color: ColorManager.background,
       padding: EdgeInsets.symmetric(
@@ -47,7 +49,7 @@ class _HomePageState extends State<HomePage> {
                 Icon(Icons.circle, size: 8, color: ColorManager.accent),
                 const SizedBox(width: 8),
                 Text(
-                  'Disponível para novos projetos',
+                  l10n.homeAvailable,
                   style: getRegularStyle(
                     color: ColorManager.neutral.shade700,
                     fontSize: FontSize.s14,
@@ -61,7 +63,7 @@ class _HomePageState extends State<HomePage> {
             fit: BoxFit.scaleDown,
             alignment: Alignment.centerLeft,
             child: Text(
-              'Desenvolvedor Full Stack',
+              l10n.homeTitle1,
               maxLines: context.screenWidth < 540 ? 2 : 1,
               style: getBoldStyle(
                 color: ColorManager.textPrimary,
@@ -73,7 +75,7 @@ class _HomePageState extends State<HomePage> {
             fit: BoxFit.scaleDown,
             alignment: Alignment.centerLeft,
             child: Text(
-              'Criando soluções digitais',
+              l10n.homeTitle2,
               maxLines: context.screenWidth < 540 ? 2 : 1,
               style: getBoldStyle(
                 color: ColorManager.primary,
@@ -85,7 +87,7 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: EdgeInsets.only(right: context.percentWidth(0.15)),
             child: Text(
-              'Especializado em desenvolvimento web moderno, transformando ideias em aplicações escaláveis e performáticas com foco em experiência do usuário.',
+              l10n.homeDescription,
               style: getRegularStyle(
                 color: ColorManager.secondary,
                 fontSize: FontSize.s20,
@@ -99,18 +101,18 @@ class _HomePageState extends State<HomePage> {
             color: ColorManager.neutral.shade200,
             height: 128,
           ),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
-                child: KpiMetric(value: '5+', label: 'Anos de experiência'),
+                child: KpiMetric(value: '5+', label: l10n.kpiYearsLabel),
               ),
               Expanded(
-                child: KpiMetric(value: '50+', label: 'Projetos concluídos'),
+                child: KpiMetric(value: '50+', label: l10n.kpiProjectsLabel),
               ),
               Expanded(
-                child: KpiMetric(value: '20+', label: 'Clientes satisfeitos'),
+                child: KpiMetric(value: '20+', label: l10n.kpiClientsLabel),
               ),
             ],
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nexus_core/l10n/app_localizations.dart';
 import 'package:nexus_core/src/core/resources/font_manager.dart' show FontSize;
 
 import '../../../../../core/resources/color_manager.dart';
@@ -9,6 +10,7 @@ class ActionButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Wrap(
       runSpacing: 16,
       children: [
@@ -27,7 +29,7 @@ class ActionButtons extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Ver projetos',
+                  l10n.actionViewProjects,
                   style: getMediumStyle(
                     color: ColorManager.neutral.shade900,
                     fontSize: FontSize.s16,
@@ -53,14 +55,14 @@ class ActionButtons extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               shape: RoundedRectangleBorder(
                 side: BorderSide(
-                  color: ColorManager.neutral.shade200, // cor da borda
-                  width: 1, // espessura da borda
+                  color: ColorManager.neutral.shade200,
+                  width: 1,
                 ),
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
             child: Text(
-              'Entre em contato',
+              l10n.actionContact,
               style: getMediumStyle(
                 color: ColorManager.neutral.shade900,
                 fontSize: FontSize.s16,
@@ -90,9 +92,8 @@ class ActionButtons extends StatelessWidget {
                   color: ColorManager.neutral.shade600,
                 ),
                 const SizedBox(width: 8),
-
                 Text(
-                  'Baixar CV',
+                  l10n.actionDownloadCV,
                   style: getMediumStyle(
                     color: ColorManager.neutral.shade600,
                     fontSize: FontSize.s16,

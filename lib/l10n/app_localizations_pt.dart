@@ -11,16 +11,13 @@ class AppLocalizationsPt extends AppLocalizations {
   String get navHome => 'Home';
 
   @override
-  String get navAbout => 'Sobre';
+  String get navSkills => 'Habilidades';
 
   @override
   String get navExperience => 'Experiências';
 
   @override
-  String get navKnowledge => 'Conhecimento';
-
-  @override
-  String get navPortfolio => 'Portifólio';
+  String get navProjects => 'Projetos';
 
   @override
   String get navContact => 'Contato';

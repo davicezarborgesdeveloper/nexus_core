@@ -11,16 +11,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navHome => 'Home';
 
   @override
-  String get navAbout => 'About';
+  String get navSkills => 'Skills';
 
   @override
   String get navExperience => 'Experience';
 
   @override
-  String get navKnowledge => 'Skills';
-
-  @override
-  String get navPortfolio => 'Portfolio';
+  String get navProjects => 'Projects';
 
   @override
   String get navContact => 'Contact';

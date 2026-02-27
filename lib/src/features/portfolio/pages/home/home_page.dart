@@ -4,6 +4,9 @@ import 'package:nexus_core/src/core/resources/font_manager.dart';
 import 'package:nexus_core/src/core/resources/size_screen_manager.dart';
 import 'package:nexus_core/src/core/resources/style_manager.dart';
 import 'package:nexus_core/src/features/portfolio/models/menu_item.dart';
+import 'package:nexus_core/src/features/portfolio/pages/home/widgets/action_buttons.dart';
+
+import 'widgets/kpi_metric.dart';
 
 class HomePage extends StatefulWidget {
   final MenuItem menu;
@@ -28,7 +31,7 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 50),
+          SizedBox(height: context.isMobile ? 48 : 100),
           Container(
             padding: const EdgeInsetsGeometry.symmetric(
               horizontal: 16,
@@ -62,7 +65,7 @@ class _HomePageState extends State<HomePage> {
               maxLines: context.screenWidth < 540 ? 2 : 1,
               style: getBoldStyle(
                 color: ColorManager.textPrimary,
-                fontSize: FontSize.s80,
+                fontSize: FontSize.s72,
               ).spaceGrotesk,
             ),
           ),
@@ -74,7 +77,7 @@ class _HomePageState extends State<HomePage> {
               maxLines: context.screenWidth < 540 ? 2 : 1,
               style: getBoldStyle(
                 color: ColorManager.primary,
-                fontSize: FontSize.s80,
+                fontSize: FontSize.s72,
               ).spaceGrotesk,
             ),
           ),
@@ -89,6 +92,29 @@ class _HomePageState extends State<HomePage> {
               ).inter,
             ),
           ),
+          const SizedBox(height: 48),
+          const ActionButtons(),
+          Divider(
+            thickness: 1,
+            color: ColorManager.neutral.shade200,
+            height: 128,
+          ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: KpiMetric(value: '5+', label: 'Anos de experiência'),
+              ),
+              Expanded(
+                child: KpiMetric(value: '50+', label: 'Projetos concluídos'),
+              ),
+              Expanded(
+                child: KpiMetric(value: '20+', label: 'Clientes satisfeitos'),
+              ),
+            ],
+          ),
+          SizedBox(height: context.isMobile ? 48 : 100),
         ],
       ),
     );

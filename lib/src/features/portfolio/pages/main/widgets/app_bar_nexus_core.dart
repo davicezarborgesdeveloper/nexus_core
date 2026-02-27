@@ -25,6 +25,7 @@ class AppBarNexusCore extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: ColorManager.background,
+      scrolledUnderElevation: 0,
       automaticallyImplyLeading: false,
       titleSpacing: 0,
       centerTitle: true,

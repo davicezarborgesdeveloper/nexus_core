@@ -6,6 +6,8 @@ import 'package:nexus_core/src/features/portfolio/pages/home/home_page.dart';
 import 'package:nexus_core/src/features/portfolio/pages/main/widgets/app_bar_nexus_core.dart';
 import 'package:nexus_core/src/features/portfolio/pages/main/widgets/main_drawer.dart';
 
+import '../skills/skills_page.dart';
+
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
@@ -43,7 +45,13 @@ class _MainPageState extends State<MainPage> {
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [HomePage(menu[0])],
+          children: [
+            HomePage(menu[0]),
+            SkillsPage(menu[1]),
+            // ExperiencePage(menu[2]),
+            // ProjectsPage(menu[3]),
+            // ContactPage(menu[4]),
+          ],
         ),
       ),
     );

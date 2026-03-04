@@ -72,13 +72,19 @@ class SkillsPage extends StatelessWidget {
             const SizedBox(height: 64),
             const Row(
               children: [
-                SkillsTiles(),
+                SkillsTiles(icon: Icons.code, title: 'Frontend', itens: []),
                 SizedBox(width: 24),
-                SkillsTiles(),
+                SkillsTiles(icon: Icons.terminal, title: 'Backend', itens: []),
+
                 SizedBox(width: 24),
-                SkillsTiles(),
+                SkillsTiles(
+                  icon: Icons.rocket_launch,
+                  title: 'DevOps',
+                  itens: [],
+                ),
+
                 SizedBox(width: 24),
-                SkillsTiles(),
+                SkillsTiles(icon: Icons.bolt, title: 'Soft Skills', itens: []),
               ],
             ),
           ],

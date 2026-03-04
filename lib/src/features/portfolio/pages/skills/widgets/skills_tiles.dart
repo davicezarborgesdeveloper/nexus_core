@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:nexus_core/src/core/resources/color_manager.dart';
 
 class SkillsTiles extends StatelessWidget {
-  const SkillsTiles({super.key});
+  const SkillsTiles({
+    super.key,
+    required IconData icon,
+    required String title,
+    required List itens,
+  });
 
   @override
   Widget build(BuildContext context) {

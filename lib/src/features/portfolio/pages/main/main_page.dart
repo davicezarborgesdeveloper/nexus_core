@@ -44,7 +44,7 @@ class _MainPageState extends State<MainPage> {
       backgroundColor: ColorManager.background,
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             HomePage(menu[0]),
             SkillsPage(menu[1]),

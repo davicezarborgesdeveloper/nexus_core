@@ -55,4 +55,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get actionDownloadCV => 'Baixar CV';
+
+  @override
+  String get skillsTitle => 'Habilidades';
 }

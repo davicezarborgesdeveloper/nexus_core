@@ -20,6 +20,8 @@ class ColorManager {
     0xFFffffff,
   ); //Texto principal, conteúdo importante
 
+  static Color shadow = const Color(0xFF000000);
+
   static const MaterialColor neutral = MaterialColor(0xFF64748b, {
     50: Color(0xFFf8fafc), //TextPrimary-Background sutil
     100: Color(0xFFf1f5f9), //Background seção

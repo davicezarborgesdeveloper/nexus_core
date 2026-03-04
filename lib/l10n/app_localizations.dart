@@ -150,6 +150,9 @@ abstract class AppLocalizations {
 
   /// In en: **'Download CV'**
   String get actionDownloadCV;
+
+  /// In en: **'Skills'**
+  String get skillsTitle;
 }
 
 class _AppLocalizationsDelegate

@@ -55,4 +55,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get actionDownloadCV => 'Download CV';
+
+  @override
+  String get skillsTitle => 'Skills';
 }

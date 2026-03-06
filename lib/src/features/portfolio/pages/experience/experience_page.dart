@@ -85,6 +85,27 @@ class _ExperiencePageState extends State<ExperiencePage> {
 class _ExperienceGrid extends StatelessWidget {
   const _ExperienceGrid();
 
+  static final _tiles = [
+    Timeline(
+      experiences: [
+        Experience(
+          title: "Senior Full Stack Developer",
+          company: "TechCorp Solutions",
+          period: "Jan 2023 - Presente",
+          description: "Liderança técnica no desenvolvimento...",
+          techs: ["React", "Node.js", "AWS", "Docker"],
+        ),
+        Experience(
+          title: "Full Stack Developer",
+          company: "StartupX",
+          period: "Mar 2021 - Dez 2022",
+          description: "Desenvolvimento SaaS...",
+          techs: ["Next.js", "Python", "MongoDB"],
+        ),
+      ],
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Container(color: ColorManager.background);

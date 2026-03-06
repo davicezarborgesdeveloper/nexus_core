@@ -71,20 +71,57 @@ class SkillsPage extends StatelessWidget {
             ),
             const SizedBox(height: 64),
             const Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SkillsTiles(icon: Icons.code, title: 'Frontend', itens: []),
-                SizedBox(width: 24),
-                SkillsTiles(icon: Icons.terminal, title: 'Backend', itens: []),
-
-                SizedBox(width: 24),
-                SkillsTiles(
-                  icon: Icons.rocket_launch,
-                  title: 'DevOps',
-                  itens: [],
+                Expanded(
+                  child: SkillsTiles(
+                    icon: Icons.code,
+                    title: 'Frontend',
+                    itens: [
+                      'React',
+                      'TypeScript',
+                      'Next.js',
+                      'Tailwind CSS',
+                      'Flutter',
+                    ],
+                  ),
                 ),
-
                 SizedBox(width: 24),
-                SkillsTiles(icon: Icons.bolt, title: 'Soft Skills', itens: []),
+                Expanded(
+                  child: SkillsTiles(
+                    icon: Icons.terminal_outlined,
+                    title: 'Backend',
+                    itens: [
+                      'Node.js',
+                      'Python',
+                      'PostgreSQL',
+                      'Rest APIs',
+                      'GraphQL',
+                    ],
+                  ),
+                ),
+                SizedBox(width: 24),
+                Expanded(
+                  child: SkillsTiles(
+                    icon: Icons.rocket_launch_outlined,
+                    title: 'DevOps',
+                    itens: ['Docker', 'AWS', 'CI/CD', 'Git', 'Firebase'],
+                  ),
+                ),
+                SizedBox(width: 24),
+                Expanded(
+                  child: SkillsTiles(
+                    icon: Icons.bolt,
+                    title: 'Soft Skills',
+                    itens: [
+                      'Trabalho em equipe',
+                      'Comunicação',
+                      'Resolução de problemas',
+                      'Gestão de tempo',
+                      'Adaptabilidade',
+                    ],
+                  ),
+                ),
               ],
             ),
           ],

@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -6,7 +8,6 @@ import 'app_localizations.dart';
 class AppLocalizationsPt extends AppLocalizations {
   AppLocalizationsPt([String locale = 'pt']) : super(locale);
 
-  // --- Navigation ---
   @override
   String get navHome => 'Home';
 
@@ -22,7 +23,6 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get navContact => 'Contato';
 
-  // --- Home Page ---
   @override
   String get homeAvailable => 'Disponível para novos projetos';
 
@@ -33,10 +33,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get homeTitle2 => 'Criando soluções digitais';
 
   @override
-  String get homeDescription =>
-      'Especializado em desenvolvimento web moderno, transformando ideias em aplicações escaláveis e performáticas com foco em experiência do usuário.';
+  String get homeDescription => 'Especializado em desenvolvimento web moderno, transformando ideias em aplicações escaláveis e performáticas com foco em experiência do usuário.';
 
-  // --- KPI Metrics ---
   @override
   String get kpiYearsLabel => 'Anos de experiência';
 
@@ -46,7 +44,6 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get kpiClientsLabel => 'Clientes satisfeitos';
 
-  // --- Action Buttons ---
   @override
   String get actionViewProjects => 'Ver projetos';
 
@@ -58,4 +55,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get skillsTitle => 'Habilidades';
+
+  @override
+  String get skillsSubtitle => 'Expertise técnica e competências';
+
+  @override
+  String get skillsDescription => 'Conjunto abrangente de tecnologias e habilidades para entregar soluções completas de alta qualidade.';
 }

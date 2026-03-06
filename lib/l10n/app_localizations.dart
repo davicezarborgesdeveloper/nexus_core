@@ -50,12 +50,12 @@ import 'app_localizations_pt.dart';
 ///
 /// iOS applications define key application metadata, including supported
 /// locales, in an Info.plist file that is built into the application bundle.
-/// To configure the locales supported by your app, you'll need to edit this
+/// To configure the locales supported by your app, you’ll need to edit this
 /// file.
 ///
-/// First, open your project's ios/Runner.xcworkspace Xcode workspace file.
+/// First, open your project’s ios/Runner.xcworkspace Xcode workspace file.
 /// Then, in the Project Navigator, open the Info.plist file under the Runner
-/// project's Runner folder.
+/// project’s Runner folder.
 ///
 /// Next, select the Information Property List item, select Add Item from the
 /// Editor menu, then select Localizations from the pop-up menu.
@@ -66,8 +66,7 @@ import 'app_localizations_pt.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -75,8 +74,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -88,83 +86,133 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
-    Locale('pt'),
+    Locale('de'),
     Locale('en'),
     Locale('es'),
-    Locale('it'),
     Locale('fr'),
-    Locale('de'),
+    Locale('it'),
+    Locale('pt')
   ];
 
-  // --- Navigation ---
-
-  /// In en: **'Home'**
+  /// No description provided for @navHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
   String get navHome;
 
-  /// In en: **'Skills'**
+  /// No description provided for @navSkills.
+  ///
+  /// In en, this message translates to:
+  /// **'Skills'**
   String get navSkills;
 
-  /// In en: **'Experience'**
+  /// No description provided for @navExperience.
+  ///
+  /// In en, this message translates to:
+  /// **'Experience'**
   String get navExperience;
 
-  /// In en: **'Projects'**
+  /// No description provided for @navProjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Projects'**
   String get navProjects;
 
-  /// In en: **'Contact'**
+  /// No description provided for @navContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact'**
   String get navContact;
 
-  // --- Home Page ---
-
-  /// In en: **'Available for new projects'**
+  /// No description provided for @homeAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Available for new projects'**
   String get homeAvailable;
 
-  /// In en: **'Full Stack Developer'**
+  /// No description provided for @homeTitle1.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Stack Developer'**
   String get homeTitle1;
 
-  /// In en: **'Creating digital solutions'**
+  /// No description provided for @homeTitle2.
+  ///
+  /// In en, this message translates to:
+  /// **'Creating digital solutions'**
   String get homeTitle2;
 
-  /// In en: **'Specialized in modern web development...'**
+  /// No description provided for @homeDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Specialized in modern web development, transforming ideas into scalable and performant applications focused on user experience.'**
   String get homeDescription;
 
-  // --- KPI Metrics ---
-
-  /// In en: **'Years of experience'**
+  /// No description provided for @kpiYearsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Years of experience'**
   String get kpiYearsLabel;
 
-  /// In en: **'Completed projects'**
+  /// No description provided for @kpiProjectsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed projects'**
   String get kpiProjectsLabel;
 
-  /// In en: **'Satisfied clients'**
+  /// No description provided for @kpiClientsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Satisfied clients'**
   String get kpiClientsLabel;
 
-  // --- Action Buttons ---
-
-  /// In en: **'View projects'**
+  /// No description provided for @actionViewProjects.
+  ///
+  /// In en, this message translates to:
+  /// **'View projects'**
   String get actionViewProjects;
 
-  /// In en: **'Get in touch'**
+  /// No description provided for @actionContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Get in touch'**
   String get actionContact;
 
-  /// In en: **'Download CV'**
+  /// No description provided for @actionDownloadCV.
+  ///
+  /// In en, this message translates to:
+  /// **'Download CV'**
   String get actionDownloadCV;
 
-  /// In en: **'Skills'**
+  /// No description provided for @skillsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Skills'**
   String get skillsTitle;
+
+  /// No description provided for @skillsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Technical expertise and competencies'**
+  String get skillsSubtitle;
+
+  /// No description provided for @skillsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'A comprehensive set of technologies and skills to deliver complete, high-quality solutions.'**
+  String get skillsDescription;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -173,40 +221,29 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) => <String>[
-    'pt',
-    'en',
-    'es',
-    'it',
-    'fr',
-    'de',
-  ].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['de', 'en', 'es', 'fr', 'it', 'pt'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'pt':
-      return AppLocalizationsPt();
-    case 'en':
-      return AppLocalizationsEn();
-    case 'es':
-      return AppLocalizationsEs();
-    case 'it':
-      return AppLocalizationsIt();
-    case 'fr':
-      return AppLocalizationsFr();
-    case 'de':
-      return AppLocalizationsDe();
+    case 'de': return AppLocalizationsDe();
+    case 'en': return AppLocalizationsEn();
+    case 'es': return AppLocalizationsEs();
+    case 'fr': return AppLocalizationsFr();
+    case 'it': return AppLocalizationsIt();
+    case 'pt': return AppLocalizationsPt();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.',
+    'that was used.'
   );
 }

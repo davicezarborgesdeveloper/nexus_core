@@ -28,96 +28,94 @@ class _HomePageState extends State<HomePage> {
             : context.isTablet
             ? 48
             : 128,
+        vertical: context.isMobile ? 48 : 100,
       ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: context.isMobile ? 48 : 100),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: const EdgeInsetsGeometry.symmetric(
-                horizontal: 16,
-                vertical: 8,
-              ),
-              decoration: BoxDecoration(
-                color: ColorManager.neutral.shade100,
-                borderRadius: const BorderRadius.all(Radius.circular(16)),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.circle, size: 8, color: ColorManager.accent),
-                  const SizedBox(width: 8),
-                  Text(
-                    l10n.homeAvailable,
-                    style: getRegularStyle(
-                      color: ColorManager.neutral.shade700,
-                      fontSize: FontSize.s14,
-                    ).inter,
-                  ),
-                ],
-              ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsetsGeometry.symmetric(
+              horizontal: 16,
+              vertical: 8,
             ),
-            const SizedBox(height: 24),
-            FittedBox(
-              fit: BoxFit.scaleDown,
-              alignment: Alignment.centerLeft,
-              child: Text(
-                l10n.homeTitle1,
-                maxLines: context.screenWidth < 540 ? 2 : 1,
-                style: getBoldStyle(
-                  color: ColorManager.textPrimary,
-                  fontSize: FontSize.s72,
-                ).spaceGrotesk,
-              ),
+            decoration: BoxDecoration(
+              color: ColorManager.neutral.shade100,
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
             ),
-            FittedBox(
-              fit: BoxFit.scaleDown,
-              alignment: Alignment.centerLeft,
-              child: Text(
-                l10n.homeTitle2,
-                maxLines: context.screenWidth < 540 ? 2 : 1,
-                style: getBoldStyle(
-                  color: ColorManager.primary,
-                  fontSize: FontSize.s72,
-                ).spaceGrotesk,
-              ),
-            ),
-            const SizedBox(height: 24),
-            Padding(
-              padding: EdgeInsets.only(right: context.percentWidth(0.15)),
-              child: Text(
-                l10n.homeDescription,
-                style: getRegularStyle(
-                  color: ColorManager.secondary,
-                  fontSize: FontSize.s20,
-                ).inter,
-              ),
-            ),
-            const SizedBox(height: 48),
-            const ActionButtons(),
-            Divider(
-              thickness: 1,
-              color: ColorManager.neutral.shade200,
-              height: 128,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.max,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Expanded(
-                  child: KpiMetric(value: '5+', label: l10n.kpiYearsLabel),
-                ),
-                Expanded(
-                  child: KpiMetric(value: '50+', label: l10n.kpiProjectsLabel),
-                ),
-                Expanded(
-                  child: KpiMetric(value: '20+', label: l10n.kpiClientsLabel),
+                Icon(Icons.circle, size: 8, color: ColorManager.accent),
+                const SizedBox(width: 8),
+                Text(
+                  l10n.homeAvailable,
+                  style: getRegularStyle(
+                    color: ColorManager.neutral.shade700,
+                    fontSize: FontSize.s14,
+                  ).inter,
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 24),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: Text(
+              l10n.homeTitle1,
+              maxLines: context.screenWidth < 540 ? 2 : 1,
+              style: getBoldStyle(
+                color: ColorManager.textPrimary,
+                fontSize: FontSize.s72,
+              ).spaceGrotesk,
+            ),
+          ),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: Text(
+              l10n.homeTitle2,
+              maxLines: context.screenWidth < 540 ? 2 : 1,
+              style: getBoldStyle(
+                color: ColorManager.primary,
+                fontSize: FontSize.s72,
+              ).spaceGrotesk,
+            ),
+          ),
+          const SizedBox(height: 24),
+          Padding(
+            padding: EdgeInsets.only(right: context.percentWidth(0.15)),
+            child: Text(
+              l10n.homeDescription,
+              style: getRegularStyle(
+                color: ColorManager.secondary,
+                fontSize: FontSize.s20,
+              ).inter,
+            ),
+          ),
+          const SizedBox(height: 48),
+          const ActionButtons(),
+          Divider(
+            thickness: 1,
+            color: ColorManager.neutral.shade200,
+            height: 128,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: KpiMetric(value: '5+', label: l10n.kpiYearsLabel),
+              ),
+              Expanded(
+                child: KpiMetric(value: '50+', label: l10n.kpiProjectsLabel),
+              ),
+              Expanded(
+                child: KpiMetric(value: '20+', label: l10n.kpiClientsLabel),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -6,7 +8,6 @@ import 'app_localizations.dart';
 class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
-  // --- Navigation ---
   @override
   String get navHome => 'Home';
 
@@ -22,7 +23,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get navContact => 'Contact';
 
-  // --- Home Page ---
   @override
   String get homeAvailable => 'Available for new projects';
 
@@ -33,10 +33,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeTitle2 => 'Creating digital solutions';
 
   @override
-  String get homeDescription =>
-      'Specialized in modern web development, transforming ideas into scalable and performant applications focused on user experience.';
+  String get homeDescription => 'Specialized in modern web development, transforming ideas into scalable and performant applications focused on user experience.';
 
-  // --- KPI Metrics ---
   @override
   String get kpiYearsLabel => 'Years of experience';
 
@@ -46,7 +44,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get kpiClientsLabel => 'Satisfied clients';
 
-  // --- Action Buttons ---
   @override
   String get actionViewProjects => 'View projects';
 
@@ -58,4 +55,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get skillsTitle => 'Skills';
+
+  @override
+  String get skillsSubtitle => 'Technical expertise and competencies';
+
+  @override
+  String get skillsDescription => 'A comprehensive set of technologies and skills to deliver complete, high-quality solutions.';
 }

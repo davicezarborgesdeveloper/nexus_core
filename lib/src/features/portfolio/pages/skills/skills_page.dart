@@ -37,7 +37,7 @@ class SkillsPage extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 color: ColorManager.primary,
-                borderRadius: const BorderRadius.all(Radius.circular(16)),
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
               ),
               child: Text(
                 l10n.skillsTitle,
@@ -53,7 +53,7 @@ class SkillsPage extends StatelessWidget {
                   ? double.infinity
                   : context.percentWidth(.5),
               child: Text(
-                'Expertise técnica e competências',
+                l10n.skillsSubtitle,
                 style: getBoldStyle(
                   color: ColorManager.neutral.shade900,
                   fontSize: context.isMobile ? FontSize.s32 : FontSize.s48,
@@ -66,7 +66,7 @@ class SkillsPage extends StatelessWidget {
                   ? double.infinity
                   : context.percentWidth(.5),
               child: Text(
-                'Conjunto abrangente de tecnologias e habilidades para entregar soluções completas de alta qualidade.',
+                l10n.skillsDescription,
                 style: getRegularStyle(
                   color: ColorManager.secondary,
                   fontSize: context.isMobile ? FontSize.s16 : FontSize.s18,
@@ -83,6 +83,7 @@ class SkillsPage extends StatelessWidget {
 }
 
 class _SkillsGrid extends StatelessWidget {
+  const _SkillsGrid();
   static final _tiles = [
     (
       icon: Icons.code,
@@ -111,8 +112,6 @@ class _SkillsGrid extends StatelessWidget {
       ],
     ),
   ];
-
-  const _SkillsGrid();
 
   @override
   Widget build(BuildContext context) {

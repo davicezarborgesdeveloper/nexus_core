@@ -14,5 +14,7 @@
     "actionViewProjects": "Projekte ansehen",
     "actionContact": "Kontakt aufnehmen",
     "actionDownloadCV": "Lebenslauf herunterladen",
-    "skillsTitle": "Fähigkeiten"
+    "skillsTitle": "Fähigkeiten",
+    "skillsSubtitle": "Technische Expertise und Kompetenzen",
+    "skillsDescription": "Ein umfassendes Set an Technologien und Fähigkeiten, um vollständige Lösungen in hoher Qualität zu liefern."
 }

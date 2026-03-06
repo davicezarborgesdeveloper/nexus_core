@@ -14,5 +14,7 @@
     "actionViewProjects": "Ver proyectos",
     "actionContact": "Ponerse en contacto",
     "actionDownloadCV": "Descargar CV",
-    "skillsTitle": "Habilidades"
+    "skillsTitle": "Habilidades",
+    "skillsSubtitle": "Experiencia técnica y competencias",
+    "skillsDescription": "Un conjunto completo de tecnologías y habilidades para entregar soluciones completas de alta calidad."
 }

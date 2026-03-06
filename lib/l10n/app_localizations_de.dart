@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -6,7 +8,6 @@ import 'app_localizations.dart';
 class AppLocalizationsDe extends AppLocalizations {
   AppLocalizationsDe([String locale = 'de']) : super(locale);
 
-  // --- Navigation ---
   @override
   String get navHome => 'Startseite';
 
@@ -22,7 +23,6 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get navContact => 'Kontakt';
 
-  // --- Home Page ---
   @override
   String get homeAvailable => 'Verfügbar für neue Projekte';
 
@@ -33,10 +33,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homeTitle2 => 'Digitale Lösungen entwickeln';
 
   @override
-  String get homeDescription =>
-      'Spezialisiert auf moderne Webentwicklung und die Umsetzung von Ideen in skalierbare und leistungsstarke Anwendungen mit Fokus auf die Nutzererfahrung.';
+  String get homeDescription => 'Spezialisiert auf moderne Webentwicklung und die Umsetzung von Ideen in skalierbare und leistungsstarke Anwendungen mit Fokus auf die Nutzererfahrung.';
 
-  // --- KPI Metrics ---
   @override
   String get kpiYearsLabel => 'Jahre Erfahrung';
 
@@ -46,7 +44,6 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get kpiClientsLabel => 'Zufriedene Kunden';
 
-  // --- Action Buttons ---
   @override
   String get actionViewProjects => 'Projekte ansehen';
 
@@ -58,4 +55,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get skillsTitle => 'Fähigkeiten';
+
+  @override
+  String get skillsSubtitle => 'Technische Expertise und Kompetenzen';
+
+  @override
+  String get skillsDescription => 'Ein umfassendes Set an Technologien und Fähigkeiten, um vollständige Lösungen in hoher Qualität zu liefern.';
 }

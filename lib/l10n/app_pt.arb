@@ -1,9 +1,8 @@
 {
     "navHome": "Home",
-    "navAbout": "Sobre",
+    "navSkills": "Habilidades",
     "navExperience": "Experiências",
-    "navKnowledge": "Conhecimento",
-    "navPortfolio": "Portifólio",
+    "navProjects": "Projetos",
     "navContact": "Contato",
     "homeAvailable": "Disponível para novos projetos",
     "homeTitle1": "Desenvolvedor Full Stack",
@@ -14,5 +13,6 @@
     "kpiClientsLabel": "Clientes satisfeitos",
     "actionViewProjects": "Ver projetos",
     "actionContact": "Entre em contato",
-    "actionDownloadCV": "Baixar CV"
+    "actionDownloadCV": "Baixar CV",
+    "skillsTitle": "Habilidades"
 }

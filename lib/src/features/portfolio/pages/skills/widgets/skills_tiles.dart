@@ -67,12 +67,14 @@ class SkillsTiles extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  Text(
-                    item,
-                    style: getRegularStyle(
-                      color: ColorManager.neutral.shade600,
-                      fontSize: FontSize.s16,
-                    ).inter,
+                  Expanded(
+                    child: Text(
+                      item,
+                      style: getRegularStyle(
+                        color: ColorManager.neutral.shade600,
+                        fontSize: FontSize.s16,
+                      ).inter,
+                    ),
                   ),
                 ],
               ),

@@ -109,7 +109,7 @@ abstract class AppLocalizations {
   /// In en: **'Experience'**
   String get navExperience;
 
-  /// In en: **'Skills'**
+  /// In en: **'Projects'**
   String get navProjects;
 
   /// In en: **'Contact'**

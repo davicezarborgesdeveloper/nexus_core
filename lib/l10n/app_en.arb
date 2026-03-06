@@ -1,9 +1,8 @@
 {
     "navHome": "Home",
-    "navAbout": "About",
+    "navSkills": "Skills",
     "navExperience": "Experience",
-    "navKnowledge": "Skills",
-    "navPortfolio": "Portfolio",
+    "navProjects": "Projects",
     "navContact": "Contact",
     "homeAvailable": "Available for new projects",
     "homeTitle1": "Full Stack Developer",
@@ -14,5 +13,6 @@
     "kpiClientsLabel": "Satisfied clients",
     "actionViewProjects": "View projects",
     "actionContact": "Get in touch",
-    "actionDownloadCV": "Download CV"
+    "actionDownloadCV": "Download CV",
+    "skillsTitle": "Skills"
 }

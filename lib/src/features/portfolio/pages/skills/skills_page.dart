@@ -49,7 +49,9 @@ class SkillsPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             SizedBox(
-              width: context.isMobile ? double.infinity : context.percentWidth(.5),
+              width: context.isMobile
+                  ? double.infinity
+                  : context.percentWidth(.5),
               child: Text(
                 'Expertise técnica e competências',
                 style: getBoldStyle(
@@ -60,7 +62,9 @@ class SkillsPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             SizedBox(
-              width: context.isMobile ? double.infinity : context.percentWidth(.5),
+              width: context.isMobile
+                  ? double.infinity
+                  : context.percentWidth(.5),
               child: Text(
                 'Conjunto abrangente de tecnologias e habilidades para entregar soluções completas de alta qualidade.',
                 style: getRegularStyle(
@@ -79,30 +83,66 @@ class SkillsPage extends StatelessWidget {
 }
 
 class _SkillsGrid extends StatelessWidget {
-  static const _tiles = [
-    (icon: Icons.code, title: 'Frontend', itens: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Flutter']),
-    (icon: Icons.terminal_outlined, title: 'Backend', itens: ['Node.js', 'Python', 'PostgreSQL', 'Rest APIs', 'GraphQL']),
-    (icon: Icons.rocket_launch_outlined, title: 'DevOps', itens: ['Docker', 'AWS', 'CI/CD', 'Git', 'Firebase']),
-    (icon: Icons.bolt, title: 'Soft Skills', itens: ['Trabalho em equipe', 'Comunicação', 'Resolução de problemas', 'Gestão de tempo', 'Adaptabilidade']),
+  static final _tiles = [
+    (
+      icon: Icons.code,
+      title: 'Frontend',
+      itens: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Flutter'],
+    ),
+    (
+      icon: Icons.terminal_outlined,
+      title: 'Backend',
+      itens: ['Node.js', 'Python', 'PostgreSQL', 'Rest APIs', 'GraphQL'],
+    ),
+    (
+      icon: Icons.rocket_launch_outlined,
+      title: 'DevOps',
+      itens: ['Docker', 'AWS', 'CI/CD', 'Git', 'Firebase'],
+    ),
+    (
+      icon: Icons.bolt,
+      title: 'Soft Skills',
+      itens: [
+        'Trabalho em equipe',
+        'Comunicação',
+        'Resolução de problemas',
+        'Gestão de tempo',
+        'Adaptabilidade',
+      ],
+    ),
   ];
 
   const _SkillsGrid();
 
   @override
   Widget build(BuildContext context) {
-    final crossAxisCount = context.isMobile ? 1 : context.isTablet ? 2 : 4;
+    final crossAxisCount = context.isMobile
+        ? 1
+        : context.isTablet
+        ? 2
+        : 4;
     final spacing = 24.0;
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        final tileWidth = (constraints.maxWidth - spacing * (crossAxisCount - 1)) / crossAxisCount;
+        final tileWidth =
+            (constraints.maxWidth - spacing * (crossAxisCount - 1)) /
+            crossAxisCount;
         return Wrap(
           spacing: spacing,
           runSpacing: spacing,
-          children: _tiles.map((t) => SizedBox(
-            width: tileWidth,
-            child: SkillsTiles(icon: t.icon, title: t.title, itens: t.itens),
-          )).toList(),
+          children: _tiles
+              .map(
+                (t) => SizedBox(
+                  width: tileWidth,
+                  child: SkillsTiles(
+                    icon: t.icon,
+                    title: t.title,
+                    itens: t.itens,
+                  ),
+                ),
+              )
+              .toList(),
         );
       },
     );

@@ -1,0 +1,18 @@
+{
+    "navHome": "Accueil",
+    "navSkills": "Compétences",
+    "navExperience": "Expérience",
+    "navProjects": "Projets",
+    "navContact": "Contact",
+    "homeAvailable": "Disponible pour de nouveaux projets",
+    "homeTitle1": "Développeur Full Stack",
+    "homeTitle2": "Créer des solutions numériques",
+    "homeDescription": "Spécialisé dans le développement web moderne, transformant les idées en applications évolutives et performantes axées sur l'expérience utilisateur.",
+    "kpiYearsLabel": "Années d'expérience",
+    "kpiProjectsLabel": "Projets réalisés",
+    "kpiClientsLabel": "Clients satisfaits",
+    "actionViewProjects": "Voir les projets",
+    "actionContact": "Me contacter",
+    "actionDownloadCV": "Télécharger CV",
+    "skillsTitle": "Compétences"
+}

@@ -54,7 +54,7 @@ class LanguageButton extends StatelessWidget {
                     ).inter,
                   ),
                   const SizedBox(width: 8),
-                  Text(language.label),
+                  Text(language.labelFor(currentLocale)),
                 ],
               ),
               Icon(

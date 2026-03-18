@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_core/src/core/resources/size_screen_manager.dart';
+import 'package:timeline_tile/timeline_tile.dart';
 
 import '../../../../../l10n/app_localizations.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/font_manager.dart';
 import '../../../../core/resources/style_manager.dart';
 import '../../models/menu_item.dart';
+import 'widgets/timeline_experience.dart';
 
 class ExperiencePage extends StatefulWidget {
   final MenuItem menu;
@@ -75,6 +77,7 @@ class _ExperiencePageState extends State<ExperiencePage> {
             ),
           ),
           const SizedBox(height: 64),
+          TimelineExperience(),
         ],
       ),
     );

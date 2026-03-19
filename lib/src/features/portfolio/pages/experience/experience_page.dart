@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_core/src/core/resources/size_screen_manager.dart';
-import 'package:timeline_tile/timeline_tile.dart';
-
 import '../../../../../l10n/app_localizations.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/font_manager.dart';
@@ -77,7 +75,7 @@ class _ExperiencePageState extends State<ExperiencePage> {
             ),
           ),
           const SizedBox(height: 64),
-          TimelineExperience(),
+          const TimelineExperience(),
         ],
       ),
     );

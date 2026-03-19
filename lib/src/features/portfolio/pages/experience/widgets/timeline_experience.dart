@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:nexus_core/src/core/resources/font_manager.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 import '../../../../../core/resources/color_manager.dart';
+import '../../../../../core/resources/style_manager.dart';
 
 class TimelineExperience extends StatelessWidget {
   const TimelineExperience({super.key});
@@ -24,6 +26,7 @@ class TimelineExperience extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   padding: const EdgeInsets.all(8),
@@ -41,26 +44,63 @@ class TimelineExperience extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Senior Full Stack Developer',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: getBoldStyle(
+                        color: ColorManager.foreground,
+                        fontSize: FontSize.s24,
+                      ).spaceGrotesk,
                     ),
                     const SizedBox(height: 4),
                     Text(
                       'TechCorp Solutions',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: ColorManager.neutral.shade600,
-                      ),
+                      style: getMediumStyle(
+                        color: ColorManager.primary,
+                        fontSize: FontSize.s18,
+                      ).inter,
                     ),
                   ],
                 ),
               ],
             ),
-            Row(),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Icon(
+                  Icons.calendar_today_outlined,
+                  size: 16,
+                  color: ColorManager.secondary,
+                ),
+                const SizedBox(width: 6),
+                Text(
+                  'Jan 2020 - Present',
+                  style: getRegularStyle(
+                    fontSize: 14,
+                    color: ColorManager.secondary,
+                  ).inter,
+                ),
+                const SizedBox(width: 14),
+                Container(
+                  decoration: BoxDecoration(
+                    color: ColorManager.accent,
+                    borderRadius: const BorderRadius.all(Radius.circular(8)),
+                  ),
+                  child: Text(
+                    'Atual',
+                    style: getMediumStyle(
+                      color: ColorManager.foreground,
+                      fontSize: FontSize.s12,
+                    ).inter,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Icon(
+                  Icons.location_on_outlined,
+                  size: 16,
+                  color: ColorManager.secondary,
+                ),
+              ],
+            ),
           ],
         ),
       ),

@@ -41,7 +41,7 @@ class _ExperiencePageState extends State<ExperiencePage> {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
             ),
             child: Text(
-              'Trajetória',
+              l10n.expBadge,
               style: getRegularStyle(
                 color: ColorManager.background,
                 fontSize: FontSize.s14,
@@ -54,7 +54,7 @@ class _ExperiencePageState extends State<ExperiencePage> {
                 ? double.infinity
                 : context.percentWidth(.5),
             child: Text(
-              'Experiência profissional',
+              l10n.expTitle,
               style: getBoldStyle(
                 color: ColorManager.neutral.shade900,
                 fontSize: context.isMobile ? FontSize.s32 : FontSize.s48,
@@ -67,7 +67,7 @@ class _ExperiencePageState extends State<ExperiencePage> {
                 ? double.infinity
                 : context.percentWidth(.5),
             child: Text(
-              'Mais de 6 anos construindo soluções digitais inovadoras e liderando projetos de alto impacto.',
+              l10n.expDescription,
               style: getRegularStyle(
                 color: ColorManager.secondary,
                 fontSize: context.isMobile ? FontSize.s16 : FontSize.s18,
@@ -91,7 +91,7 @@ class _ExperiencePageState extends State<ExperiencePage> {
                 onPressed: () {},
                 icon: const Icon(Icons.download_outlined, color: Colors.white),
                 label: Text(
-                  'Baixar currículo completo',
+                  l10n.expDownloadResume,
                   style: getBoldStyle(
                     color: Colors.white,
                     fontSize: FontSize.s16,

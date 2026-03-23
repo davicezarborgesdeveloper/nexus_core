@@ -16,5 +16,17 @@
     "actionDownloadCV": "Baixar CV",
     "skillsTitle": "Habilidades",
     "skillsSubtitle": "Expertise técnica e competências",
-    "skillsDescription": "Conjunto abrangente de tecnologias e habilidades para entregar soluções completas de alta qualidade."
+    "skillsDescription": "Conjunto abrangente de tecnologias e habilidades para entregar soluções completas de alta qualidade.",
+    "expBadge": "Trajetória",
+    "expTitle": "Experiência profissional",
+    "expDescription": "Mais de 6 anos construindo soluções digitais inovadoras e liderando projetos de alto impacto.",
+    "expDownloadResume": "Baixar currículo completo",
+    "expCurrentLabel": "Atual",
+    "expAchievementsLabel": "PRINCIPAIS CONQUISTAS",
+    "expTechnologiesLabel": "TECNOLOGIAS",
+    "softSkillTeamwork": "Trabalho em equipe",
+    "softSkillCommunication": "Comunicação",
+    "softSkillProblemSolving": "Resolução de problemas",
+    "softSkillTimeManagement": "Gestão de tempo",
+    "softSkillAdaptability": "Adaptabilidade"
 }

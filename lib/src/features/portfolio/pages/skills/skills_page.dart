@@ -84,37 +84,39 @@ class SkillsPage extends StatelessWidget {
 
 class _SkillsGrid extends StatelessWidget {
   const _SkillsGrid();
-  static final _tiles = [
-    (
-      icon: Icons.code,
-      title: 'Frontend',
-      itens: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Flutter'],
-    ),
-    (
-      icon: Icons.terminal_outlined,
-      title: 'Backend',
-      itens: ['Node.js', 'Python', 'PostgreSQL', 'Rest APIs', 'GraphQL'],
-    ),
-    (
-      icon: Icons.rocket_launch_outlined,
-      title: 'DevOps',
-      itens: ['Docker', 'AWS', 'CI/CD', 'Git', 'Firebase'],
-    ),
-    (
-      icon: Icons.bolt,
-      title: 'Soft Skills',
-      itens: [
-        'Trabalho em equipe',
-        'Comunicação',
-        'Resolução de problemas',
-        'Gestão de tempo',
-        'Adaptabilidade',
-      ],
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final tiles = [
+      (
+        icon: Icons.code,
+        title: 'Frontend',
+        itens: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Flutter'],
+      ),
+      (
+        icon: Icons.terminal_outlined,
+        title: 'Backend',
+        itens: ['Node.js', 'Python', 'PostgreSQL', 'Rest APIs', 'GraphQL'],
+      ),
+      (
+        icon: Icons.rocket_launch_outlined,
+        title: 'DevOps',
+        itens: ['Docker', 'AWS', 'CI/CD', 'Git', 'Firebase'],
+      ),
+      (
+        icon: Icons.bolt,
+        title: 'Soft Skills',
+        itens: [
+          l10n.softSkillTeamwork,
+          l10n.softSkillCommunication,
+          l10n.softSkillProblemSolving,
+          l10n.softSkillTimeManagement,
+          l10n.softSkillAdaptability,
+        ],
+      ),
+    ];
+
     final crossAxisCount = context.isMobile
         ? 1
         : context.isTablet
@@ -130,7 +132,7 @@ class _SkillsGrid extends StatelessWidget {
         return Wrap(
           spacing: spacing,
           runSpacing: spacing,
-          children: _tiles
+          children: tiles
               .map(
                 (t) => SizedBox(
                   width: tileWidth,

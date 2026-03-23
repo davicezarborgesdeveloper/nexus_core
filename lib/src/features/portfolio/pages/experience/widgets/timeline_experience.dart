@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_core/src/core/resources/font_manager.dart';
+import 'package:nexus_core/src/features/portfolio/pages/experience/widgets/section_label.dart';
+import 'package:nexus_core/src/features/portfolio/pages/experience/widgets/tech_chip.dart';
+import 'package:nexus_core/src/features/portfolio/pages/experience/widgets/bullet_item.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/style_manager.dart';
-import 'bullet_item.dart';
-import 'section_label.dart';
-import 'tech_chip.dart';
+import 'package:nexus_core/l10n/app_localizations.dart';
 
 class TimelineExperience extends StatelessWidget {
   const TimelineExperience({
@@ -132,7 +133,7 @@ class TimelineExperience extends StatelessWidget {
                     borderRadius: const BorderRadius.all(Radius.circular(8)),
                   ),
                   child: Text(
-                    'Atual',
+                    AppLocalizations.of(context)!.expCurrentLabel,
                     style: getMediumStyle(
                       color: ColorManager.foreground,
                       fontSize: FontSize.s12,
@@ -163,7 +164,7 @@ class TimelineExperience extends StatelessWidget {
               ).inter,
             ),
             const SizedBox(height: 20),
-            const SectionLabel('PRINCIPAIS CONQUISTAS'),
+            SectionLabel(AppLocalizations.of(context)!.expAchievementsLabel),
             const SizedBox(height: 8),
             const Column(
               children: [
@@ -181,7 +182,7 @@ class TimelineExperience extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            const SectionLabel('TECNOLOGIAS'),
+            SectionLabel(AppLocalizations.of(context)!.expTechnologiesLabel),
             const SizedBox(height: 8),
             const Row(
               children: [

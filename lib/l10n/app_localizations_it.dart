@@ -33,7 +33,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get homeTitle2 => 'Creando soluzioni digitali';
 
   @override
-  String get homeDescription => 'Specializzato nello sviluppo web moderno, trasformando idee in applicazioni scalabili e performanti con focus sull\'esperienza utente.';
+  String get homeDescription =>
+      'Specializzato nello sviluppo web moderno, trasformando idee in applicazioni scalabili e performanti con focus sull\'esperienza utente.';
 
   @override
   String get kpiYearsLabel => 'Anni di esperienza';
@@ -60,5 +61,43 @@ class AppLocalizationsIt extends AppLocalizations {
   String get skillsSubtitle => 'Competenze tecniche e capacità';
 
   @override
-  String get skillsDescription => 'Un insieme completo di tecnologie e competenze per fornire soluzioni complete di alta qualità.';
+  String get skillsDescription =>
+      'Un insieme completo di tecnologie e competenze per fornire soluzioni complete di alta qualità.';
+
+  @override
+  String get expBadge => 'Percorso';
+
+  @override
+  String get expTitle => 'Esperienza professionale';
+
+  @override
+  String get expDescription =>
+      'Oltre 6 anni a costruire soluzioni digitali innovative e a guidare progetti ad alto impatto.';
+
+  @override
+  String get expDownloadResume => 'Scarica il curriculum completo';
+
+  @override
+  String get expCurrentLabel => 'Attuale';
+
+  @override
+  String get expAchievementsLabel => 'PRINCIPALI RISULTATI';
+
+  @override
+  String get expTechnologiesLabel => 'TECNOLOGIE';
+
+  @override
+  String get softSkillTeamwork => 'Lavoro di squadra';
+
+  @override
+  String get softSkillCommunication => 'Comunicazione';
+
+  @override
+  String get softSkillProblemSolving => 'Risoluzione dei problemi';
+
+  @override
+  String get softSkillTimeManagement => 'Gestione del tempo';
+
+  @override
+  String get softSkillAdaptability => 'Adattabilità';
 }

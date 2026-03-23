@@ -16,5 +16,17 @@
     "actionDownloadCV": "Download CV",
     "skillsTitle": "Skills",
     "skillsSubtitle": "Technical expertise and competencies",
-    "skillsDescription": "A comprehensive set of technologies and skills to deliver complete, high-quality solutions."
+    "skillsDescription": "A comprehensive set of technologies and skills to deliver complete, high-quality solutions.",
+    "expBadge": "Journey",
+    "expTitle": "Professional experience",
+    "expDescription": "Over 6 years building innovative digital solutions and leading high-impact projects.",
+    "expDownloadResume": "Download full resume",
+    "expCurrentLabel": "Current",
+    "expAchievementsLabel": "KEY ACHIEVEMENTS",
+    "expTechnologiesLabel": "TECHNOLOGIES",
+    "softSkillTeamwork": "Teamwork",
+    "softSkillCommunication": "Communication",
+    "softSkillProblemSolving": "Problem solving",
+    "softSkillTimeManagement": "Time management",
+    "softSkillAdaptability": "Adaptability"
 }

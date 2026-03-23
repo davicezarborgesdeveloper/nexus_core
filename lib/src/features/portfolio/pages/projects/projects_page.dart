@@ -75,12 +75,51 @@ class _ProjectsPageState extends State<ProjectsPage> {
             ),
           ),
           const SizedBox(height: 64),
+          // https://picsum.photos/590/256
           Wrap(
+            spacing: 32,
+            runSpacing: 32,
+            alignment: WrapAlignment.start,
+            crossAxisAlignment: WrapCrossAlignment.start,
             children: [
               Container(
+                width: 590,
+                height: 640,
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(16)),
                   border: Border.all(color: ColorManager.primary, width: 2),
+                ),
+                child: Column(
+                  children: [
+                    Flexible(
+                      flex: 4,
+                      child: Image.network(
+                        'https://picsum.photos/590/256',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Flexible(flex: 6, child: Container(color: Colors.red)),
+                  ],
+                ),
+              ),
+              Container(
+                width: 590,
+                height: 640,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(16)),
+                  border: Border.all(color: ColorManager.primary, width: 2),
+                ),
+                child: Column(
+                  children: [
+                    Flexible(
+                      flex: 4,
+                      child: Image.network(
+                        'https://picsum.photos/590/256',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Flexible(flex: 6, child: Container(color: Colors.red)),
+                  ],
                 ),
               ),
             ],

@@ -75,7 +75,41 @@ class _ExperiencePageState extends State<ExperiencePage> {
             ),
           ),
           const SizedBox(height: 64),
-          const TimelineExperience(),
+          const Column(
+            children: [
+              TimelineExperience(isFirst: true),
+              TimelineExperience(),
+              TimelineExperience(),
+              TimelineExperience(isLast: true),
+            ],
+          ),
+          const SizedBox(height: 64),
+          Center(
+            child: SizedBox(
+              height: 60,
+              child: ElevatedButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.download_outlined, color: Colors.white),
+                label: Text(
+                  'Baixar currículo completo',
+                  style: getBoldStyle(
+                    color: Colors.white,
+                    fontSize: FontSize.s16,
+                  ).inter,
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ColorManager.primary,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 16,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

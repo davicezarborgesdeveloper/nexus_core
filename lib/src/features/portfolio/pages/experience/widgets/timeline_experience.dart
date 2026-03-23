@@ -4,17 +4,59 @@ import 'package:timeline_tile/timeline_tile.dart';
 
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/style_manager.dart';
+import 'bullet_item.dart';
+import 'section_label.dart';
+import 'tech_chip.dart';
 
 class TimelineExperience extends StatelessWidget {
-  const TimelineExperience({super.key});
+  const TimelineExperience({
+    super.key,
+    this.isFirst = false,
+    this.isLast = false,
+  });
+
+  final bool isFirst;
+  final bool isLast;
 
   @override
   Widget build(BuildContext context) {
     return TimelineTile(
-      // alignment: TimelineAlign.manual,
-      // lineXY: 0.01,
+      isFirst: isFirst,
+      isLast: isLast,
+      beforeLineStyle: LineStyle(
+        color: ColorManager.neutral.shade200,
+        thickness: 1,
+      ),
+      afterLineStyle: LineStyle(
+        color: ColorManager.neutral.shade200,
+        thickness: 1,
+      ),
+      indicatorStyle: isFirst
+          ? IndicatorStyle(
+              width: 20,
+              indicator: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: ColorManager.primaryLight,
+                  border: Border.all(color: ColorManager.primary, width: 4),
+                ),
+              ),
+            )
+          : IndicatorStyle(
+              width: 20,
+              indicator: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: ColorManager.background,
+                  border: Border.all(
+                    color: ColorManager.neutral.shade300,
+                    width: 2,
+                  ),
+                ),
+              ),
+            ),
       endChild: Container(
-        margin: const EdgeInsets.only(left: 30),
+        margin: EdgeInsets.only(left: 30, bottom: isLast ? 0 : 48),
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
           color: ColorManager.background,
@@ -81,6 +123,10 @@ class TimelineExperience extends StatelessWidget {
                 ),
                 const SizedBox(width: 14),
                 Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: ColorManager.accent,
                     borderRadius: const BorderRadius.all(Radius.circular(8)),
@@ -99,13 +145,56 @@ class TimelineExperience extends StatelessWidget {
                   size: 16,
                   color: ColorManager.secondary,
                 ),
+                Text(
+                  'São Paulo, SP',
+                  style: getRegularStyle(
+                    fontSize: 14,
+                    color: ColorManager.secondary,
+                  ).inter,
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Text(
+              'Responsável por liderar o desenvolvimento de soluções web e mobile, utilizando tecnologias como Flutter, React e Node.js. Implementação de APIs RESTful, integração com bancos de dados e otimização de performance. Colaboração com equipes multidisciplinares para garantir a entrega de projetos dentro do prazo e com alta qualidade.',
+              style: getRegularStyle(
+                fontSize: 16,
+                color: ColorManager.secondary,
+              ).inter,
+            ),
+            const SizedBox(height: 20),
+            const SectionLabel('PRINCIPAIS CONQUISTAS'),
+            const SizedBox(height: 8),
+            const Column(
+              children: [
+                BulletItem(
+                  'Reduzi o tempo de carregamento da aplicação principal em 60% através de otimizações',
+                ),
+                SizedBox(height: 8),
+                BulletItem(
+                  'Implementei pipeline CI/CD completo reduzindo tempo de deploy de 2h para 15min',
+                ),
+                SizedBox(height: 8),
+                BulletItem(
+                  'Liderei equipe de 5 desenvolvedores em projeto de migração de monolito para microserviços',
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            const SectionLabel('TECNOLOGIAS'),
+            const SizedBox(height: 8),
+            const Row(
+              children: [
+                TechChip('Flutter'),
+                SizedBox(width: 8),
+                TechChip('React'),
+                SizedBox(width: 8),
+                TechChip('Node.js'),
               ],
             ),
           ],
         ),
       ),
-      // startChild: Container(color: Colors.amberAccent),
     );
   }
 }
-// business_center_outlined

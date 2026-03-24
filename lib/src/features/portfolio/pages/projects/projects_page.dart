@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_core/src/core/resources/size_screen_manager.dart';
-import '../../../../core/resources/color_manager.dart';
-import '../../../../core/resources/font_manager.dart';
-import '../../../../core/resources/style_manager.dart';
 import '../../../../../l10n/app_localizations.dart';
+import '../../../../core/resources/color_manager.dart';
 import '../../models/menu_item.dart';
+import 'widgets/project_card.dart';
+import 'widgets/projects_header.dart';
 
 class ProjectsPage extends StatefulWidget {
   final MenuItem menu;
@@ -28,99 +28,44 @@ class _ProjectsPageState extends State<ProjectsPage> {
             : 128,
         vertical: context.isMobile ? 48 : 100,
       ),
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsetsGeometry.symmetric(
-              horizontal: 16,
-              vertical: 8,
-            ),
-            decoration: BoxDecoration(
-              color: ColorManager.accent,
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-            ),
-            child: Text(
-              'Portifólio',
-              style: getRegularStyle(
-                color: ColorManager.background,
-                fontSize: FontSize.s14,
-              ).inter,
-            ),
-          ),
-          const SizedBox(height: 16),
-          SizedBox(
-            width: context.isMobile
-                ? double.infinity
-                : context.percentWidth(.5),
-            child: Text(
-              'Projetos em destaque',
-              style: getBoldStyle(
-                color: ColorManager.neutral.shade900,
-                fontSize: context.isMobile ? FontSize.s32 : FontSize.s48,
-              ).inter,
-            ),
-          ),
-          const SizedBox(height: 20),
-          SizedBox(
-            width: context.isMobile
-                ? double.infinity
-                : context.percentWidth(.5),
-            child: Text(
-              'Uma seleção de projetos que demonstram minha capacidade de criar soluções completas e escaláveis.',
-              style: getRegularStyle(
-                color: ColorManager.secondary,
-                fontSize: context.isMobile ? FontSize.s16 : FontSize.s18,
-              ).inter,
-            ),
-          ),
-          const SizedBox(height: 64),
-          // https://picsum.photos/590/256
+          ProjectsHeader(),
+          SizedBox(height: 64),
           Wrap(
             spacing: 32,
             runSpacing: 32,
             alignment: WrapAlignment.start,
             crossAxisAlignment: WrapCrossAlignment.start,
             children: [
-              Container(
-                width: 590,
-                height: 640,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(16)),
-                  border: Border.all(color: ColorManager.primary, width: 2),
-                ),
-                child: Column(
-                  children: [
-                    Flexible(
-                      flex: 4,
-                      child: Image.network(
-                        'https://picsum.photos/590/256',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Flexible(flex: 6, child: Container(color: Colors.red)),
-                  ],
-                ),
+              ProjectCard(
+                imageUrl: 'https://picsum.photos/590/256',
+                title: 'Mobile App - Fitness Tracker',
+                description:
+                    'Aplicativo mobile para acompanhamento de exercícios físicos com monitoramento de progresso e metas personalizadas.',
+                technologies: ['Flutter', 'Dart', 'Firebase', 'REST API'],
               ),
-              Container(
-                width: 590,
-                height: 640,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(16)),
-                  border: Border.all(color: ColorManager.primary, width: 2),
-                ),
-                child: Column(
-                  children: [
-                    Flexible(
-                      flex: 4,
-                      child: Image.network(
-                        'https://picsum.photos/590/256',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Flexible(flex: 6, child: Container(color: Colors.red)),
-                  ],
-                ),
+              ProjectCard(
+                imageUrl: 'https://picsum.photos/590/256',
+                title: 'Mobile App - Fitness Tracker',
+                description:
+                    'Aplicativo mobile para acompanhamento de exercícios físicos com monitoramento de progresso e metas personalizadas.',
+                technologies: ['Flutter', 'Firebase'],
+              ),
+              ProjectCard(
+                imageUrl: 'https://picsum.photos/590/256',
+                title: 'Mobile App - Fitness Tracker',
+                description:
+                    'Aplicativo mobile para acompanhamento de exercícios físicos com monitoramento de progresso e metas personalizadas.',
+                technologies: ['Flutter', 'Dart', 'Firebase', 'REST API'],
+              ),
+              ProjectCard(
+                imageUrl: 'https://picsum.photos/590/256',
+                title: 'Mobile App - Fitness Tracker',
+                description:
+                    'Aplicativo mobile para acompanhamento de exercícios físicos com monitoramento de progresso e metas personalizadas.',
+                technologies: ['Flutter', 'Firebase'],
               ),
             ],
           ),

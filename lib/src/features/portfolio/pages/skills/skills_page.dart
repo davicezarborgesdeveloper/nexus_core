@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nexus_core/src/core/resources/font_manager.dart';
-import 'package:nexus_core/src/core/resources/style_manager.dart';
-import 'package:nexus_core/src/features/portfolio/pages/skills/widgets/skills_tiles.dart';
-
-import '../../../../../l10n/app_localizations.dart';
 import 'package:nexus_core/src/core/resources/size_screen_manager.dart';
 import 'package:nexus_core/src/core/resources/color_manager.dart';
+import 'package:nexus_core/src/features/portfolio/pages/skills/widgets/skills_tiles.dart';
+import 'package:nexus_core/src/features/portfolio/widgets/section_header.dart';
+
+import '../../../../../l10n/app_localizations.dart';
 import '../../models/menu_item.dart';
 
 class SkillsPage extends StatelessWidget {
@@ -30,48 +29,10 @@ class SkillsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              padding: const EdgeInsetsGeometry.symmetric(
-                horizontal: 16,
-                vertical: 8,
-              ),
-              decoration: BoxDecoration(
-                color: ColorManager.primary,
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-              ),
-              child: Text(
-                l10n.skillsTitle,
-                style: getMediumStyle(
-                  color: ColorManager.background,
-                  fontSize: FontSize.s14,
-                ).inter,
-              ),
-            ),
-            const SizedBox(height: 16),
-            SizedBox(
-              width: context.isMobile
-                  ? double.infinity
-                  : context.percentWidth(.5),
-              child: Text(
-                l10n.skillsSubtitle,
-                style: getBoldStyle(
-                  color: ColorManager.neutral.shade900,
-                  fontSize: context.isMobile ? FontSize.s32 : FontSize.s48,
-                ).inter,
-              ),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              width: context.isMobile
-                  ? double.infinity
-                  : context.percentWidth(.5),
-              child: Text(
-                l10n.skillsDescription,
-                style: getRegularStyle(
-                  color: ColorManager.secondary,
-                  fontSize: context.isMobile ? FontSize.s16 : FontSize.s18,
-                ).inter,
-              ),
+            SectionHeader(
+              badge: l10n.skillsTitle,
+              title: l10n.skillsSubtitle,
+              description: l10n.skillsDescription,
             ),
             const SizedBox(height: 64),
             const _SkillsGrid(),

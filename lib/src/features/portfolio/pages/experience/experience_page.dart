@@ -5,6 +5,7 @@ import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/font_manager.dart';
 import '../../../../core/resources/style_manager.dart';
 import '../../models/menu_item.dart';
+import '../../widgets/section_header.dart';
 import 'widgets/timeline_experience.dart';
 
 class ExperiencePage extends StatefulWidget {
@@ -31,48 +32,10 @@ class _ExperiencePageState extends State<ExperiencePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsetsGeometry.symmetric(
-              horizontal: 16,
-              vertical: 8,
-            ),
-            decoration: BoxDecoration(
-              color: ColorManager.primary,
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-            ),
-            child: Text(
-              l10n.expBadge,
-              style: getRegularStyle(
-                color: ColorManager.background,
-                fontSize: FontSize.s14,
-              ).inter,
-            ),
-          ),
-          const SizedBox(height: 16),
-          SizedBox(
-            width: context.isMobile
-                ? double.infinity
-                : context.percentWidth(.5),
-            child: Text(
-              l10n.expTitle,
-              style: getBoldStyle(
-                color: ColorManager.neutral.shade900,
-                fontSize: context.isMobile ? FontSize.s32 : FontSize.s48,
-              ).inter,
-            ),
-          ),
-          const SizedBox(height: 20),
-          SizedBox(
-            width: context.isMobile
-                ? double.infinity
-                : context.percentWidth(.5),
-            child: Text(
-              l10n.expDescription,
-              style: getRegularStyle(
-                color: ColorManager.secondary,
-                fontSize: context.isMobile ? FontSize.s16 : FontSize.s18,
-              ).inter,
-            ),
+          SectionHeader(
+            badge: l10n.expBadge,
+            title: l10n.expTitle,
+            description: l10n.expDescription,
           ),
           const SizedBox(height: 64),
           const Column(

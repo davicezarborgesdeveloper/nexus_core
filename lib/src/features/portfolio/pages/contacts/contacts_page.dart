@@ -41,12 +41,12 @@ class _ContactsPageState extends State<ContactsPage> {
                 badgeColor: ColorManager.primary,
               ),
               const SizedBox(height: 36),
-              Container(child: Column(children: [])),
+              Container(child: const Column(children: [])),
             ],
           ),
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-             
-            ],
+          const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [],
           ),
         ],
       ),

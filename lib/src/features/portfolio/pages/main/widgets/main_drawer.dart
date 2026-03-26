@@ -9,19 +9,16 @@ import 'package:nexus_core/src/features/portfolio/pages/main/widgets/social/soci
 import 'package:nexus_core/src/features/portfolio/pages/main/widgets/social/social_enum.dart';
 
 class MainDrawer extends StatelessWidget {
-  const MainDrawer({
-    super.key,
-    required this.menu,
-  });
+  const MainDrawer({super.key, required this.menu});
 
   final List<MenuItem> menu;
 
   @override
   Widget build(BuildContext context) {
-    return  Transform.translate(
-        offset: Offset(0, context.appbarHeight),
+    return Transform.translate(
+      offset: Offset(0, context.appbarHeight),
       child: SizedBox(
-            width:kIsWeb?context.screenWidth:null,
+        width: kIsWeb ? context.screenWidth : null,
         child: Drawer(
           backgroundColor: ColorManager.background,
           shape: const RoundedRectangleBorder(
@@ -34,7 +31,10 @@ class MainDrawer extends StatelessWidget {
             children: [
               ...menu.map(
                 (m) => GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Scrollable.ensureVisible(m.key.currentContext!);
+                    Navigator.of(context).pop();
+                  },
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 24,
@@ -50,11 +50,7 @@ class MainDrawer extends StatelessWidget {
                   ),
                 ),
               ),
-              Divider(
-                indent: 24,
-                endIndent: 24,
-                color: ColorManager.secondary,
-              ),
+              Divider(indent: 24, endIndent: 24, color: ColorManager.secondary),
               Row(
                 children: [
                   const SizedBox(width: 24),

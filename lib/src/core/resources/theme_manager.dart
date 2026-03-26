@@ -73,5 +73,31 @@ ThemeData getApplicationTheme() {
         side: BorderSide(color: Colors.white.withValues(alpha: 0.05)),
       ),
     ),
+
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: ColorManager.background,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide(color: ColorManager.neutral.shade200, width: 1),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide(color: ColorManager.neutral.shade200, width: 1),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide(color: ColorManager.primary, width: 1),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide(color: ColorManager.error, width: 1),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide(color: ColorManager.error, width: 1),
+      ),
+    ),
   );
 }

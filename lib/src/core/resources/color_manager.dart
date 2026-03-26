@@ -20,6 +20,10 @@ class ColorManager {
     0xFFffffff,
   ); //Texto principal, conteúdo importante
 
+  static Color error = const Color(
+    0xFFef4444,
+  ); //Vermelho vibrante para mensagens de erro, alertas
+
   static Color shadow = const Color(0xFF000000);
 
   static const MaterialColor neutral = MaterialColor(0xFF64748b, {

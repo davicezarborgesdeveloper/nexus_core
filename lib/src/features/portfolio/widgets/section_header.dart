@@ -47,7 +47,11 @@ class SectionHeader extends StatelessWidget {
             title,
             style: getBoldStyle(
               color: ColorManager.neutral.shade900,
-              fontSize: context.isMobile ? FontSize.s32 : FontSize.s48,
+              fontSize: context.isMobile
+                  ? FontSize.s24
+                  : context.isTablet
+                  ? FontSize.s32
+                  : FontSize.s48,
             ).inter,
           ),
         ),

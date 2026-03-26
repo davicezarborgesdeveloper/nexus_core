@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_core/src/core/resources/font_manager.dart';
+import 'package:nexus_core/src/core/resources/size_screen_manager.dart';
 import 'package:nexus_core/src/features/portfolio/pages/experience/widgets/section_label.dart';
 import 'package:nexus_core/src/features/portfolio/pages/experience/widgets/tech_chip.dart';
 import 'package:nexus_core/src/features/portfolio/pages/experience/widgets/bullet_item.dart';
@@ -84,45 +85,54 @@ class TimelineExperience extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 12),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Senior Full Stack Developer',
-                      style: getBoldStyle(
-                        color: ColorManager.foreground,
-                        fontSize: FontSize.s24,
-                      ).spaceGrotesk,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      'TechCorp Solutions',
-                      style: getMediumStyle(
-                        color: ColorManager.primary,
-                        fontSize: FontSize.s18,
-                      ).inter,
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Senior Full Stack Developer',
+                        style: getBoldStyle(
+                          color: ColorManager.foreground,
+                          fontSize: context.isMobile ? FontSize.s18 : FontSize.s24,
+                        ).spaceGrotesk,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'TechCorp Solutions',
+                        style: getMediumStyle(
+                          color: ColorManager.primary,
+                          fontSize: context.isMobile ? FontSize.s16 : FontSize.s18,
+                        ).inter,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
             const SizedBox(height: 8),
-            Row(
+            Wrap(
+              spacing: 14,
+              runSpacing: 6,
+              crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                Icon(
-                  Icons.calendar_today_outlined,
-                  size: 16,
-                  color: ColorManager.secondary,
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.calendar_today_outlined,
+                      size: 16,
+                      color: ColorManager.secondary,
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      'Jan 2020 - Present',
+                      style: getRegularStyle(
+                        fontSize: 14,
+                        color: ColorManager.secondary,
+                      ).inter,
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 6),
-                Text(
-                  'Jan 2020 - Present',
-                  style: getRegularStyle(
-                    fontSize: 14,
-                    color: ColorManager.secondary,
-                  ).inter,
-                ),
-                const SizedBox(width: 14),
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 8,
@@ -140,18 +150,23 @@ class TimelineExperience extends StatelessWidget {
                     ).inter,
                   ),
                 ),
-                const SizedBox(width: 16),
-                Icon(
-                  Icons.location_on_outlined,
-                  size: 16,
-                  color: ColorManager.secondary,
-                ),
-                Text(
-                  'São Paulo, SP',
-                  style: getRegularStyle(
-                    fontSize: 14,
-                    color: ColorManager.secondary,
-                  ).inter,
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.location_on_outlined,
+                      size: 16,
+                      color: ColorManager.secondary,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      'São Paulo, SP',
+                      style: getRegularStyle(
+                        fontSize: 14,
+                        color: ColorManager.secondary,
+                      ).inter,
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -184,12 +199,12 @@ class TimelineExperience extends StatelessWidget {
             const SizedBox(height: 16),
             SectionLabel(AppLocalizations.of(context)!.expTechnologiesLabel),
             const SizedBox(height: 8),
-            const Row(
+            const Wrap(
+              spacing: 8,
+              runSpacing: 8,
               children: [
                 TechChip('Flutter'),
-                SizedBox(width: 8),
                 TechChip('React'),
-                SizedBox(width: 8),
                 TechChip('Node.js'),
               ],
             ),

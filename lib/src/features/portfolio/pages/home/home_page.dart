@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
               l10n.homeDescription,
               style: getRegularStyle(
                 color: ColorManager.secondary,
-                fontSize: FontSize.s20,
+                fontSize: context.isMobile ? FontSize.s16 : FontSize.s20,
               ).inter,
             ),
           ),

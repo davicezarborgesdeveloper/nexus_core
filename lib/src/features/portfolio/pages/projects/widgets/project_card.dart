@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nexus_core/src/core/resources/size_screen_manager.dart';
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/font_manager.dart';
 import '../../../../../core/resources/style_manager.dart';
@@ -30,7 +31,7 @@ class ProjectCard extends StatelessWidget {
           // ação do clique
         },
         child: Container(
-          width: 590,
+          width: context.isMobile ? double.infinity : 590,
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(16)),
           ),
@@ -59,7 +60,7 @@ class ProjectCard extends StatelessWidget {
                       title,
                       style: getBoldStyle(
                         color: ColorManager.foreground,
-                        fontSize: FontSize.s24,
+                        fontSize: context.isMobile ? FontSize.s20 : FontSize.s24,
                       ).spaceGrotesk,
                     ),
                     const SizedBox(height: 12),

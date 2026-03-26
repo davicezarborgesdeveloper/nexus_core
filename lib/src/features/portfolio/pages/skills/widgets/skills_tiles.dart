@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_core/src/core/resources/color_manager.dart';
+import 'package:nexus_core/src/core/resources/size_screen_manager.dart';
 import 'package:nexus_core/src/core/resources/style_manager.dart';
 
 import '../../../../../core/resources/font_manager.dart';
@@ -61,7 +62,7 @@ class _SkillsTilesState extends State<SkillsTiles> {
               widget.title,
               style: getBoldStyle(
                 color: ColorManager.neutral.shade900,
-                fontSize: FontSize.s20,
+                fontSize: context.isMobile ? FontSize.s18 : FontSize.s20,
               ).spaceGrotesk,
             ),
             const SizedBox(height: 12),

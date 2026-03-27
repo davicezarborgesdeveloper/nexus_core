@@ -19,21 +19,29 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  List<MenuItem>? _menu;
-  List<MenuItem> get menu => _menu!;
+  late final List<GlobalKey> _keys;
+  late List<MenuItem> _menu;
+  List<MenuItem> get menu => _menu;
 
   final String name = 'Davi Cezário Borges';
   bool _isDrawerOpen = false;
 
   @override
+  void initState() {
+    super.initState();
+    _keys = List.generate(5, (_) => GlobalKey());
+  }
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    final l10n = AppLocalizations.of(context)!;
     _menu = [
-      MenuItem(AppLocalizations.of(context)!.navHome, GlobalKey()),
-      MenuItem(AppLocalizations.of(context)!.navSkills, GlobalKey()),
-      MenuItem(AppLocalizations.of(context)!.navExperience, GlobalKey()),
-      MenuItem(AppLocalizations.of(context)!.navProjects, GlobalKey()),
-      MenuItem(AppLocalizations.of(context)!.navContact, GlobalKey()),
+      MenuItem(l10n.navHome, _keys[0]),
+      MenuItem(l10n.navSkills, _keys[1]),
+      MenuItem(l10n.navExperience, _keys[2]),
+      MenuItem(l10n.navProjects, _keys[3]),
+      MenuItem(l10n.navContact, _keys[4]),
     ];
   }
 
@@ -49,7 +57,7 @@ class _MainPageState extends State<MainPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            HomePage(menu[0]),
+            HomePage(menu[0], projectsKey: menu[3].key, contactKey: menu[4].key),
             SkillsPage(menu[1]),
             ExperiencePage(menu[2]),
             ProjectsPage(menu[3]),

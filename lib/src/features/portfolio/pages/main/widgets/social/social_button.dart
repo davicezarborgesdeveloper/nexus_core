@@ -9,17 +9,27 @@ class SocialButton extends StatelessWidget {
   final SocialEnum? tipo;
   const SocialButton({this.link, this.tipo, super.key});
 
+  Future<void> _launch(BuildContext context) async {
+    try {
+      final Uri uri = tipo == SocialEnum.email
+          ? Uri(scheme: 'mailto', path: link)
+          : Uri.parse(link ?? '');
+      if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+        throw Exception('Could not launch $uri');
+      }
+    } catch (_) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Não foi possível abrir o link.')),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        if (tipo == SocialEnum.email) {
-          final Uri emailLaunchUri = Uri(scheme: 'mailto', path: link);
-          launchUrl(emailLaunchUri);
-        } else {
-          launchUrl(Uri.parse(link ?? ''));
-        }
-      },
+      onTap: () => _launch(context),
       child: SvgPicture.asset(
         switch (tipo) {
           SocialEnum.github => 'assets/icons/github.svg',

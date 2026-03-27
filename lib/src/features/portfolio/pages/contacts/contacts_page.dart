@@ -118,9 +118,7 @@ class _ContactForm extends StatelessWidget {
           ).inter,
         ),
         const SizedBox(height: 8),
-        TextFormField(
-          decoration: const InputDecoration(hintText: 'Seu nome'),
-        ),
+        TextFormField(decoration: const InputDecoration(hintText: 'Seu nome')),
         const SizedBox(height: 24),
         Text(
           'E-mail',
@@ -130,9 +128,7 @@ class _ContactForm extends StatelessWidget {
           ).inter,
         ),
         const SizedBox(height: 8),
-        TextFormField(
-          decoration: const InputDecoration(hintText: 'Seu@email'),
-        ),
+        TextFormField(decoration: const InputDecoration(hintText: 'Seu@email')),
         const SizedBox(height: 24),
         Text(
           'Mensagem',

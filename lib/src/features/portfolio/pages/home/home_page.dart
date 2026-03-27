@@ -6,11 +6,15 @@ import 'package:nexus_core/src/core/resources/size_screen_manager.dart';
 import 'package:nexus_core/src/core/resources/style_manager.dart';
 import 'package:nexus_core/src/features/portfolio/models/menu_item.dart';
 import 'package:nexus_core/src/features/portfolio/pages/home/widgets/action_buttons.dart';
+import 'package:nexus_core/src/features/portfolio/pages/home/widgets/header_home_page.dart';
 import 'widgets/kpi_metric.dart';
 
 class HomePage extends StatefulWidget {
   final MenuItem menu;
-  HomePage(this.menu, {Key? key}) : super(key: key ?? menu.key);
+  final GlobalKey? projectsKey;
+  final GlobalKey? contactKey;
+  HomePage(this.menu, {this.projectsKey, this.contactKey, Key? key})
+    : super(key: key ?? menu.key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -33,30 +37,7 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsetsGeometry.symmetric(
-              horizontal: 16,
-              vertical: 8,
-            ),
-            decoration: BoxDecoration(
-              color: ColorManager.neutral.shade100,
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(Icons.circle, size: 8, color: ColorManager.accent),
-                const SizedBox(width: 8),
-                Text(
-                  l10n.homeAvailable,
-                  style: getRegularStyle(
-                    color: ColorManager.neutral.shade700,
-                    fontSize: FontSize.s14,
-                  ).inter,
-                ),
-              ],
-            ),
-          ),
+          const HeaderHomePage(),
           const SizedBox(height: 24),
           FittedBox(
             fit: BoxFit.scaleDown,
@@ -94,7 +75,34 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           const SizedBox(height: 48),
-          const ActionButtons(),
+          ActionButtons(
+            onViewProjects: widget.projectsKey == null
+                ? null
+                : () {
+                    print('overthere');
+                    // final ctx = widget.projectsKey!.currentContext;
+                    // if (ctx == null) return;
+                    // Scrollable.ensureVisible(
+                    //   ctx,
+                    //   duration: const Duration(milliseconds: 600),
+                    //   curve: Curves.easeInOut,
+                    // );
+                  },
+            onContact: widget.contactKey == null
+                ? () {
+                    print('onContact: contactKey is NULL');
+                  }
+                : () {
+                    final ctx = widget.contactKey!.currentContext;
+                    print('onContact: ctx=$ctx');
+                    if (ctx == null) return;
+                    Scrollable.ensureVisible(
+                      ctx,
+                      duration: const Duration(milliseconds: 600),
+                      curve: Curves.easeInOut,
+                    );
+                  },
+          ),
           Divider(
             thickness: 1,
             color: ColorManager.neutral.shade200,

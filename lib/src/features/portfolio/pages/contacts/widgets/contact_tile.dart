@@ -44,25 +44,27 @@ class ContactTile extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 16),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                label,
-                style: getRegularStyle(
-                  color: ColorManager.secondary,
-                  fontSize: FontSize.s14,
-                ).inter,
-              ),
-              const SizedBox(height: 4),
-              Text(
-                value,
-                style: getMediumStyle(
-                  color: ColorManager.foreground,
-                  fontSize: FontSize.s16,
-                ).inter,
-              ),
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label,
+                  style: getRegularStyle(
+                    color: ColorManager.secondary,
+                    fontSize: FontSize.s14,
+                  ).inter,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  value,
+                  style: getMediumStyle(
+                    color: ColorManager.foreground,
+                    fontSize: FontSize.s16,
+                  ).inter,
+                ),
+              ],
+            ),
           ),
         ],
       ),

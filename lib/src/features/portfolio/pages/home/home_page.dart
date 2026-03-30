@@ -79,19 +79,16 @@ class _HomePageState extends State<HomePage> {
             onViewProjects: widget.projectsKey == null
                 ? null
                 : () {
-                    print('overthere');
-                    // final ctx = widget.projectsKey!.currentContext;
-                    // if (ctx == null) return;
-                    // Scrollable.ensureVisible(
-                    //   ctx,
-                    //   duration: const Duration(milliseconds: 600),
-                    //   curve: Curves.easeInOut,
-                    // );
+                    final ctx = widget.projectsKey!.currentContext;
+                    if (ctx == null) return;
+                    Scrollable.ensureVisible(
+                      ctx,
+                      duration: const Duration(milliseconds: 600),
+                      curve: Curves.easeInOut,
+                    );
                   },
             onContact: widget.contactKey == null
-                ? () {
-                    print('onContact: contactKey is NULL');
-                  }
+                ? null
                 : () {
                     final ctx = widget.contactKey!.currentContext;
                     print('onContact: ctx=$ctx');

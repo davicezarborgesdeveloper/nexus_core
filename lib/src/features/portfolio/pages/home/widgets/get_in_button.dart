@@ -14,7 +14,7 @@ class GetInButton extends StatelessWidget {
     return SizedBox(
       height: 48,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           elevation: 0,
           backgroundColor: ColorManager.background,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_core/src/core/resources/size_screen_manager.dart';
+import 'package:nexus_core/src/features/portfolio/pages/projects/widgets/github_button_projects.dart';
 import '../../../../../l10n/app_localizations.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../models/menu_item.dart';
@@ -69,6 +70,9 @@ class _ProjectsPageState extends State<ProjectsPage> {
               ),
             ],
           ),
+          SizedBox(height: 48),
+          GithubButtonProjects(),
+          SizedBox(height: 64),
         ],
       ),
     );

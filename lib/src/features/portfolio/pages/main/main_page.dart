@@ -10,6 +10,7 @@ import '../contacts/contacts_page.dart';
 import '../experience/experience_page.dart';
 import '../projects/projects_page.dart';
 import '../skills/skills_page.dart';
+import 'widgets/footer.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -57,11 +58,16 @@ class _MainPageState extends State<MainPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            HomePage(menu[0], projectsKey: menu[3].key, contactKey: menu[4].key),
+            HomePage(
+              menu[0],
+              projectsKey: menu[3].key,
+              contactKey: menu[4].key,
+            ),
             SkillsPage(menu[1]),
             ExperiencePage(menu[2]),
             ProjectsPage(menu[3]),
             ContactsPage(menu[4]),
+            Footer(menus: menu),
           ],
         ),
       ),

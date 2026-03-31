@@ -5,7 +5,7 @@ import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/font_manager.dart';
 import '../../../../../core/resources/style_manager.dart';
 
-class ContactTile extends StatelessWidget {
+class ContactTile extends StatefulWidget {
   final String icon;
   final String label;
   final String value;
@@ -17,56 +17,79 @@ class ContactTile extends StatelessWidget {
   });
 
   @override
+  State<ContactTile> createState() => _ContactTileState();
+}
+
+class _ContactTileState extends State<ContactTile> {
+  final ValueNotifier<bool> isHovered = ValueNotifier<bool>(false);
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        color: ColorManager.background,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: ColorManager.neutral.shade200),
-      ),
-      child: Row(
-        children: [
-          Container(
+    return MouseRegion(
+      onEnter: (_) => isHovered.value = true,
+      onExit: (_) => isHovered.value = false,
+      child: ValueListenableBuilder(
+        valueListenable: isHovered,
+        builder: (context, hovered, _) {
+          return AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeOut,
+            transform: Matrix4.translationValues(hovered ? 4 : 0, 0, 0),
+            padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
-              color: ColorManager.neutral.shade100,
+              color: ColorManager.background,
               borderRadius: BorderRadius.circular(12),
-            ),
-            padding: const EdgeInsets.all(14),
-            child: SvgPicture.asset(
-              icon,
-              colorFilter: ColorFilter.mode(
-                ColorManager.primary,
-                BlendMode.srcIn,
+              border: Border.all(
+                color: hovered
+                    ? ColorManager.primary
+                    : ColorManager.neutral.shade200,
               ),
-              height: 20,
-              width: 20,
             ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
               children: [
-                Text(
-                  label,
-                  style: getRegularStyle(
-                    color: ColorManager.secondary,
-                    fontSize: FontSize.s14,
-                  ).inter,
+                Container(
+                  decoration: BoxDecoration(
+                    color: ColorManager.neutral.shade100,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: const EdgeInsets.all(14),
+                  child: SvgPicture.asset(
+                    widget.icon,
+                    colorFilter: ColorFilter.mode(
+                      ColorManager.primary,
+                      BlendMode.srcIn,
+                    ),
+                    height: 20,
+                    width: 20,
+                  ),
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  value,
-                  style: getMediumStyle(
-                    color: ColorManager.foreground,
-                    fontSize: FontSize.s16,
-                  ).inter,
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.label,
+                        style: getRegularStyle(
+                          color: ColorManager.secondary,
+                          fontSize: FontSize.s14,
+                        ).inter,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        widget.value,
+                        style: getMediumStyle(
+                          color: ColorManager.foreground,
+                          fontSize: FontSize.s16,
+                        ).inter,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }

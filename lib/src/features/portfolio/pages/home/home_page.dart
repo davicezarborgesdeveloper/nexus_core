@@ -91,7 +91,6 @@ class _HomePageState extends State<HomePage> {
                 ? null
                 : () {
                     final ctx = widget.contactKey!.currentContext;
-                    print('onContact: ctx=$ctx');
                     if (ctx == null) return;
                     Scrollable.ensureVisible(
                       ctx,

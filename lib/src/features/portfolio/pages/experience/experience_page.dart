@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_core/src/core/resources/size_screen_manager.dart';
+import 'package:nexus_core/src/features/portfolio/pages/experience/widgets/download_resume_button.dart';
 import '../../../../../l10n/app_localizations.dart';
 import '../../../../core/resources/color_manager.dart';
-import '../../../../core/resources/font_manager.dart';
-import '../../../../core/resources/style_manager.dart';
 import '../../models/menu_item.dart';
 import '../../widgets/section_header.dart';
 import 'widgets/timeline_experience.dart';
@@ -47,32 +46,7 @@ class _ExperiencePageState extends State<ExperiencePage> {
             ],
           ),
           const SizedBox(height: 64),
-          Center(
-            child: SizedBox(
-              height: 60,
-              child: ElevatedButton.icon(
-                onPressed: () {},
-                icon: const Icon(Icons.download_outlined, color: Colors.white),
-                label: Text(
-                  l10n.expDownloadResume,
-                  style: getBoldStyle(
-                    color: Colors.white,
-                    fontSize: FontSize.s16,
-                  ).inter,
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorManager.primary,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24,
-                    vertical: 16,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          const Center(child: DownloadResumeButton()),
         ],
       ),
     );

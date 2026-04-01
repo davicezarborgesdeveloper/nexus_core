@@ -235,6 +235,102 @@ abstract class AppLocalizations {
   /// No description provided for @expTechnologiesLabel.
   String get expTechnologiesLabel;
 
+  /// No description provided for @skillsFrontend.
+  String get skillsFrontend;
+
+  /// No description provided for @skillsBackend.
+  String get skillsBackend;
+
+  /// No description provided for @skillsDevOps.
+  String get skillsDevOps;
+
+  /// No description provided for @skillsSoftSkills.
+  String get skillsSoftSkills;
+
+  /// No description provided for @expJobTitle.
+  String get expJobTitle;
+
+  /// No description provided for @expCompany.
+  String get expCompany;
+
+  /// No description provided for @expDateRange.
+  String get expDateRange;
+
+  /// No description provided for @expLocation.
+  String get expLocation;
+
+  /// No description provided for @expJobDescription.
+  String get expJobDescription;
+
+  /// No description provided for @expAchievement1.
+  String get expAchievement1;
+
+  /// No description provided for @expAchievement2.
+  String get expAchievement2;
+
+  /// No description provided for @expAchievement3.
+  String get expAchievement3;
+
+  /// No description provided for @projectsBadge.
+  String get projectsBadge;
+
+  /// No description provided for @projectsTitle.
+  String get projectsTitle;
+
+  /// No description provided for @projectsDescription.
+  String get projectsDescription;
+
+  /// No description provided for @projectCardTitle.
+  String get projectCardTitle;
+
+  /// No description provided for @projectCardDescription.
+  String get projectCardDescription;
+
+  /// No description provided for @contactBadge.
+  String get contactBadge;
+
+  /// No description provided for @contactTitle.
+  String get contactTitle;
+
+  /// No description provided for @contactDescription.
+  String get contactDescription;
+
+  /// No description provided for @contactLabelEmail.
+  String get contactLabelEmail;
+
+  /// No description provided for @contactLabelGithub.
+  String get contactLabelGithub;
+
+  /// No description provided for @contactLabelLinkedin.
+  String get contactLabelLinkedin;
+
+  /// No description provided for @contactLabelLocation.
+  String get contactLabelLocation;
+
+  /// No description provided for @contactLocationValue.
+  String get contactLocationValue;
+
+  /// No description provided for @contactFormName.
+  String get contactFormName;
+
+  /// No description provided for @contactFormNameHint.
+  String get contactFormNameHint;
+
+  /// No description provided for @contactFormEmail.
+  String get contactFormEmail;
+
+  /// No description provided for @contactFormEmailHint.
+  String get contactFormEmailHint;
+
+  /// No description provided for @contactFormMessage.
+  String get contactFormMessage;
+
+  /// No description provided for @contactFormMessageHint.
+  String get contactFormMessageHint;
+
+  /// No description provided for @contactFormSubmit.
+  String get contactFormSubmit;
+
   /// No description provided for @softSkillTeamwork.
   String get softSkillTeamwork;
 

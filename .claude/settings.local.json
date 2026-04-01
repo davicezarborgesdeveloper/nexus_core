@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(find . -path ./.github/* -o -path ./test/*)"
+      "Bash(find . -path ./.github/* -o -path ./test/*)",
+      "Bash(find lib/l10n -name \"*.arb\" -type f -exec wc -l {} \\\\;)",
+      "Bash(sort -k2)"
     ]
   }
 }

@@ -37,7 +37,7 @@ class _ContactsPageState extends State<ContactsPage> {
               children: [
                 _ContactInfo(l10n: l10n),
                 const SizedBox(height: 48),
-                const _ContactForm(),
+                _ContactForm(l10n: l10n),
               ],
             )
           : Row(
@@ -45,7 +45,7 @@ class _ContactsPageState extends State<ContactsPage> {
               children: [
                 Expanded(child: _ContactInfo(l10n: l10n)),
                 const SizedBox(width: 64),
-                const Expanded(child: _ContactForm()),
+                Expanded(child: _ContactForm(l10n: l10n)),
               ],
             ),
     );
@@ -62,38 +62,37 @@ class _ContactInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SectionHeader(
-          badge: 'Contato',
-          title: 'Vamos trabalhar juntos',
-          description:
-              'Estou sempre aberto a discutir novos projetos, ideias criativas ou oportunidades de fazer parte de sua visão.',
+          badge: l10n.contactBadge,
+          title: l10n.contactTitle,
+          description: l10n.contactDescription,
           badgeColor: ColorManager.primary,
         ),
         const SizedBox(height: 36),
-        const Column(
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ContactTile(
               icon: 'assets/icons/mail.svg',
-              label: 'Email',
+              label: l10n.contactLabelEmail,
               value: 'daviborges.sistemas@gmail.com',
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ContactTile(
               icon: 'assets/icons/github.svg',
-              label: 'GitHub',
+              label: l10n.contactLabelGithub,
               value: 'davicezarborgesdeveloper',
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ContactTile(
               icon: 'assets/icons/linkedin.svg',
-              label: 'LinkedIn',
+              label: l10n.contactLabelLinkedin,
               value: 'daviborgesdeveloper',
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ContactTile(
               icon: 'assets/icons/location.svg',
-              label: 'Localização',
-              value: 'São Paulo, Brasil',
+              label: l10n.contactLabelLocation,
+              value: l10n.contactLocationValue,
             ),
           ],
         ),
@@ -103,7 +102,8 @@ class _ContactInfo extends StatelessWidget {
 }
 
 class _ContactForm extends StatelessWidget {
-  const _ContactForm();
+  final AppLocalizations l10n;
+  const _ContactForm({required this.l10n});
 
   @override
   Widget build(BuildContext context) {
@@ -111,37 +111,37 @@ class _ContactForm extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          'Nome',
+          l10n.contactFormName,
           style: getMediumStyle(
             fontSize: FontSize.s16,
             color: ColorManager.foreground,
           ).inter,
         ),
         const SizedBox(height: 8),
-        TextFormField(decoration: const InputDecoration(hintText: 'Seu nome')),
+        TextFormField(decoration: InputDecoration(hintText: l10n.contactFormNameHint)),
         const SizedBox(height: 24),
         Text(
-          'E-mail',
+          l10n.contactFormEmail,
           style: getMediumStyle(
             fontSize: FontSize.s16,
             color: ColorManager.foreground,
           ).inter,
         ),
         const SizedBox(height: 8),
-        TextFormField(decoration: const InputDecoration(hintText: 'Seu@email')),
+        TextFormField(decoration: InputDecoration(hintText: l10n.contactFormEmailHint)),
         const SizedBox(height: 24),
         Text(
-          'Mensagem',
+          l10n.contactFormMessage,
           style: getMediumStyle(
             fontSize: FontSize.s16,
             color: ColorManager.foreground,
           ).inter,
         ),
         const SizedBox(height: 8),
-        const TextField(
+        TextField(
           minLines: 4,
           maxLines: 8,
-          decoration: InputDecoration(hintText: 'Digite sua mensagem'),
+          decoration: InputDecoration(hintText: l10n.contactFormMessageHint),
         ),
         const SizedBox(height: 30),
         SizedBox(
@@ -149,7 +149,7 @@ class _ContactForm extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {},
             child: Text(
-              'Enviar mensagem',
+              l10n.contactFormSubmit,
               style: getMediumStyle(
                 color: ColorManager.foreground,
                 fontSize: FontSize.s16,

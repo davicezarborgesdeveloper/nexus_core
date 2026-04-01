@@ -87,6 +87,109 @@ class AppLocalizationsFr extends AppLocalizations {
   String get expTechnologiesLabel => 'TECHNOLOGIES';
 
   @override
+  String get skillsFrontend => 'Frontend';
+
+  @override
+  String get skillsBackend => 'Backend';
+
+  @override
+  String get skillsDevOps => 'DevOps';
+
+  @override
+  String get skillsSoftSkills => 'Compétences Douces';
+
+  @override
+  String get expJobTitle => 'Développeur Full Stack Senior';
+
+  @override
+  String get expCompany => 'TechCorp Solutions';
+
+  @override
+  String get expDateRange => 'Jan 2020 - Présent';
+
+  @override
+  String get expLocation => 'São Paulo, SP';
+
+  @override
+  String get expJobDescription =>
+      'Responsable de diriger le développement de solutions web et mobiles en utilisant des technologies telles que Flutter, React et Node.js. Implémentation d\'APIs RESTful, intégration de bases de données et optimisation des performances. Collaboration avec des équipes multidisciplinaires pour assurer la livraison des projets dans les délais et avec une haute qualité.';
+
+  @override
+  String get expAchievement1 =>
+      'Réduit le temps de chargement de l\'application principale de 60% grâce à des optimisations';
+
+  @override
+  String get expAchievement2 =>
+      'Mis en place un pipeline CI/CD complet réduisant le temps de déploiement de 2h à 15min';
+
+  @override
+  String get expAchievement3 =>
+      'Dirigé une équipe de 5 développeurs dans un projet de migration de monolithe vers microservices';
+
+  @override
+  String get projectsBadge => 'Portfolio';
+
+  @override
+  String get projectsTitle => 'Projets en vedette';
+
+  @override
+  String get projectsDescription =>
+      'Une sélection de projets démontrant ma capacité à créer des solutions complètes et évolutives.';
+
+  @override
+  String get projectCardTitle => 'App Mobile - Fitness Tracker';
+
+  @override
+  String get projectCardDescription =>
+      'Application mobile pour le suivi des exercices physiques avec surveillance des progrès et objectifs personnalisés.';
+
+  @override
+  String get contactBadge => 'Contact';
+
+  @override
+  String get contactTitle => 'Travaillons ensemble';
+
+  @override
+  String get contactDescription =>
+      'Je suis toujours ouvert à discuter de nouveaux projets, d\'idées créatives ou d\'opportunités de faire partie de votre vision.';
+
+  @override
+  String get contactLabelEmail => 'E-mail';
+
+  @override
+  String get contactLabelGithub => 'GitHub';
+
+  @override
+  String get contactLabelLinkedin => 'LinkedIn';
+
+  @override
+  String get contactLabelLocation => 'Localisation';
+
+  @override
+  String get contactLocationValue => 'São Paulo, Brésil';
+
+  @override
+  String get contactFormName => 'Nom';
+
+  @override
+  String get contactFormNameHint => 'Votre nom';
+
+  @override
+  String get contactFormEmail => 'E-mail';
+
+  @override
+  String get contactFormEmailHint => 'votre@email';
+
+  @override
+  String get contactFormMessage => 'Message';
+
+  @override
+  String get contactFormMessageHint => 'Écrivez votre message';
+
+  @override
+  String get contactFormSubmit => 'Envoyer le message';
+
+  @override
   String get softSkillTeamwork => 'Travail d\'équipe';
 
   @override

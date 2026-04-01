@@ -137,7 +137,7 @@ class _TimelineExperienceState extends State<TimelineExperience> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Senior Full Stack Developer',
+                              AppLocalizations.of(context)!.expJobTitle,
                               style: getBoldStyle(
                                 color: ColorManager.foreground,
                                 fontSize: context.isMobile
@@ -147,7 +147,7 @@ class _TimelineExperienceState extends State<TimelineExperience> {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'TechCorp Solutions',
+                              AppLocalizations.of(context)!.expCompany,
                               style: getMediumStyle(
                                 color: ColorManager.primary,
                                 fontSize: context.isMobile
@@ -176,7 +176,7 @@ class _TimelineExperienceState extends State<TimelineExperience> {
                           ),
                           const SizedBox(width: 6),
                           Text(
-                            'Jan 2020 - Present',
+                            AppLocalizations.of(context)!.expDateRange,
                             style: getRegularStyle(
                               fontSize: 14,
                               color: ColorManager.secondary,
@@ -213,7 +213,7 @@ class _TimelineExperienceState extends State<TimelineExperience> {
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            'São Paulo, SP',
+                            AppLocalizations.of(context)!.expLocation,
                             style: getRegularStyle(
                               fontSize: 14,
                               color: ColorManager.secondary,
@@ -225,7 +225,7 @@ class _TimelineExperienceState extends State<TimelineExperience> {
                   ),
                   const SizedBox(height: 20),
                   Text(
-                    'Responsável por liderar o desenvolvimento de soluções web e mobile, utilizando tecnologias como Flutter, React e Node.js. Implementação de APIs RESTful, integração com bancos de dados e otimização de performance. Colaboração com equipes multidisciplinares para garantir a entrega de projetos dentro do prazo e com alta qualidade.',
+                    AppLocalizations.of(context)!.expJobDescription,
                     style: getRegularStyle(
                       fontSize: 16,
                       color: ColorManager.secondary,
@@ -236,18 +236,18 @@ class _TimelineExperienceState extends State<TimelineExperience> {
                     AppLocalizations.of(context)!.expAchievementsLabel,
                   ),
                   const SizedBox(height: 8),
-                  const Column(
+                  Column(
                     children: [
                       BulletItem(
-                        'Reduzi o tempo de carregamento da aplicação principal em 60% através de otimizações',
+                        AppLocalizations.of(context)!.expAchievement1,
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       BulletItem(
-                        'Implementei pipeline CI/CD completo reduzindo tempo de deploy de 2h para 15min',
+                        AppLocalizations.of(context)!.expAchievement2,
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       BulletItem(
-                        'Liderei equipe de 5 desenvolvedores em projeto de migração de monolito para microserviços',
+                        AppLocalizations.of(context)!.expAchievement3,
                       ),
                     ],
                   ),

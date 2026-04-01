@@ -52,22 +52,22 @@ class _SkillsGrid extends StatelessWidget {
     final tiles = [
       (
         icon: Icons.code,
-        title: 'Frontend',
+        title: l10n.skillsFrontend,
         itens: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Flutter'],
       ),
       (
         icon: Icons.terminal_outlined,
-        title: 'Backend',
+        title: l10n.skillsBackend,
         itens: ['Node.js', 'Python', 'PostgreSQL', 'Rest APIs', 'GraphQL'],
       ),
       (
         icon: Icons.rocket_launch_outlined,
-        title: 'DevOps',
+        title: l10n.skillsDevOps,
         itens: ['Docker', 'AWS', 'CI/CD', 'Git', 'Firebase'],
       ),
       (
         icon: Icons.bolt,
-        title: 'Soft Skills',
+        title: l10n.skillsSoftSkills,
         itens: [
           l10n.softSkillTeamwork,
           l10n.softSkillCommunication,

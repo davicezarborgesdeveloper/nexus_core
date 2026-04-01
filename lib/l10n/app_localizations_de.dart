@@ -87,6 +87,109 @@ class AppLocalizationsDe extends AppLocalizations {
   String get expTechnologiesLabel => 'TECHNOLOGIEN';
 
   @override
+  String get skillsFrontend => 'Frontend';
+
+  @override
+  String get skillsBackend => 'Backend';
+
+  @override
+  String get skillsDevOps => 'DevOps';
+
+  @override
+  String get skillsSoftSkills => 'Soft Skills';
+
+  @override
+  String get expJobTitle => 'Senior Full-Stack-Entwickler';
+
+  @override
+  String get expCompany => 'TechCorp Solutions';
+
+  @override
+  String get expDateRange => 'Jan 2020 - Gegenwart';
+
+  @override
+  String get expLocation => 'São Paulo, SP';
+
+  @override
+  String get expJobDescription =>
+      'Verantwortlich für die Leitung der Entwicklung von Web- und Mobile-Lösungen mit Technologien wie Flutter, React und Node.js. Implementierung von RESTful-APIs, Datenbankintegration und Performance-Optimierung. Zusammenarbeit mit multidisziplinären Teams zur Sicherstellung der pünktlichen Projektlieferung in hoher Qualität.';
+
+  @override
+  String get expAchievement1 =>
+      'Ladezeit der Hauptanwendung durch Optimierungen um 60% reduziert';
+
+  @override
+  String get expAchievement2 =>
+      'Vollständige CI/CD-Pipeline implementiert, die Deployment-Zeit von 2h auf 15min verkürzt';
+
+  @override
+  String get expAchievement3 =>
+      'Team von 5 Entwicklern bei einem Migrations-Projekt von Monolith zu Microservices geleitet';
+
+  @override
+  String get projectsBadge => 'Portfolio';
+
+  @override
+  String get projectsTitle => 'Ausgewählte Projekte';
+
+  @override
+  String get projectsDescription =>
+      'Eine Auswahl von Projekten, die meine Fähigkeit zeigen, vollständige und skalierbare Lösungen zu erstellen.';
+
+  @override
+  String get projectCardTitle => 'Mobile App - Fitness Tracker';
+
+  @override
+  String get projectCardDescription =>
+      'Mobile Anwendung zur Verfolgung körperlicher Übungen mit Fortschrittsüberwachung und personalisierten Zielen.';
+
+  @override
+  String get contactBadge => 'Kontakt';
+
+  @override
+  String get contactTitle => 'Lassen Sie uns zusammenarbeiten';
+
+  @override
+  String get contactDescription =>
+      'Ich bin immer offen für Gespräche über neue Projekte, kreative Ideen oder Möglichkeiten, Teil Ihrer Vision zu werden.';
+
+  @override
+  String get contactLabelEmail => 'E-Mail';
+
+  @override
+  String get contactLabelGithub => 'GitHub';
+
+  @override
+  String get contactLabelLinkedin => 'LinkedIn';
+
+  @override
+  String get contactLabelLocation => 'Standort';
+
+  @override
+  String get contactLocationValue => 'São Paulo, Brasilien';
+
+  @override
+  String get contactFormName => 'Name';
+
+  @override
+  String get contactFormNameHint => 'Ihr Name';
+
+  @override
+  String get contactFormEmail => 'E-Mail';
+
+  @override
+  String get contactFormEmailHint => 'ihre@email';
+
+  @override
+  String get contactFormMessage => 'Nachricht';
+
+  @override
+  String get contactFormMessageHint => 'Schreiben Sie Ihre Nachricht';
+
+  @override
+  String get contactFormSubmit => 'Nachricht senden';
+
+  @override
   String get softSkillTeamwork => 'Teamarbeit';
 
   @override

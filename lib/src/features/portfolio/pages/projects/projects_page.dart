@@ -29,11 +29,11 @@ class _ProjectsPageState extends State<ProjectsPage> {
             : 128,
         vertical: context.isMobile ? 48 : 100,
       ),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProjectsHeader(),
-          SizedBox(height: 64),
+          const ProjectsHeader(),
+          const SizedBox(height: 64),
           Wrap(
             spacing: 32,
             runSpacing: 32,
@@ -42,31 +42,27 @@ class _ProjectsPageState extends State<ProjectsPage> {
             children: [
               ProjectCard(
                 imageUrl: 'https://picsum.photos/590/256',
-                title: 'Mobile App - Fitness Tracker',
-                description:
-                    'Aplicativo mobile para acompanhamento de exercícios físicos com monitoramento de progresso e metas personalizadas.',
-                technologies: ['Flutter', 'Dart', 'Firebase', 'REST API'],
+                title: l10n.projectCardTitle,
+                description: l10n.projectCardDescription,
+                technologies: const ['Flutter', 'Dart', 'Firebase', 'REST API'],
               ),
               ProjectCard(
                 imageUrl: 'https://picsum.photos/590/256',
-                title: 'Mobile App - Fitness Tracker',
-                description:
-                    'Aplicativo mobile para acompanhamento de exercícios físicos com monitoramento de progresso e metas personalizadas.',
-                technologies: ['Flutter', 'Firebase'],
+                title: l10n.projectCardTitle,
+                description: l10n.projectCardDescription,
+                technologies: const ['Flutter', 'Firebase'],
               ),
               ProjectCard(
                 imageUrl: 'https://picsum.photos/590/256',
-                title: 'Mobile App - Fitness Tracker',
-                description:
-                    'Aplicativo mobile para acompanhamento de exercícios físicos com monitoramento de progresso e metas personalizadas.',
-                technologies: ['Flutter', 'Dart', 'Firebase', 'REST API'],
+                title: l10n.projectCardTitle,
+                description: l10n.projectCardDescription,
+                technologies: const ['Flutter', 'Dart', 'Firebase', 'REST API'],
               ),
               ProjectCard(
                 imageUrl: 'https://picsum.photos/590/256',
-                title: 'Mobile App - Fitness Tracker',
-                description:
-                    'Aplicativo mobile para acompanhamento de exercícios físicos com monitoramento de progresso e metas personalizadas.',
-                technologies: ['Flutter', 'Firebase'],
+                title: l10n.projectCardTitle,
+                description: l10n.projectCardDescription,
+                technologies: const ['Flutter', 'Firebase'],
               ),
             ],
           ),

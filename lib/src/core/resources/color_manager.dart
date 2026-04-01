@@ -1,30 +1,17 @@
 import 'package:flutter/material.dart';
 
 class ColorManager {
-  static Color primary = const Color(
-    0xFF1e3a8a,
-  ); // Identidade principal, títulos importantes, ícones
-  static Color primaryLight = const Color(
-    0xFF3b82f6,
-  ); //Uso: Variações, estados hover
-  static Color accent = const Color(
-    0xFFf97316,
-  ); //vibrant coral-CTAs, destaques, chamadas para ação
-  static Color secondary = const Color(
-    0xFF475569,
-  ); //Elementos secundários, texto normal
-  static Color foreground = const Color(
-    0xFF0f172a,
-  ); //deepBlue-Texto principal, conteúdo importante
-  static Color background = const Color(
-    0xFFffffff,
-  ); //Texto principal, conteúdo importante
+  static const Color primary = Color(0xFF1e3a8a); // Identidade principal, títulos importantes, ícones
+  static const Color primaryLight = Color(0xFF3b82f6); // Variações, estados hover
+  static const Color accent = Color(0xFFf97316); // CTAs, destaques, chamadas para ação
+  static const Color accentForeground = Color(0xFFffffff); // Texto sobre botões accent
+  static const Color secondary = Color(0xFF475569); // Elementos secundários, texto normal
+  static const Color foreground = Color(0xFF0f172a); // Texto principal, conteúdo importante
+  static const Color background = Color(0xFFffffff); // Fundo principal do site
 
-  static Color error = const Color(
-    0xFFef4444,
-  ); //Vermelho vibrante para mensagens de erro, alertas
+  static const Color error = Color(0xFFef4444); // Vermelho vibrante para mensagens de erro, alertas
 
-  static Color shadow = const Color(0xFF000000);
+  static const Color shadow = Color(0xFF000000);
 
   static const MaterialColor neutral = MaterialColor(0xFF64748b, {
     50: Color(0xFFf8fafc), //TextPrimary-Background sutil
@@ -39,6 +26,6 @@ class ColorManager {
     900: Color(0xFF0f172a), //Texto principal
   });
 
-  static Color textPrimary = foreground;
-  static Color textSecondary = secondary;
+  static const Color textPrimary = foreground;
+  static const Color textSecondary = secondary;
 }

@@ -6,18 +6,18 @@ import 'package:nexus_core/src/core/resources/style_manager.dart';
 ThemeData getApplicationTheme() {
   return ThemeData(
     useMaterial3: true,
-    brightness: Brightness.dark, // Definimos como Dark por ser a base do design
+    brightness: Brightness.light,
     colorScheme: ColorScheme.fromSeed(
-      brightness: Brightness.dark,
-      seedColor: ColorManager.accent,
-      primary: ColorManager.accent,
-      onPrimary: Colors.white,
+      brightness: Brightness.light,
+      seedColor: ColorManager.primary,
+      primary: ColorManager.primary,
+      onPrimary: ColorManager.accentForeground,
       secondary: ColorManager.accent,
-      surface: ColorManager.foreground,
+      surface: ColorManager.background,
       onSurface: ColorManager.textPrimary,
-      error: Colors.redAccent,
+      error: ColorManager.error,
     ),
-    scaffoldBackgroundColor: ColorManager.foreground,
+    scaffoldBackgroundColor: ColorManager.background,
 
     // Tipografia
     textTheme: TextTheme(
@@ -56,21 +56,21 @@ ThemeData getApplicationTheme() {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: ColorManager.accent,
-        foregroundColor: Colors.white,
+        foregroundColor: ColorManager.accentForeground,
         textStyle: getSemiBoldStyle(
           fontSize: FontSize.s16,
-          color: Colors.white,
+          color: ColorManager.accentForeground,
         ).inter,
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
     ),
     cardTheme: CardThemeData(
-      color: ColorManager.neutral[800],
+      color: ColorManager.background,
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
-        side: BorderSide(color: Colors.white.withValues(alpha: 0.05)),
+        side: BorderSide(color: ColorManager.neutral.shade200),
       ),
     ),
 

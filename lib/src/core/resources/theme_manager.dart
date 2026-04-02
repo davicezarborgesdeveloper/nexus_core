@@ -46,7 +46,7 @@ ThemeData getApplicationTheme() {
     ),
 
     // Customização de Componentes
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: ColorManager.foreground,
       elevation: 0,
       centerTitle: false,
@@ -88,15 +88,15 @@ ThemeData getApplicationTheme() {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: ColorManager.primary, width: 1),
+        borderSide: const BorderSide(color: ColorManager.primary, width: 1),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: ColorManager.error, width: 1),
+        borderSide: const BorderSide(color: ColorManager.error, width: 1),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: ColorManager.error, width: 1),
+        borderSide: const BorderSide(color: ColorManager.error, width: 1),
       ),
     ),
   );

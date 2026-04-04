@@ -1,0 +1,12 @@
+name: login_module
+description: Reusable login module with clean architecture.
+publish_to: none
+
+version: 1.0.0
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter

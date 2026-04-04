@@ -14,6 +14,10 @@ dependencies:
     sdk: flutter
   intl: any
 
+  login_module:
+    path: packages/login_module
+  shared_preferences: ^2.3.0
+
   cupertino_icons: ^1.0.8
   url_launcher: ^6.3.2
   path_provider: ^2.1.5

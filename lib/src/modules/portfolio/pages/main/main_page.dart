@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nexus_core/l10n/app_localizations.dart';
 import 'package:nexus_core/src/core/resources/color_manager.dart';
 import 'package:nexus_core/src/infra/auth/api_auth_repository.dart';
-import 'package:nexus_core/src/modules/login/login_module.dart';
+import 'package:login_module/login_module.dart';
 import 'package:nexus_core/src/modules/portfolio/models/menu_item.dart';
 import 'package:nexus_core/src/modules/portfolio/pages/home/home_page.dart';
 import 'package:nexus_core/src/modules/portfolio/pages/main/widgets/app_bar_nexus_core.dart';

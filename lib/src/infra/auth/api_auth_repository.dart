@@ -1,6 +1,4 @@
-import '../../modules/login/domain/contracts/auth_repository.dart';
-import '../../modules/login/domain/entities/auth_session.dart';
-import '../../modules/login/domain/result.dart';
+import 'package:login_module/login_module.dart';
 
 class ApiAuthRepository implements AuthRepository {
   @override

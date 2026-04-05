@@ -1,3 +1,5 @@
+import '../../domain/errors/auth_failure.dart';
+
 sealed class LoginState {
   const LoginState();
 }
@@ -15,7 +17,11 @@ class LoginSuccess extends LoginState {
 }
 
 class LoginError extends LoginState {
-  final String message;
+  final AuthFailure error;
 
-  const LoginError(this.message);
+  const LoginError(this.error);
+}
+
+class LoggedOut extends LoginState {
+  const LoggedOut();
 }

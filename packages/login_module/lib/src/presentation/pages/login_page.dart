@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart'
+    show defaultTargetPlatform, TargetPlatform;
 import 'package:flutter/material.dart';
 
 import '../controllers/login_controller.dart';
@@ -23,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _rememberMe = false;
 
   @override
   void dispose() {
@@ -31,19 +34,46 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  // bool get _isMobileDevice =>
+  //     defaultTargetPlatform == TargetPlatform.android ||
+  //     defaultTargetPlatform == TargetPlatform.iOS;
+
+  bool get _isMobileDevice => true;
+
   void _submit() {
     if (!_formKey.currentState!.validate()) return;
 
     widget.controller.submit(
       email: _emailController.text,
       password: _passwordController.text,
+      rememberMe: _rememberMe,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: _isMobileDevice
+          ? AppBar(
+              backgroundColor: Colors.transparent,
+              automaticallyImplyLeading: false,
+              actions: [
+                GestureDetector(
+                  onTap: () => Navigator.of(context).pop(),
+                  child: const Row(
+                    children: [
+                      Icon(Icons.arrow_back, size: 16, color: Colors.white),
+                      SizedBox(width: 8),
+                      Text(
+                        'Voltar ao portfólio',
+                        style: TextStyle(fontSize: 14, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            )
+          : null,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -60,9 +90,9 @@ class _LoginPageState extends State<LoginPage> {
 
               if (state is LoginError) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(state.message)),
-                  );
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text(state.error.message)));
                   widget.controller.reset();
                 });
               }
@@ -112,7 +142,16 @@ class _LoginPageState extends State<LoginPage> {
                         return null;
                       },
                     ),
-                    const SizedBox(height: 24),
+                    CheckboxListTile(
+                      value: _rememberMe,
+                      onChanged: isLoading
+                          ? null
+                          : (v) => setState(() => _rememberMe = v ?? false),
+                      title: const Text('Lembrar-me'),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      contentPadding: EdgeInsets.zero,
+                    ),
+                    const SizedBox(height: 8),
                     SizedBox(
                       height: 48,
                       child: ElevatedButton(

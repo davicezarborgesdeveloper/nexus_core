@@ -1,5 +1,6 @@
 import '../contracts/auth_repository.dart';
 import '../entities/auth_session.dart';
+import '../errors/auth_failure.dart';
 import '../result.dart';
 
 class SignIn {
@@ -7,22 +8,22 @@ class SignIn {
 
   const SignIn(this.repository);
 
-  Future<Result<AuthSession>> call({
+  Future<Result<AuthSession, AuthFailure>> call({
     required String email,
     required String password,
   }) async {
     final normalizedEmail = email.trim().toLowerCase();
 
     if (normalizedEmail.isEmpty) {
-      return const Failure('Informe o e-mail');
+      return const Failure(ValidationFailure('Informe o e-mail'));
     }
 
     if (!_isValidEmail(normalizedEmail)) {
-      return const Failure('Informe um e-mail válido');
+      return const Failure(ValidationFailure('Informe um e-mail válido'));
     }
 
     if (password.isEmpty) {
-      return const Failure('Informe a senha');
+      return const Failure(ValidationFailure('Informe a senha'));
     }
 
     return repository.signIn(email: normalizedEmail, password: password);

@@ -11,6 +11,7 @@ export 'src/domain/usecases/sign_out.dart';
 export 'src/infra/in_memory_session_storage.dart';
 
 // Presentation
+export 'src/presentation/login_theme.dart';
 export 'src/presentation/states/login_state.dart';
 export 'src/presentation/controllers/login_controller.dart';
 export 'src/presentation/pages/login_page.dart';

@@ -72,7 +72,7 @@ class _MainPageState extends State<MainPage> {
         isDrawerOpen: _isDrawerOpen,
         onSettingsTap: _onSettingsTap,
       ),
-      drawer: MainDrawer(menu: menu),
+      drawer: MainDrawer(menu: menu, onSettingsTap: _onSettingsTap),
       backgroundColor: ColorManager.background,
       body: SingleChildScrollView(
         child: Column(

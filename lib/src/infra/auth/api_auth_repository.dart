@@ -2,7 +2,7 @@ import 'package:login_module/login_module.dart';
 
 class ApiAuthRepository implements AuthRepository {
   @override
-  Future<Result<AuthSession>> signIn({
+  Future<Result<AuthSession, AuthFailure>> signIn({
     required String email,
     required String password,
   }) async {
@@ -18,6 +18,6 @@ class ApiAuthRepository implements AuthRepository {
       );
     }
 
-    return const Failure('Usuário ou senha inválidos');
+    return const Failure(InvalidCredentials());
   }
 }

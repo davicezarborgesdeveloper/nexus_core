@@ -9,7 +9,8 @@ import 'package:nexus_core/src/modules/portfolio/pages/main/widgets/social/socia
 import 'package:nexus_core/src/modules/portfolio/pages/main/widgets/social/social_enum.dart';
 
 class MainDrawer extends StatelessWidget {
-  const MainDrawer({super.key, required this.menu});
+  final VoidCallback? onSettingsTap;
+  const MainDrawer({super.key, required this.menu, this.onSettingsTap});
 
   final List<MenuItem> menu;
 
@@ -81,7 +82,7 @@ class MainDrawer extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: onSettingsTap,
                     child: const Icon(
                       Icons.settings_outlined,
                       color: ColorManager.secondary,

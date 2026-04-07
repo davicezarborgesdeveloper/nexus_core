@@ -29,6 +29,9 @@ dependencies:
   device_info_plus: ^12.3.0
   flutter_svg: ^2.2.3
   timeline_tile: ^2.0.0
+  firebase_core: ^4.6.0
+  cloud_firestore: ^6.2.0
+  firebase_auth: ^6.3.0
 
 dev_dependencies:
   flutter_test:

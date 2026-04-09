@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nexus_core/l10n/app_localizations.dart';
 import 'package:nexus_core/src/core/resources/color_manager.dart';
-import 'package:nexus_core/src/infra/auth/api_auth_repository.dart';
+import 'package:nexus_core/src/core/service_locator.dart';
 import 'package:login_module/login_module.dart';
 import 'package:nexus_core/src/modules/portfolio/models/menu_item.dart';
 import 'package:nexus_core/src/modules/portfolio/pages/home/home_page.dart';
@@ -27,7 +27,7 @@ class _MainPageState extends State<MainPage> {
   List<MenuItem> get menu => _menu;
 
   final String name = 'Davi Cezário Borges';
-  bool _isDrawerOpen = false;
+  final _isDrawerOpen = ValueNotifier<bool>(false);
 
   late final LoginModule _loginModule;
 
@@ -35,7 +35,13 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
     _keys = List.generate(5, (_) => GlobalKey());
-    _loginModule = LoginModule(repository: ApiAuthRepository());
+    _loginModule = getIt<LoginModule>();
+  }
+
+  @override
+  void dispose() {
+    _isDrawerOpen.dispose();
+    super.dispose();
   }
 
   void _onSettingsTap() {
@@ -63,32 +69,35 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawerScrimColor: Colors.transparent,
-      onDrawerChanged: (isOpen) => setState(() => _isDrawerOpen = isOpen),
-      appBar: AppBarNexusCore(
-        name,
-        menu,
-        isDrawerOpen: _isDrawerOpen,
-        onSettingsTap: _onSettingsTap,
-      ),
-      drawer: MainDrawer(menu: menu, onSettingsTap: _onSettingsTap),
-      backgroundColor: ColorManager.background,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            HomePage(
-              menu[0],
-              projectsKey: menu[3].key,
-              contactKey: menu[4].key,
-            ),
-            SkillsPage(menu[1]),
-            ExperiencePage(menu[2]),
-            ProjectsPage(menu[3]),
-            ContactsPage(menu[4]),
-            Footer(menus: menu),
-          ],
+    return ValueListenableBuilder<bool>(
+      valueListenable: _isDrawerOpen,
+      builder: (context, isDrawerOpen, child) => Scaffold(
+        drawerScrimColor: Colors.transparent,
+        onDrawerChanged: (isOpen) => _isDrawerOpen.value = isOpen,
+        appBar: AppBarNexusCore(
+          name,
+          menu,
+          isDrawerOpen: isDrawerOpen,
+          onSettingsTap: _onSettingsTap,
+        ),
+        drawer: MainDrawer(menu: menu, onSettingsTap: _onSettingsTap),
+        backgroundColor: ColorManager.background,
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              HomePage(
+                menu[0],
+                projectsKey: menu[3].key,
+                contactKey: menu[4].key,
+              ),
+              SkillsPage(menu[1]),
+              ExperiencePage(menu[2]),
+              ProjectsPage(menu[3]),
+              ContactsPage(menu[4]),
+              Footer(menus: menu),
+            ],
+          ),
         ),
       ),
     );

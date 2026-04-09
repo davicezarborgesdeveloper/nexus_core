@@ -28,12 +28,15 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _rememberMe = false;
+  final _obscurePassword = ValueNotifier<bool>(true);
+  final _rememberMe = ValueNotifier<bool>(false);
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _obscurePassword.dispose();
+    _rememberMe.dispose();
     super.dispose();
   }
 
@@ -47,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
     widget.controller.submit(
       email: _emailController.text,
       password: _passwordController.text,
-      rememberMe: _rememberMe,
+      rememberMe: _rememberMe.value,
     );
   }
 
@@ -307,40 +310,59 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                     ),
                                     const SizedBox(height: 6),
-                                    TextFormField(
-                                      controller: _passwordController,
-                                      obscureText: true,
-                                      enabled: !isLoading,
-                                      decoration: _fieldDecoration(
-                                        hint: 'Digite sua senha',
-                                        isMobile: isMobile,
-                                        primaryColor: primaryColor,
-                                        bodyFont: bodyFont,
+                                    ValueListenableBuilder<bool>(
+                                      valueListenable: _obscurePassword,
+                                      builder: (context, obscure, _) =>
+                                          TextFormField(
+                                        controller: _passwordController,
+                                        obscureText: obscure,
+                                        enabled: !isLoading,
+                                        decoration: _fieldDecoration(
+                                          hint: 'Digite sua senha',
+                                          isMobile: isMobile,
+                                          primaryColor: primaryColor,
+                                          bodyFont: bodyFont,
+                                        ).copyWith(
+                                          suffixIcon: IconButton(
+                                            icon: Icon(
+                                              obscure
+                                                  ? Icons.visibility_outlined
+                                                  : Icons.visibility_off_outlined,
+                                              color: const Color(0xFF94A3B8),
+                                              size: 20,
+                                            ),
+                                            onPressed: () => _obscurePassword
+                                                .value = !obscure,
+                                          ),
+                                        ),
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Informe a senha';
+                                          }
+                                          return null;
+                                        },
                                       ),
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Informe a senha';
-                                        }
-                                        return null;
-                                      },
                                     ),
                                   ],
                                 ),
-                                CheckboxListTile(
-                                  value: _rememberMe,
-                                  activeColor: primaryColor,
-                                  onChanged: isLoading
-                                      ? null
-                                      : (v) => setState(
-                                            () => _rememberMe = v ?? false,
-                                          ),
-                                  title: Text(
-                                    'Lembrar-me',
-                                    style: TextStyle(fontFamily: bodyFont),
+                                ValueListenableBuilder<bool>(
+                                  valueListenable: _rememberMe,
+                                  builder: (context, rememberMe, _) =>
+                                      CheckboxListTile(
+                                    value: rememberMe,
+                                    activeColor: primaryColor,
+                                    onChanged: isLoading
+                                        ? null
+                                        : (v) =>
+                                            _rememberMe.value = v ?? false,
+                                    title: Text(
+                                      'Lembrar-me',
+                                      style: TextStyle(fontFamily: bodyFont),
+                                    ),
+                                    controlAffinity:
+                                        ListTileControlAffinity.leading,
+                                    contentPadding: EdgeInsets.zero,
                                   ),
-                                  controlAffinity:
-                                      ListTileControlAffinity.leading,
-                                  contentPadding: EdgeInsets.zero,
                                 ),
                                 const SizedBox(height: 24),
                                 SizedBox(

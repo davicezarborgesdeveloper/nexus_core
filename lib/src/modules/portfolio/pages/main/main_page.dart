@@ -3,6 +3,7 @@ import 'package:nexus_core/l10n/app_localizations.dart';
 import 'package:nexus_core/src/core/resources/color_manager.dart';
 import 'package:nexus_core/src/core/service_locator.dart';
 import 'package:login_module/login_module.dart';
+import 'package:nexus_core/src/modules/dashboard/dashboard_module.dart';
 import 'package:nexus_core/src/modules/portfolio/models/menu_item.dart';
 import 'package:nexus_core/src/modules/portfolio/pages/home/home_page.dart';
 import 'package:nexus_core/src/modules/portfolio/pages/main/widgets/app_bar_nexus_core.dart';
@@ -30,12 +31,14 @@ class _MainPageState extends State<MainPage> {
   final _isDrawerOpen = ValueNotifier<bool>(false);
 
   late final LoginModule _loginModule;
+  late final DashboardModule _dashboardModule;
 
   @override
   void initState() {
     super.initState();
     _keys = List.generate(5, (_) => GlobalKey());
     _loginModule = getIt<LoginModule>();
+    _dashboardModule = getIt<DashboardModule>();
   }
 
   @override
@@ -48,7 +51,9 @@ class _MainPageState extends State<MainPage> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (pageContext) => _loginModule.createPage(
-          onSuccess: () => Navigator.of(pageContext).pop(),
+          onSuccess: () => Navigator.of(pageContext).pushReplacement(
+            MaterialPageRoute(builder: (_) => _dashboardModule.createPage()),
+          ),
         ),
       ),
     );

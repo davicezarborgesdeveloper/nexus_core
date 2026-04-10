@@ -7,4 +7,4 @@ vars:
   module_name:
     type: string
     description: "The name of the module (e.g. login, sign_up)"
-    default: "my_module"
+    default: "Nome do módulo"

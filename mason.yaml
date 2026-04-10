@@ -1,0 +1,3 @@
+bricks:
+  clean_module:
+    path: bricks/clean_module

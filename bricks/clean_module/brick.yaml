@@ -1,10 +1,14 @@
 name: clean_module
-description: A new Flutter module with Clean Architecture.
-version: 0.1.0+1
+description: A new Flutter module with Clean Architecture (domain, infra, external, presentation).
+version: 0.1.0+2
 environment:
   mason: ">=0.1.0 <1.0.0"
 vars:
   module_name:
     type: string
-    description: "The name of the module (e.g. login, sign_up)"
-    default: "Nome do módulo"
+    description: "Nome do modulo - define as camadas domain/infra/external (ex: auth, home)"
+    prompt: "Qual o nome do modulo?"
+  page_name:
+    type: string
+    description: "Nome da pagina principal - define os arquivos de presentation (ex: login, dashboard)"
+    prompt: "Qual o nome da pagina principal?"

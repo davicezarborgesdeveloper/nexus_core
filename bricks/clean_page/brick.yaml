@@ -1,0 +1,14 @@
+name: clean_page
+description: Adiciona uma page com controller e state a um módulo existente
+version: 0.1.0+1
+environment:
+  mason: ">=0.1.0 <1.0.0"
+vars:
+  module_name:
+    type: string
+    description: "Nome do módulo (ex: auth)"
+    prompt: "Qual o nome do módulo?"
+  page_name:
+    type: string
+    description: "Nome da page (ex: login, register)"
+    prompt: "Qual o nome da page?"

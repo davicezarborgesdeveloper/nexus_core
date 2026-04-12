@@ -1,18 +1,22 @@
-import 'presentation/controllers/{{module_name}}_controller.dart';
-import 'presentation/pages/{{module_name}}_page.dart';
+import 'domain/usecases/get_{{module_name}}_usecase.dart';
+import 'external/datasources/{{module_name}}_datasource_impl.dart';
+import 'infrastructure/repositories/{{module_name}}_repository_impl.dart';
+import 'presentation/controllers/{{page_name}}_controller.dart';
+import 'presentation/pages/{{page_name}}_page.dart';
 
 class {{module_name.pascalCase()}}Module {
   {{module_name.pascalCase()}}Module();
 
-  {{module_name.pascalCase()}}Controller createController() {
-    return {{module_name.pascalCase()}}Controller();
-  }
-
-  {{module_name.pascalCase()}}Page createPage({
-    String title = '{{module_name.pascalCase()}}',
+  {{page_name.pascalCase()}}Page createPage({
+    String title = '{{page_name.pascalCase()}}',
   }) {
-    return {{module_name.pascalCase()}}Page(
-      controller: createController(),
+    final datasource = {{module_name.pascalCase()}}DatasourceImpl();
+    final repository = {{module_name.pascalCase()}}RepositoryImpl(datasource);
+    final usecase = Get{{module_name.pascalCase()}}Usecase(repository);
+    final controller = {{page_name.pascalCase()}}Controller(usecase);
+
+    return {{page_name.pascalCase()}}Page(
+      controller: controller,
       title: title,
     );
   }

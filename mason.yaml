@@ -1,3 +1,5 @@
 bricks:
   clean_module:
     path: bricks/clean_module
+  clean_page:
+    path: bricks/clean_page

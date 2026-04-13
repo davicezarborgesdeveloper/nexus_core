@@ -22,7 +22,11 @@ class LoginController extends ValueNotifier<LoginState> {
   }) async {
     value = const LoginLoading();
 
-    final result = await signInUseCase(email: email, password: password);
+    final result = await signInUseCase(
+      email: email,
+      password: password,
+      rememberMe: rememberMe,
+    );
 
     switch (result) {
       case Success(:final data):

@@ -6,5 +6,6 @@ abstract class AuthRepository {
   Future<Result<AuthSession, AuthFailure>> signIn({
     required String email,
     required String password,
+    bool rememberMe = false,
   });
 }

@@ -11,6 +11,7 @@ class SignIn {
   Future<Result<AuthSession, AuthFailure>> call({
     required String email,
     required String password,
+    bool rememberMe = false,
   }) async {
     final normalizedEmail = email.trim().toLowerCase();
 
@@ -26,7 +27,11 @@ class SignIn {
       return const Failure(ValidationFailure('Informe a senha'));
     }
 
-    return repository.signIn(email: normalizedEmail, password: password);
+    return repository.signIn(
+      email: normalizedEmail,
+      password: password,
+      rememberMe: rememberMe,
+    );
   }
 
   bool _isValidEmail(String email) {

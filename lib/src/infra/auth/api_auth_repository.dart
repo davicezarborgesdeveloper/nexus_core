@@ -11,5 +11,6 @@ class ApiAuthRepository implements AuthRepository {
   Future<Result<AuthSession, AuthFailure>> signIn({
     required String email,
     required String password,
-  }) => _delegate.signIn(email: email, password: password);
+    bool rememberMe = false,
+  }) => _delegate.signIn(email: email, password: password, rememberMe: rememberMe);
 }

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart' as fb;
+import 'package:flutter/foundation.dart';
 import 'package:login_module/login_module.dart';
 
 class FirebaseAuthRepository implements AuthRepository {
@@ -11,8 +12,15 @@ class FirebaseAuthRepository implements AuthRepository {
   Future<Result<AuthSession, AuthFailure>> signIn({
     required String email,
     required String password,
+    bool rememberMe = false,
   }) async {
     try {
+      if (kIsWeb) {
+        await _auth.setPersistence(
+          rememberMe ? fb.Persistence.LOCAL : fb.Persistence.SESSION,
+        );
+      }
+
       final credential = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,

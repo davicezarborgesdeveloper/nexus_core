@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nexus_core/l10n/app_localizations.dart';
 import 'package:nexus_core/src/core/resources/color_manager.dart';
@@ -48,6 +49,15 @@ class _MainPageState extends State<MainPage> {
   }
 
   void _onSettingsTap() {
+    final isLoggedIn = FirebaseAuth.instance.currentUser != null;
+
+    if (isLoggedIn) {
+      Navigator.of(
+        context,
+      ).push(MaterialPageRoute(builder: (_) => _adminModule.createPage()));
+      return;
+    }
+
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (pageContext) => _loginModule.createPage(

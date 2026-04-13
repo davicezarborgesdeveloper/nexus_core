@@ -5,6 +5,7 @@ import 'package:nexus_core/src/modules/admin/presentation/pages/widgets/admin_si
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../../core/resources/color_manager.dart';
+import '../../../portfolio/pages/main/main_page.dart';
 import '../../domain/usecases/get_admin_usecase.dart';
 import '../controllers/configuracoes_controller.dart';
 import '../controllers/experiencias_controller.dart';
@@ -60,7 +61,10 @@ class _AdminShellPageState extends State<AdminShellPage> {
     if (mounted) Navigator.of(context).pop();
   }
 
-  void _viewPortfolio() => Navigator.of(context).pop();
+  void _viewPortfolio() => Navigator.of(context).pushAndRemoveUntil(
+    MaterialPageRoute(builder: (_) => const MainPage()),
+    (Route<dynamic> route) => false,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +75,7 @@ class _AdminShellPageState extends State<AdminShellPage> {
       selectedIndex: _selectedIndex,
       onItemSelected: (index) {
         setState(() => _selectedIndex = index);
-        if (isMobile) Navigator.of(context).pop(); // fecha drawer
+        if (isMobile) Navigator.of(context).pop();
       },
     );
 

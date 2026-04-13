@@ -3,25 +3,11 @@ import 'package:flutter/material.dart';
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/font_manager.dart';
 import '../../../../../core/resources/style_manager.dart';
-
-class _NavItem {
-  final IconData icon;
-  final String label;
-  const _NavItem(this.icon, this.label);
-}
+import '../../admin_nav_item.dart';
 
 class AdminSideNav extends StatelessWidget {
   final int selectedIndex;
   final ValueChanged<int> onItemSelected;
-
-  static const _items = [
-    _NavItem(Icons.person_outline, 'Perfil'),
-    _NavItem(Icons.folder_outlined, 'Projetos'),
-    _NavItem(Icons.work_outline, 'Experiências'),
-    _NavItem(Icons.bolt_outlined, 'Habilidades'),
-    _NavItem(Icons.settings_outlined, 'Configurações'),
-    _NavItem(Icons.shield_outlined, 'Segurança'),
-  ];
 
   const AdminSideNav({
     super.key,
@@ -31,6 +17,8 @@ class AdminSideNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final items = AdminNavItem.values;
+
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
       width: 240,
@@ -42,8 +30,8 @@ class AdminSideNav extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: List.generate(_items.length, (index) {
-          final item = _items[index];
+        children: List.generate(items.length, (index) {
+          final item = items[index];
           final isSelected = index == selectedIndex;
 
           return Padding(

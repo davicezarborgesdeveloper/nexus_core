@@ -17,9 +17,6 @@ class AdminAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onSignOut,
   });
 
-  // @override
-  // Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight + 1);
   @override

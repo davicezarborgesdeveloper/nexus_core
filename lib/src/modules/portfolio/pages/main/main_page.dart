@@ -49,24 +49,26 @@ class _MainPageState extends State<MainPage> {
   }
 
   void _onSettingsTap() {
-    final isLoggedIn = FirebaseAuth.instance.currentUser != null;
-
-    if (isLoggedIn) {
-      Navigator.of(
-        context,
-      ).push(MaterialPageRoute(builder: (_) => _adminModule.createPage()));
+    if (FirebaseAuth.instance.currentUser != null) {
+      _goToAdmin();
       return;
     }
 
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (pageContext) => _loginModule.createPage(
-          onSuccess: () => Navigator.of(pageContext).pushReplacement(
-            MaterialPageRoute(builder: (_) => _adminModule.createPage()),
-          ),
+          onSuccess: () =>
+              _goToAdmin(navigationContext: pageContext, replace: true),
         ),
       ),
     );
+  }
+
+  void _goToAdmin({BuildContext? navigationContext, bool replace = false}) {
+    final route = MaterialPageRoute(builder: (_) => _adminModule.createPage());
+
+    final navigator = Navigator.of(navigationContext ?? context);
+    replace ? navigator.pushReplacement(route) : navigator.push(route);
   }
 
   @override

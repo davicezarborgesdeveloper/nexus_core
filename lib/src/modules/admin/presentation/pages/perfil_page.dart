@@ -20,26 +20,27 @@ class PerfilPage extends StatefulWidget {
 class _PerfilPageState extends State<PerfilPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
-      body: SafeArea(
-        child: ValueListenableBuilder<PerfilState>(
-          valueListenable: widget.controller,
-          builder: (context, state, _) {
-            if (state is PerfilLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
+    return Container();
+    // return Scaffold(
+    //   appBar: AppBar(title: Text(widget.title)),
+    //   body: SafeArea(
+    //     child: ValueListenableBuilder<PerfilState>(
+    //       valueListenable: widget.controller,
+    //       builder: (context, state, _) {
+    //         if (state is PerfilLoading) {
+    //           return const Center(child: CircularProgressIndicator());
+    //         }
 
-            if (state is PerfilError) {
-              return Center(child: Text(state.message));
-            }
+    //         if (state is PerfilError) {
+    //           return Center(child: Text(state.message));
+    //         }
 
-            return const Center(
-              child: Text('Perfil'),
-            );
-          },
-        ),
-      ),
-    );
+    //         return const Center(
+    //           child: Text('Perfil'),
+    //         );
+    //       },
+    //     ),
+    //   ),
+    // );
   }
 }

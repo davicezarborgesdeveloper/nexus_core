@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../controllers/seguranca_controller.dart';
-import '../states/seguranca_state.dart';
+import 'seguranca_controller.dart';
+import 'seguranca_state.dart';
 
 class SegurancaPage extends StatefulWidget {
   final SegurancaController controller;

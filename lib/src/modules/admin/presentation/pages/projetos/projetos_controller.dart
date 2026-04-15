@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import '../states/projetos_state.dart';
+import 'projetos_state.dart';
 
 class ProjetosController extends ValueNotifier<ProjetosState> {
   ProjetosController() : super(const ProjetosInitial());

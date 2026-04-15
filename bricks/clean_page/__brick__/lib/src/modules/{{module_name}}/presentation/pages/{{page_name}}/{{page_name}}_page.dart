@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../controllers/{{page_name}}_controller.dart';
-import '../states/{{page_name}}_state.dart';
+import '{{page_name}}_controller.dart';
+import '{{page_name}}_state.dart';
 
 class {{page_name.pascalCase()}}Page extends StatefulWidget {
   final {{page_name.pascalCase()}}Controller controller;
@@ -30,12 +30,8 @@ class _{{page_name.pascalCase()}}PageState extends State<{{page_name.pascalCase(
               return const Center(child: CircularProgressIndicator());
             }
 
-            if (state is {{page_name.pascalCase()}}Error) {
-              return Center(child: Text(state.message));
-            }
-
-            return const Center(
-              child: Text('{{page_name.pascalCase()}}'),
+            return Center(
+              child: Text('Content for {{page_name.pascalCase()}}'),
             );
           },
         ),

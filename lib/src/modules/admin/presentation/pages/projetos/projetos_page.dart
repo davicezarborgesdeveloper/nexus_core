@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../controllers/projetos_controller.dart';
-import '../states/projetos_state.dart';
+import 'projetos_controller.dart';
+import 'projetos_state.dart';
 
 class ProjetosPage extends StatefulWidget {
   final ProjetosController controller;

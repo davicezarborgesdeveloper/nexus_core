@@ -1,6 +1,6 @@
 # clean_page
 
-Adiciona uma page com controller e state independentes a um módulo existente.
+Adiciona uma page com controller e state a um módulo existente.
 
 ## Uso
 
@@ -16,21 +16,20 @@ mason make clean_page
 
 ## Variáveis
 
-| Variável      | Descrição                         | Exemplo        |
-|---------------|-----------------------------------|----------------|
-| `module_name` | Nome do módulo já existente       | `auth`         |
-| `page_name`   | Nome da page a ser criada         | `login`        |
+| Variável      | Descrição                   | Exemplo  |
+|---------------|-----------------------------|----------|
+| `module_name` | Nome do módulo já existente | `auth`   |
+| `page_name`   | Nome da page a ser criada   | `login`  |
 
 ## Arquivos gerados
 
 ```
 lib/src/modules/<module_name>/presentation/
-├── controllers/
-│   └── <page_name>_controller.dart
-├── pages/
-│   └── <page_name>_page.dart
-└── states/
-    └── <page_name>_state.dart
+└── pages/
+    └── <page_name>/
+        ├── <page_name>_state.dart
+        ├── <page_name>_controller.dart
+        └── <page_name>_page.dart
 ```
 
 ## Exemplo real
@@ -45,16 +44,17 @@ Resultado:
 
 ```
 lib/src/modules/auth/presentation/
-├── controllers/
-│   ├── login_controller.dart
-│   ├── register_controller.dart
-│   └── forgot_password_controller.dart
-├── pages/
-│   ├── login_page.dart
-│   ├── register_page.dart
-│   └── forgot_password_page.dart
-└── states/
-    ├── login_state.dart
-    ├── register_state.dart
-    └── forgot_password_state.dart
+└── pages/
+    ├── login/
+    │   ├── login_state.dart
+    │   ├── login_controller.dart
+    │   └── login_page.dart
+    ├── register/
+    │   ├── register_state.dart
+    │   ├── register_controller.dart
+    │   └── register_page.dart
+    └── forgot_password/
+        ├── forgot_password_state.dart
+        ├── forgot_password_controller.dart
+        └── forgot_password_page.dart
 ```

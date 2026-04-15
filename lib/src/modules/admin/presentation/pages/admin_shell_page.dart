@@ -7,18 +7,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../portfolio/pages/main/main_page.dart';
 import '../../domain/usecases/get_admin_usecase.dart';
-import '../controllers/configuracoes_controller.dart';
-import '../controllers/experiencias_controller.dart';
-import '../controllers/habilidades_controller.dart';
-import '../controllers/perfil_controller.dart';
-import '../controllers/projetos_controller.dart';
-import '../controllers/seguranca_controller.dart';
-import 'configuracoes_page.dart';
-import 'experiencias_page.dart';
-import 'habilidades_page.dart';
-import 'perfil_page.dart';
-import 'projetos_page.dart';
-import 'seguranca_page.dart';
+import 'configuracoes/configuracoes_controller.dart';
+import 'configuracoes/configuracoes_page.dart';
+import 'experiencias/experiencias_controller.dart';
+import 'experiencias/experiencias_page.dart';
+import 'habilidades/habilidades_controller.dart';
+import 'habilidades/habilidades_page.dart';
+import 'profile/profile_controller.dart';
+import 'profile/profile_page.dart';
+import 'projetos/projetos_controller.dart';
+import 'projetos/projetos_page.dart';
+import 'seguranca/seguranca_controller.dart';
+import 'seguranca/seguranca_page.dart';
 
 class AdminShellPage extends StatefulWidget {
   final IGetAdminUsecase usecase;
@@ -32,7 +32,7 @@ class _AdminShellPageState extends State<AdminShellPage> {
   late String _userName;
   int _selectedIndex = 0;
 
-  late final PerfilController _perfilController;
+  late final ProfileController _perfilController;
   late final ProjetosController _projetosController;
   late final ExperienciasController _experienciasController;
   late final HabilidadesController _habilidadesController;
@@ -48,7 +48,7 @@ class _AdminShellPageState extends State<AdminShellPage> {
         ? user!.displayName!
         : user?.email?.split('@').first ?? 'Admin';
 
-    _perfilController = PerfilController(widget.usecase);
+    _perfilController = ProfileController(widget.usecase);
     _projetosController = ProjetosController();
     _experienciasController = ExperienciasController();
     _habilidadesController = HabilidadesController();
@@ -94,7 +94,7 @@ class _AdminShellPageState extends State<AdminShellPage> {
             child: IndexedStack(
               index: _selectedIndex,
               children: [
-                PerfilPage(controller: _perfilController),
+                ProfilePage(controller: _perfilController),
                 ProjetosPage(controller: _projetosController),
                 ExperienciasPage(controller: _experienciasController),
                 HabilidadesPage(controller: _habilidadesController),

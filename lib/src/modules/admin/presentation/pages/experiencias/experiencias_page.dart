@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../controllers/experiencias_controller.dart';
-import '../states/experiencias_state.dart';
+import 'experiencias_controller.dart';
+import 'experiencias_state.dart';
 
 class ExperienciasPage extends StatefulWidget {
   final ExperienciasController controller;

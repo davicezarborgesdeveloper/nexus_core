@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../controllers/habilidades_controller.dart';
-import '../states/habilidades_state.dart';
+import 'habilidades_controller.dart';
+import 'habilidades_state.dart';
 
 class HabilidadesPage extends StatefulWidget {
   final HabilidadesController controller;

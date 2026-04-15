@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import '../../domain/usecases/get_{{module_name}}_usecase.dart';
-import '../states/{{page_name}}_state.dart';
+import '{{page_name}}_state.dart';
 
 class {{page_name.pascalCase()}}Controller extends ValueNotifier<{{page_name.pascalCase()}}State> {
   final IGet{{module_name.pascalCase()}}Usecase _usecase;

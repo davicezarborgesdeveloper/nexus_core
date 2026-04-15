@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../controllers/configuracoes_controller.dart';
-import '../states/configuracoes_state.dart';
+import 'configuracoes_controller.dart';
+import 'configuracoes_state.dart';
 
 class ConfiguracoesPage extends StatefulWidget {
   final ConfiguracoesController controller;

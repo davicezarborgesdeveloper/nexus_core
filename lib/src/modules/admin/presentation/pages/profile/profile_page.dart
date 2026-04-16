@@ -25,7 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.fromLTRB(24, 16, 256, 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

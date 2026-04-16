@@ -27,6 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Container(
         padding: const EdgeInsets.all(16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,21 +70,34 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             ),
             const SizedBox(height: 26),
-            const ProfileTextField(label: 'Nome'),
-            const SizedBox(height: 16),
-            const ProfileTextField(
-              label: 'Título (use \\n para quebra de linha)',
+            LayoutBuilder(
+              builder: (context, constraints) {
+                return SizedBox(
+                  width: constraints.maxWidth > 600
+                      ? constraints.maxWidth * 0.53
+                      : double.infinity,
+                  child: Column(
+                    children: [
+                      const ProfileTextField(label: 'Nome'),
+                      const SizedBox(height: 16),
+                      const ProfileTextField(
+                        label: 'Título (use \\n para quebra de linha)',
+                      ),
+                      const SizedBox(height: 16),
+                      const ProfileTextField(label: 'Subtítulo'),
+                      const SizedBox(height: 16),
+                      const ProfileTextField(label: 'GitHub URL'),
+                      const SizedBox(height: 16),
+                      const ProfileTextField(label: 'LinkedIn URL'),
+                      const SizedBox(height: 16),
+                      const ProfileTextField(label: 'E-mail'),
+                      const SizedBox(height: 16),
+                      const ProfileTextField(label: 'Localização'),
+                    ],
+                  ),
+                );
+              },
             ),
-            const SizedBox(height: 16),
-            const ProfileTextField(label: 'Subtítulo'),
-            const SizedBox(height: 16),
-            const ProfileTextField(label: 'GitHub URL'),
-            const SizedBox(height: 16),
-            const ProfileTextField(label: 'LinkedIn URL'),
-            const SizedBox(height: 16),
-            const ProfileTextField(label: 'E-mail'),
-            const SizedBox(height: 16),
-            const ProfileTextField(label: 'Localização'),
           ],
         ),
       ),

@@ -23,66 +23,69 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                widget.title,
-                style: getBoldStyle(
-                  color: ColorManager.foreground,
-                  fontSize: FontSize.s24,
-                ).spaceGrotesk,
-              ),
-              SizedBox(
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
-                    backgroundColor: ColorManager.primary,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
-                  onPressed: () {},
-                  child: Row(
-                    children: [
-                      const Icon(Icons.save_outlined, size: 16),
-                      const SizedBox(width: 8),
-                      Text(
-                        'Salvar',
-                        style: getSemiBoldStyle(
-                          color: ColorManager.background,
-                          fontSize: FontSize.s14,
-                        ).inter,
+    return SingleChildScrollView(
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  widget.title,
+                  style: getBoldStyle(
+                    color: ColorManager.foreground,
+                    fontSize: FontSize.s24,
+                  ).spaceGrotesk,
+                ),
+                SizedBox(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
                       ),
-                    ],
+                      backgroundColor: ColorManager.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: Row(
+                      children: [
+                        const Icon(Icons.save_outlined, size: 16),
+                        const SizedBox(width: 8),
+                        Text(
+                          'Salvar',
+                          style: getSemiBoldStyle(
+                            color: ColorManager.background,
+                            fontSize: FontSize.s14,
+                          ).inter,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 26),
-          ProfileTextField(),
-          const SizedBox(height: 24),
-          ProfileTextField(),
-          const SizedBox(height: 24),
-          ProfileTextField(),
-          const SizedBox(height: 24),
-          ProfileTextField(),
-          const SizedBox(height: 24),
-          ProfileTextField(),
-          const SizedBox(height: 24),
-          ProfileTextField(),
-          const SizedBox(height: 24),
-          ProfileTextField(),
-          const SizedBox(height: 24),
-        ],
+              ],
+            ),
+            const SizedBox(height: 26),
+            const ProfileTextField(label: 'Nome'),
+            const SizedBox(height: 16),
+            const ProfileTextField(
+              label: 'Título (use \\n para quebra de linha)',
+            ),
+            const SizedBox(height: 16),
+            const ProfileTextField(label: 'Subtítulo'),
+            const SizedBox(height: 16),
+            const ProfileTextField(label: 'GitHub URL'),
+            const SizedBox(height: 16),
+            const ProfileTextField(label: 'LinkedIn URL'),
+            const SizedBox(height: 16),
+            const ProfileTextField(label: 'E-mail'),
+            const SizedBox(height: 16),
+            const ProfileTextField(label: 'Localização'),
+          ],
+        ),
       ),
     );
   }

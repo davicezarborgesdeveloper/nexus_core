@@ -75,6 +75,7 @@ ThemeData getApplicationTheme() {
     ),
 
     inputDecorationTheme: InputDecorationTheme(
+      isDense: true,
       filled: true,
       fillColor: ColorManager.background,
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/font_manager.dart';
 import '../../../../../core/resources/style_manager.dart';
-import '../../admin_nav_item.dart';
+import 'admin_nav_item.dart';
 
 class AdminSideNav extends StatelessWidget {
   final int selectedIndex;

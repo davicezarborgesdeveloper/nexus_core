@@ -83,9 +83,11 @@ class _ProfilePageState extends State<ProfilePage> {
                       SizedBox(height: 16),
                       NexusCoreTextField(label: 'Título Principal'),
                       SizedBox(height: 16),
-                      NexusCoreResizebleTextArea(label: 'Título Principal'),
+                      NexusCoreResizebleTextArea(
+                        label: 'Destaque/Frase de impacto',
+                      ),
                       SizedBox(height: 16),
-                      NexusCoreTextField(label: 'Subtítulo'),
+                      NexusCoreTextField(label: 'Descrição'),
                       SizedBox(height: 16),
                       NexusCoreTextField(label: 'GitHub URL'),
                       SizedBox(height: 16),

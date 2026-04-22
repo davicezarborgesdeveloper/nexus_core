@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nexus_core/src/core/resources/font_manager.dart';
-import 'package:nexus_core/src/core/resources/style_manager.dart';
-import 'package:nexus_core/src/modules/admin/presentation/pages/profile/widgets/profile_text_field.dart';
 
 import '../../../../../core/resources/color_manager.dart';
+import '../../../../../core/resources/font_manager.dart';
+import '../../../../../core/resources/style_manager.dart';
+import '../widgets/nexus_core_resizeble_text_area.dart';
+import '../widgets/nexus_core_text_field.dart';
 import 'profile_controller.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -76,23 +77,23 @@ class _ProfilePageState extends State<ProfilePage> {
                   width: constraints.maxWidth > 600
                       ? constraints.maxWidth * 0.53
                       : double.infinity,
-                  child: Column(
+                  child: const Column(
                     children: [
-                      const ProfileTextField(label: 'Nome'),
-                      const SizedBox(height: 16),
-                      const ProfileTextField(
-                        label: 'Título (use \\n para quebra de linha)',
-                      ),
-                      const SizedBox(height: 16),
-                      const ProfileTextField(label: 'Subtítulo'),
-                      const SizedBox(height: 16),
-                      const ProfileTextField(label: 'GitHub URL'),
-                      const SizedBox(height: 16),
-                      const ProfileTextField(label: 'LinkedIn URL'),
-                      const SizedBox(height: 16),
-                      const ProfileTextField(label: 'E-mail'),
-                      const SizedBox(height: 16),
-                      const ProfileTextField(label: 'Localização'),
+                      NexusCoreTextField(label: 'Nome'),
+                      SizedBox(height: 16),
+                      NexusCoreTextField(label: 'Título Principal'),
+                      SizedBox(height: 16),
+                      NexusCoreResizebleTextArea(label: 'Título Principal'),
+                      SizedBox(height: 16),
+                      NexusCoreTextField(label: 'Subtítulo'),
+                      SizedBox(height: 16),
+                      NexusCoreTextField(label: 'GitHub URL'),
+                      SizedBox(height: 16),
+                      NexusCoreTextField(label: 'LinkedIn URL'),
+                      SizedBox(height: 16),
+                      NexusCoreTextField(label: 'E-mail'),
+                      SizedBox(height: 16),
+                      NexusCoreTextField(label: 'Localização'),
                     ],
                   ),
                 );

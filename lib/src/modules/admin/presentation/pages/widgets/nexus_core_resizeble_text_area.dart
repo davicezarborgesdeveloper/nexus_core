@@ -17,6 +17,15 @@ class _NexusCoreResizebleTextAreaState
     extends State<NexusCoreResizebleTextArea> {
   double height = 120;
 
+  static const double minHeight = 80;
+  static const double maxHeight = 400;
+
+  void _resize(double deltaY) {
+    setState(() {
+      height = (height + deltaY).clamp(minHeight, maxHeight);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -28,7 +37,6 @@ class _NexusCoreResizebleTextAreaState
             color: ColorManager.foreground,
             fontSize: FontSize.s14,
           ).inter,
-          // style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 8),
         Stack(
@@ -44,7 +52,7 @@ class _NexusCoreResizebleTextAreaState
                 maxLines: null,
                 expands: true,
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(16),
+                  contentPadding: EdgeInsets.fromLTRB(16, 16, 36, 16),
                   border: InputBorder.none,
                 ),
               ),
@@ -52,27 +60,76 @@ class _NexusCoreResizebleTextAreaState
 
             /// 🔽 Handle de resize (canto inferior direito)
             Positioned(
-              right: 4,
-              bottom: 4,
-              child: GestureDetector(
-                onPanUpdate: (details) {
-                  setState(() {
-                    height += details.delta.dy;
-
-                    if (height < 80) height = 80; // mínimo
-                    if (height > 400) height = 400; // máximo (opcional)
-                  });
-                },
-                child: const Icon(
-                  Icons.drag_handle,
-                  size: 20,
-                  color: Colors.grey,
+              right: 8,
+              bottom: 8,
+              child: MouseRegion(
+                cursor: SystemMouseCursors.resizeUpLeftDownRight,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onPanUpdate: (details) {
+                    _resize(details.delta.dy);
+                  },
+                  child: const SizedBox(
+                    width: 18,
+                    height: 18,
+                    child: CustomPaint(painter: _ResizeHandlePainter()),
+                  ),
                 ),
               ),
+              // child: GestureDetector(
+              //   onPanUpdate: (details) {
+              //     setState(() {
+              //       height += details.delta.dy;
+
+              //       if (height < 80) height = 80; // mínimo
+              //       if (height > 400) height = 400; // máximo (opcional)
+              //     });
+              //   },
+              //   child: const Icon(
+              //     Icons.drag_handle,
+              //     size: 20,
+              //     color: Colors.grey,
+              //   ),
+              // ),
             ),
           ],
         ),
       ],
     );
   }
+}
+
+class _ResizeHandlePainter extends CustomPainter {
+  const _ResizeHandlePainter();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.grey.shade500
+      ..strokeWidth = 1.4
+      ..strokeCap = StrokeCap.round;
+
+    const double margin = 2;
+
+    canvas.drawLine(
+      Offset(size.width - 4, size.height - 14),
+      Offset(size.width - 14, size.height - 4),
+      paint,
+    );
+
+    canvas.drawLine(
+      Offset(size.width - 4, size.height - 9),
+      Offset(size.width - 9, size.height - 4),
+      paint,
+    );
+
+    canvas.drawLine(
+      Offset(size.width - 4, size.height - 4),
+      Offset(size.width - 4 - margin, size.height - 4 + margin),
+      paint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

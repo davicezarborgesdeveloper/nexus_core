@@ -24,12 +24,15 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
+    final c = widget.controller;
+
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.fromLTRB(24, 16, 256, 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            /// HEADER
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -40,62 +43,146 @@ class _ProfilePageState extends State<ProfilePage> {
                     fontSize: FontSize.s24,
                   ).spaceGrotesk,
                 ),
-                SizedBox(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      backgroundColor: ColorManager.primary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
                     ),
-                    onPressed: () {},
-                    child: Row(
-                      children: [
-                        const Icon(Icons.save_outlined, size: 16),
-                        const SizedBox(width: 8),
-                        Text(
-                          'Salvar',
-                          style: getSemiBoldStyle(
-                            color: ColorManager.background,
-                            fontSize: FontSize.s14,
-                          ).inter,
-                        ),
-                      ],
+                    backgroundColor: ColorManager.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
                     ),
+                  ),
+                  onPressed: () {
+                    final data = {
+                      'name': c.nameController.text,
+                      'title': c.titleController.text,
+                      'tagline': c.taglineController.text,
+                      'description': c.descriptionController.text,
+                      'github': c.githubController.text,
+                      'linkedin': c.linkedinController.text,
+                      'email': c.emailController.text,
+                      'location': c.locationController.text,
+                      'available': c.available,
+                    };
+
+                    print(data);
+                  },
+                  child: Row(
+                    children: [
+                      const Icon(Icons.save_outlined, size: 16),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Salvar',
+                        style: getSemiBoldStyle(
+                          color: ColorManager.background,
+                          fontSize: FontSize.s14,
+                        ).inter,
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
+
             const SizedBox(height: 26),
+
+            /// FORM
             LayoutBuilder(
               builder: (context, constraints) {
+                final isWide = constraints.maxWidth > 600;
+
                 return SizedBox(
-                  width: constraints.maxWidth > 600
-                      ? constraints.maxWidth * 0.53
-                      : double.infinity,
-                  child: const Column(
+                  width: isWide ? constraints.maxWidth * 0.53 : double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      NexusCoreTextField(label: 'Nome'),
-                      SizedBox(height: 16),
-                      NexusCoreTextField(label: 'Título Principal'),
-                      SizedBox(height: 16),
                       NexusCoreTextField(
-                        label: 'DescriçãoDestaque/Frase de impacto',
+                        label: 'Nome',
+                        controller: c.nameController,
                       ),
-                      SizedBox(height: 16),
-                      NexusCoreResizebleTextArea(label: 'Descrição'),
-                      SizedBox(height: 16),
-                      NexusCoreTextField(label: 'GitHub URL'),
-                      SizedBox(height: 16),
-                      NexusCoreTextField(label: 'LinkedIn URL'),
-                      SizedBox(height: 16),
-                      NexusCoreTextField(label: 'E-mail'),
-                      SizedBox(height: 16),
-                      NexusCoreTextField(label: 'Localização'),
+                      const SizedBox(height: 24),
+
+                      NexusCoreTextField(
+                        label: 'Título Principal',
+                        controller: c.titleController,
+                      ),
+                      const SizedBox(height: 24),
+
+                      NexusCoreTextField(
+                        label: 'Frase de impacto',
+                        controller: c.taglineController,
+                      ),
+                      const SizedBox(height: 24),
+
+                      NexusCoreResizebleTextArea(
+                        label: 'Descrição',
+                        controller: c.descriptionController,
+                      ),
+                      const SizedBox(height: 24),
+
+                      NexusCoreTextField(
+                        label: 'GitHub URL',
+                        controller: c.githubController,
+                      ),
+                      const SizedBox(height: 24),
+
+                      NexusCoreTextField(
+                        label: 'LinkedIn URL',
+                        controller: c.linkedinController,
+                      ),
+                      const SizedBox(height: 24),
+
+                      NexusCoreTextField(
+                        label: 'E-mail',
+                        controller: c.emailController,
+                      ),
+                      const SizedBox(height: 24),
+
+                      NexusCoreTextField(
+                        label: 'Localização',
+                        controller: c.locationController,
+                      ),
+                      const SizedBox(height: 24),
+
+                      /// SWITCH
+                      Row(
+                        children: [
+                          Text(
+                            'Disponível para projetos',
+                            style: getMediumStyle(
+                              color: ColorManager.foreground,
+                              fontSize: FontSize.s14,
+                            ).inter,
+                          ),
+                          const SizedBox(width: 12),
+                          Switch(
+                            value: c.available,
+                            onChanged: (value) {
+                              setState(() {
+                                c.available = value;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: 24),
+
+                      /// STATS
+                      Text(
+                        'Stats',
+                        style: getMediumStyle(
+                          color: ColorManager.foreground,
+                          fontSize: FontSize.s14,
+                        ).inter,
+                      ),
+                      const SizedBox(height: 12),
+
+                      _buildStatsRow(),
+                      const SizedBox(height: 8),
+                      _buildStatsRow(),
                     ],
                   ),
                 );
@@ -104,6 +191,31 @@ class _ProfilePageState extends State<ProfilePage> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildStatsRow() {
+    return Row(
+      children: List.generate(3, (index) {
+        return Expanded(
+          child: Padding(
+            padding: EdgeInsets.only(right: index < 2 ? 16 : 0),
+            child: TextFormField(
+              style: getRegularStyle(
+                color: ColorManager.foreground,
+                fontSize: FontSize.s14,
+              ).inter,
+              decoration: const InputDecoration(
+                isDense: true,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 12,
+                ),
+              ),
+            ),
+          ),
+        );
+      }),
     );
   }
 }

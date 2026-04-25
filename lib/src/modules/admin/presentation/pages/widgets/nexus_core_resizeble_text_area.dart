@@ -6,7 +6,23 @@ import '../../../../../core/resources/font_manager.dart';
 
 class NexusCoreResizebleTextArea extends StatefulWidget {
   final String label;
-  const NexusCoreResizebleTextArea({super.key, required this.label});
+  final String? hintText;
+  final String? initialValue;
+
+  final TextEditingController? controller;
+  final ValueChanged<String>? onChanged;
+
+  const NexusCoreResizebleTextArea({
+    super.key,
+    required this.label,
+    this.hintText,
+    this.initialValue,
+    this.controller,
+    this.onChanged,
+  }) : assert(
+         controller == null || initialValue == null,
+         'Não use controller e initialValue ao mesmo tempo',
+       );
 
   @override
   State<NexusCoreResizebleTextArea> createState() =>
@@ -19,6 +35,26 @@ class _NexusCoreResizebleTextAreaState
 
   static const double minHeight = 80;
   static const double maxHeight = 400;
+
+  late final TextEditingController _internalController;
+
+  TextEditingController get _controller =>
+      widget.controller ?? _internalController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _internalController = TextEditingController(text: widget.initialValue);
+  }
+
+  @override
+  void dispose() {
+    if (widget.controller == null) {
+      _internalController.dispose();
+    }
+    super.dispose();
+  }
 
   void _resize(double deltaY) {
     setState(() {
@@ -39,6 +75,7 @@ class _NexusCoreResizebleTextAreaState
           ).inter,
         ),
         const SizedBox(height: 8),
+
         Stack(
           children: [
             Container(
@@ -48,17 +85,24 @@ class _NexusCoreResizebleTextAreaState
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: const Color(0xFFE0E0E0)),
               ),
-              child: const TextField(
+              child: TextField(
+                controller: _controller,
+                onChanged: widget.onChanged,
                 maxLines: null,
                 expands: true,
+                style: getRegularStyle(
+                  color: ColorManager.foreground,
+                  fontSize: FontSize.s14,
+                ).inter,
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.fromLTRB(16, 16, 36, 16),
+                  hintText: widget.hintText,
+                  contentPadding: const EdgeInsets.fromLTRB(16, 16, 36, 16),
                   border: InputBorder.none,
                 ),
               ),
             ),
 
-            /// 🔽 Handle de resize (canto inferior direito)
+            /// HANDLE RESIZE
             Positioned(
               right: 8,
               bottom: 8,
@@ -76,21 +120,6 @@ class _NexusCoreResizebleTextAreaState
                   ),
                 ),
               ),
-              // child: GestureDetector(
-              //   onPanUpdate: (details) {
-              //     setState(() {
-              //       height += details.delta.dy;
-
-              //       if (height < 80) height = 80; // mínimo
-              //       if (height > 400) height = 400; // máximo (opcional)
-              //     });
-              //   },
-              //   child: const Icon(
-              //     Icons.drag_handle,
-              //     size: 20,
-              //     color: Colors.grey,
-              //   ),
-              // ),
             ),
           ],
         ),

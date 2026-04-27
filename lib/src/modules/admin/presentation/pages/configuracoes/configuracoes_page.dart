@@ -20,19 +20,27 @@ class ConfiguracoesPage extends StatefulWidget {
 class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
-      body: SafeArea(
-        child: ValueListenableBuilder<ConfiguracoesState>(
-          valueListenable: widget.controller,
-          builder: (context, state, _) {
-            if (state is ConfiguracoesLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            widget.title,
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 24),
+          ValueListenableBuilder<ConfiguracoesState>(
+            valueListenable: widget.controller,
+            builder: (context, state, _) {
+              if (state is ConfiguracoesLoading) {
+                return const Center(child: CircularProgressIndicator());
+              }
 
-            return const Center(child: Text('Content for Configuracoes'));
-          },
-        ),
+              return const Center(child: Text('Content for Configuracoes'));
+            },
+          ),
+        ],
       ),
     );
   }

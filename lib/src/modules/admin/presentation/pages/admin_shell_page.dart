@@ -32,6 +32,8 @@ class _AdminShellPageState extends State<AdminShellPage> {
   late String _userName;
   int _selectedIndex = 0;
 
+  final ScrollController _bodyScrollController = ScrollController();
+
   late final ProfileController _perfilController;
   late final ProjetosController _projetosController;
   late final ExperienciasController _experienciasController;
@@ -54,6 +56,12 @@ class _AdminShellPageState extends State<AdminShellPage> {
     _habilidadesController = HabilidadesController();
     _configuracoesController = ConfiguracoesController();
     _segurancaController = SegurancaController();
+  }
+
+  @override
+  void dispose() {
+    _bodyScrollController.dispose();
+    super.dispose();
   }
 
   Future<void> _signOut() async {
@@ -87,23 +95,51 @@ class _AdminShellPageState extends State<AdminShellPage> {
         onSignOut: _signOut,
       ),
       drawer: isMobile ? Drawer(child: SafeArea(child: sideNav)) : null,
-      body: Row(
-        children: [
-          if (isWide) sideNav,
-          Expanded(
-            child: IndexedStack(
-              index: _selectedIndex,
-              children: [
-                ProfilePage(controller: _perfilController),
-                ProjetosPage(controller: _projetosController),
-                ExperienciasPage(controller: _experienciasController),
-                HabilidadesPage(controller: _habilidadesController),
-                ConfiguracoesPage(controller: _configuracoesController),
-                SegurancaPage(controller: _segurancaController),
-              ],
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return Scrollbar(
+            controller: _bodyScrollController,
+            thumbVisibility: true,
+            child: SingleChildScrollView(
+              controller: _bodyScrollController,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 1200),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (isWide) sideNav,
+
+                        Expanded(
+                          child: IndexedStack(
+                            index: _selectedIndex,
+                            children: [
+                              ProfilePage(controller: _perfilController),
+                              ProjetosPage(controller: _projetosController),
+                              ExperienciasPage(
+                                controller: _experienciasController,
+                              ),
+                              HabilidadesPage(
+                                controller: _habilidadesController,
+                              ),
+                              ConfiguracoesPage(
+                                controller: _configuracoesController,
+                              ),
+                              SegurancaPage(controller: _segurancaController),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }

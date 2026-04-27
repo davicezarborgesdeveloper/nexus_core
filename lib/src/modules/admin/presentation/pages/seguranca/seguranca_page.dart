@@ -20,19 +20,27 @@ class SegurancaPage extends StatefulWidget {
 class _SegurancaPageState extends State<SegurancaPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
-      body: SafeArea(
-        child: ValueListenableBuilder<SegurancaState>(
-          valueListenable: widget.controller,
-          builder: (context, state, _) {
-            if (state is SegurancaLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            widget.title,
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 24),
+          ValueListenableBuilder<SegurancaState>(
+            valueListenable: widget.controller,
+            builder: (context, state, _) {
+              if (state is SegurancaLoading) {
+                return const Center(child: CircularProgressIndicator());
+              }
 
-            return const Center(child: Text('Content for Seguranca'));
-          },
-        ),
+              return const Center(child: Text('Content for Seguranca'));
+            },
+          ),
+        ],
       ),
     );
   }

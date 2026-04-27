@@ -65,7 +65,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     'location': c.locationController.text,
                     'available': c.available,
                   };
-
+                  print(data);
                   // salvar dados
                 },
                 child: Row(
@@ -85,51 +85,41 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ],
           ),
-
           const SizedBox(height: 24),
-
           NexusCoreTextField(label: 'Nome', controller: c.nameController),
           const SizedBox(height: 24),
-
           NexusCoreTextField(
             label: 'Título Principal',
             controller: c.titleController,
           ),
           const SizedBox(height: 24),
-
           NexusCoreTextField(
             label: 'Frase de impacto',
             controller: c.taglineController,
           ),
           const SizedBox(height: 24),
-
           NexusCoreResizebleTextArea(
             label: 'Descrição',
             controller: c.descriptionController,
           ),
           const SizedBox(height: 24),
-
           NexusCoreTextField(
             label: 'GitHub URL',
             controller: c.githubController,
           ),
           const SizedBox(height: 24),
-
           NexusCoreTextField(
             label: 'LinkedIn URL',
             controller: c.linkedinController,
           ),
           const SizedBox(height: 24),
-
           NexusCoreTextField(label: 'E-mail', controller: c.emailController),
           const SizedBox(height: 24),
-
           NexusCoreTextField(
             label: 'Localização',
             controller: c.locationController,
           ),
           const SizedBox(height: 24),
-
           Row(
             children: [
               Text(
@@ -150,9 +140,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ],
           ),
-
           const SizedBox(height: 24),
-
           Text(
             'Stats',
             style: getMediumStyle(
@@ -161,7 +149,6 @@ class _ProfilePageState extends State<ProfilePage> {
             ).inter,
           ),
           const SizedBox(height: 12),
-
           _buildStatsRow(),
           const SizedBox(height: 8),
           _buildStatsRow(),

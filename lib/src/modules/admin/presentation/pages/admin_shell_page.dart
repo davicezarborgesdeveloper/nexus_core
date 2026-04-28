@@ -97,23 +97,24 @@ class _AdminShellPageState extends State<AdminShellPage> {
       drawer: isMobile ? Drawer(child: SafeArea(child: sideNav)) : null,
       body: LayoutBuilder(
         builder: (context, constraints) {
-          return Scrollbar(
-            controller: _bodyScrollController,
-            thumbVisibility: true,
-            child: SingleChildScrollView(
-              controller: _bodyScrollController,
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 1200),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (isWide) sideNav,
-
-                        Expanded(
+          return Align(
+            alignment: Alignment.topCenter,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1200),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (isWide) sideNav,
+                  Expanded(
+                    child: Scrollbar(
+                      controller: _bodyScrollController,
+                      thumbVisibility: false,
+                      child: SingleChildScrollView(
+                        controller: _bodyScrollController,
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minHeight: constraints.maxHeight,
+                          ),
                           child: IndexedStack(
                             index: _selectedIndex,
                             children: [
@@ -132,10 +133,10 @@ class _AdminShellPageState extends State<AdminShellPage> {
                             ],
                           ),
                         ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
             ),
           );

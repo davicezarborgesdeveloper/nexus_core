@@ -51,7 +51,7 @@ export function HeroSection() {
           >
             {titleLines.map((line, i) => (
               i === titleLines.length - 1 ? (
-                <span key={i} style={{ color: 'var(--primary)' }}>{line}</span>
+                <span key={i} style={{ color: profile.accentColor }}>{line}</span>
               ) : (
                 <span key={i}>{line}<br /></span>
               )

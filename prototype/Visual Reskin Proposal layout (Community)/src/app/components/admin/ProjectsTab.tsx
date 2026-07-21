@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Pencil, Trash2 } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Eye, Github, Pencil, Save, Trash2 } from 'lucide-react';
 import { PortfolioStore, type Project } from '../../../lib/portfolioStore';
-import { Modal } from './Modal';
 
 type Draft = {
   title: string;
@@ -43,7 +42,7 @@ export function ProjectsTab() {
     setDraft(toDraft(projects[index]));
   };
 
-  const closeModal = () => {
+  const closeEditor = () => {
     setDraft(null);
     setEditingIndex(null);
   };
@@ -67,7 +66,7 @@ export function ProjectsTab() {
     else if (editingIndex !== null) next[editingIndex] = updated;
     setProjects(next);
     PortfolioStore.setProjects(next);
-    closeModal();
+    closeEditor();
   };
 
   const handleDelete = (index: number) => {
@@ -76,6 +75,119 @@ export function ProjectsTab() {
     setProjects(next);
     PortfolioStore.setProjects(next);
   };
+
+  if (draft) {
+    return (
+      <section>
+        <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={closeEditor}
+              className="w-9 h-9 rounded-lg border border-[var(--border)] flex items-center justify-center text-[var(--neutral-600)] hover:text-[var(--foreground)]"
+              aria-label="Voltar"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </button>
+            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 'var(--font-weight-bold)' }}>
+              {isNew ? 'Novo projeto' : 'Editar projeto'}
+            </h2>
+          </div>
+          <button
+            onClick={handleSave}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm"
+            style={{ backgroundColor: 'var(--primary)', color: 'var(--primary-foreground)', fontWeight: 'var(--font-weight-medium)' }}
+          >
+            <Save className="w-4 h-4" />
+            Salvar
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          {/* Coluna esquerda: formulário */}
+          <div className="rounded-xl border p-6 flex flex-col gap-5" style={{ borderColor: 'var(--border)' }}>
+            <div>
+              <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>Título</label>
+              <input className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" value={draft.title} onChange={(e) => setDraft({ ...draft, title: e.target.value })} />
+            </div>
+            <div>
+              <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>Descrição</label>
+              <textarea className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" rows={3} value={draft.description} onChange={(e) => setDraft({ ...draft, description: e.target.value })} />
+            </div>
+            <div>
+              <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>URL da imagem</label>
+              <input className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" value={draft.image} onChange={(e) => setDraft({ ...draft, image: e.target.value })} />
+            </div>
+            <div>
+              <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>URL do GitHub</label>
+              <input className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" value={draft.githubUrl} onChange={(e) => setDraft({ ...draft, githubUrl: e.target.value })} />
+            </div>
+            <div>
+              <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>URL do projeto ao vivo</label>
+              <input className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" value={draft.liveUrl} onChange={(e) => setDraft({ ...draft, liveUrl: e.target.value })} />
+            </div>
+            <div>
+              <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>Tags/tecnologias (uma por linha)</label>
+              <textarea className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" rows={3} value={draft.tagsText} onChange={(e) => setDraft({ ...draft, tagsText: e.target.value })} />
+            </div>
+          </div>
+
+          {/* Coluna direita: preview ao vivo */}
+          <div className="lg:sticky" style={{ top: '1.5rem' }}>
+            <div className="flex items-center gap-2 mb-1">
+              <Eye className="w-5 h-5" style={{ color: 'var(--primary)' }} />
+              <h3 style={{ fontWeight: 'var(--font-weight-semibold)' }}>Pré-visualização</h3>
+            </div>
+            <p className="text-sm mb-4" style={{ color: 'var(--neutral-500)' }}>
+              Veja como este projeto ficará para os visitantes.
+            </p>
+
+            <div className="rounded-xl overflow-hidden bg-white border border-[var(--border)]" style={{ boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)' }}>
+              <div className="relative h-48 overflow-hidden bg-[var(--neutral-200)]">
+                {draft.image ? (
+                  <img src={draft.image} alt={draft.title} className="w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-sm" style={{ color: 'var(--neutral-500)' }}>
+                    Sem imagem
+                  </div>
+                )}
+                <div className="absolute bottom-3 right-3 flex gap-2">
+                  {draft.githubUrl && (
+                    <span className="p-2 rounded-lg" style={{ backgroundColor: 'white', color: 'var(--foreground)' }}>
+                      <Github className="w-4 h-4" />
+                    </span>
+                  )}
+                  {draft.liveUrl && (
+                    <span className="p-2 rounded-lg" style={{ backgroundColor: 'white', color: 'var(--foreground)' }}>
+                      <ExternalLink className="w-4 h-4" />
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="p-6">
+                <h3 className="mb-2" style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 'var(--font-weight-semibold)', color: 'var(--foreground)' }}>
+                  {draft.title || 'Título do projeto'}
+                </h3>
+                {draft.description && (
+                  <p className="mb-4" style={{ fontFamily: 'var(--font-body)', color: 'var(--neutral-600)', lineHeight: '1.6' }}>
+                    {draft.description}
+                  </p>
+                )}
+                {draft.tagsText.trim() && (
+                  <div className="flex flex-wrap gap-2">
+                    {draft.tagsText.split('\n').map((s) => s.trim()).filter(Boolean).map((tag, i) => (
+                      <span key={i} className="px-3 py-1 rounded-md text-sm" style={{ backgroundColor: 'var(--neutral-100)', color: 'var(--neutral-700)' }}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section>
@@ -134,35 +246,6 @@ export function ProjectsTab() {
             </div>
           ))}
         </div>
-      )}
-
-      {draft && (
-        <Modal title={isNew ? 'Novo projeto' : 'Editar projeto'} onCancel={closeModal} onSave={handleSave}>
-          <div>
-            <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>Título</label>
-            <input className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" value={draft.title} onChange={(e) => setDraft({ ...draft, title: e.target.value })} />
-          </div>
-          <div>
-            <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>Descrição</label>
-            <textarea className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" rows={3} value={draft.description} onChange={(e) => setDraft({ ...draft, description: e.target.value })} />
-          </div>
-          <div>
-            <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>URL da imagem</label>
-            <input className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" value={draft.image} onChange={(e) => setDraft({ ...draft, image: e.target.value })} />
-          </div>
-          <div>
-            <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>URL do GitHub</label>
-            <input className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" value={draft.githubUrl} onChange={(e) => setDraft({ ...draft, githubUrl: e.target.value })} />
-          </div>
-          <div>
-            <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>URL do projeto ao vivo</label>
-            <input className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" value={draft.liveUrl} onChange={(e) => setDraft({ ...draft, liveUrl: e.target.value })} />
-          </div>
-          <div>
-            <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>Tags/tecnologias (uma por linha)</label>
-            <textarea className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" rows={3} value={draft.tagsText} onChange={(e) => setDraft({ ...draft, tagsText: e.target.value })} />
-          </div>
-        </Modal>
       )}
     </section>
   );

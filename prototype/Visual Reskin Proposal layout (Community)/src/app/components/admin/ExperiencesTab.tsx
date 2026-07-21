@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Pencil, Trash2 } from 'lucide-react';
+import { ArrowLeft, Briefcase, Calendar, Eye, MapPin, Pencil, Save, Trash2 } from 'lucide-react';
 import { PortfolioStore, type Experience } from '../../../lib/portfolioStore';
-import { Modal } from './Modal';
 
 type Draft = {
   role: string;
@@ -50,7 +49,7 @@ export function ExperiencesTab() {
     setDraft(toDraft(experiences[index]));
   };
 
-  const closeModal = () => {
+  const closeEditor = () => {
     setDraft(null);
     setEditingIndex(null);
   };
@@ -76,7 +75,7 @@ export function ExperiencesTab() {
     else if (editingIndex !== null) next[editingIndex] = updated;
     setExperiences(next);
     PortfolioStore.setExperiences(next);
-    closeModal();
+    closeEditor();
   };
 
   const handleDelete = (index: number) => {
@@ -85,6 +84,162 @@ export function ExperiencesTab() {
     setExperiences(next);
     PortfolioStore.setExperiences(next);
   };
+
+  if (draft) {
+    return (
+      <section>
+        <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={closeEditor}
+              className="w-9 h-9 rounded-lg border border-[var(--border)] flex items-center justify-center text-[var(--neutral-600)] hover:text-[var(--foreground)]"
+              aria-label="Voltar"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </button>
+            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 'var(--font-weight-bold)' }}>
+              {isNew ? 'Nova experiência' : 'Editar experiência'}
+            </h2>
+          </div>
+          <button
+            onClick={handleSave}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm"
+            style={{ backgroundColor: 'var(--primary)', color: 'var(--primary-foreground)', fontWeight: 'var(--font-weight-medium)' }}
+          >
+            <Save className="w-4 h-4" />
+            Salvar
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          {/* Coluna esquerda: formulário */}
+          <div className="rounded-xl border p-6 flex flex-col gap-5" style={{ borderColor: 'var(--border)' }}>
+            <div>
+              <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>Cargo</label>
+              <input className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" value={draft.role} onChange={(e) => setDraft({ ...draft, role: e.target.value })} />
+            </div>
+            <div>
+              <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>Empresa</label>
+              <input className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" value={draft.company} onChange={(e) => setDraft({ ...draft, company: e.target.value })} />
+            </div>
+            <div>
+              <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>Localização</label>
+              <input className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" value={draft.location} onChange={(e) => setDraft({ ...draft, location: e.target.value })} />
+            </div>
+            <div>
+              <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>Período (ex: Jan 2023 - Presente)</label>
+              <input className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" value={draft.period} onChange={(e) => setDraft({ ...draft, period: e.target.value })} />
+            </div>
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="expCurrent"
+                checked={draft.current}
+                onChange={(e) => setDraft({ ...draft, current: e.target.checked })}
+              />
+              <label htmlFor="expCurrent">Emprego atual</label>
+            </div>
+            <div>
+              <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>Descrição</label>
+              <textarea className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" rows={3} value={draft.description} onChange={(e) => setDraft({ ...draft, description: e.target.value })} />
+            </div>
+            <div>
+              <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>Principais conquistas (uma por linha)</label>
+              <textarea className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" rows={3} value={draft.achievementsText} onChange={(e) => setDraft({ ...draft, achievementsText: e.target.value })} />
+            </div>
+            <div>
+              <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>Tecnologias (uma por linha)</label>
+              <textarea className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" rows={3} value={draft.technologiesText} onChange={(e) => setDraft({ ...draft, technologiesText: e.target.value })} />
+            </div>
+          </div>
+
+          {/* Coluna direita: preview ao vivo */}
+          <div className="lg:sticky" style={{ top: '1.5rem' }}>
+            <div className="flex items-center gap-2 mb-1">
+              <Eye className="w-5 h-5" style={{ color: 'var(--primary)' }} />
+              <h3 style={{ fontWeight: 'var(--font-weight-semibold)' }}>Pré-visualização</h3>
+            </div>
+            <p className="text-sm mb-4" style={{ color: 'var(--neutral-500)' }}>
+              Veja como esta experiência ficará para os visitantes.
+            </p>
+
+            <div className="rounded-xl border p-6" style={{ borderColor: 'var(--border)', backgroundColor: 'var(--neutral-50)' }}>
+              <div className="flex items-start gap-3 mb-2">
+                <div className="p-2 rounded-lg mt-1" style={{ backgroundColor: 'var(--neutral-100)' }}>
+                  <Briefcase className="w-5 h-5" style={{ color: 'var(--primary)' }} />
+                </div>
+                <div>
+                  <h3
+                    className="flex items-center gap-2"
+                    style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', fontWeight: 'var(--font-weight-semibold)', color: 'var(--foreground)' }}
+                  >
+                    {draft.role || 'Cargo'}
+                    {draft.current && (
+                      <span
+                        className="px-2 py-0.5 rounded text-xs"
+                        style={{ backgroundColor: 'var(--accent-color)', color: 'var(--accent-foreground)', fontWeight: 'var(--font-weight-medium)' }}
+                      >
+                        Atual
+                      </span>
+                    )}
+                  </h3>
+                  <p style={{ fontFamily: 'var(--font-body)', fontWeight: 'var(--font-weight-medium)', color: 'var(--primary)' }}>
+                    {draft.company || 'Empresa'}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-4 text-sm mb-4" style={{ color: 'var(--neutral-600)' }}>
+                <div className="flex items-center gap-1.5">
+                  <Calendar className="w-4 h-4" />
+                  <span>{draft.period || 'Período'}</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <MapPin className="w-4 h-4" />
+                  <span>{draft.location || 'Localização'}</span>
+                </div>
+              </div>
+
+              {draft.description && (
+                <p className="mb-4" style={{ fontFamily: 'var(--font-body)', color: 'var(--neutral-600)', lineHeight: '1.7' }}>
+                  {draft.description}
+                </p>
+              )}
+
+              {draft.achievementsText.trim() && (
+                <div className="mb-4">
+                  <h4
+                    className="mb-2"
+                    style={{ fontFamily: 'var(--font-heading)', fontSize: '0.8125rem', fontWeight: 'var(--font-weight-semibold)', textTransform: 'uppercase', letterSpacing: '0.05em' }}
+                  >
+                    Principais conquistas
+                  </h4>
+                  <ul className="space-y-2">
+                    {draft.achievementsText.split('\n').map((s) => s.trim()).filter(Boolean).map((achievement, i) => (
+                      <li key={i} className="flex items-start gap-2" style={{ fontFamily: 'var(--font-body)', color: 'var(--neutral-600)', lineHeight: '1.6' }}>
+                        <div className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: 'var(--accent-color)' }} />
+                        <span>{achievement}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {draft.technologiesText.trim() && (
+                <div className="flex flex-wrap gap-1.5">
+                  {draft.technologiesText.split('\n').map((s) => s.trim()).filter(Boolean).map((t, i) => (
+                    <span key={i} className="px-3 py-1 rounded-md text-sm" style={{ backgroundColor: 'var(--neutral-100)', color: 'var(--neutral-700)' }}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section>
@@ -151,48 +306,6 @@ export function ExperiencesTab() {
             </div>
           ))}
         </div>
-      )}
-
-      {draft && (
-        <Modal title={isNew ? 'Nova experiência' : 'Editar experiência'} onCancel={closeModal} onSave={handleSave}>
-          <div>
-            <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>Cargo</label>
-            <input className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" value={draft.role} onChange={(e) => setDraft({ ...draft, role: e.target.value })} />
-          </div>
-          <div>
-            <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>Empresa</label>
-            <input className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" value={draft.company} onChange={(e) => setDraft({ ...draft, company: e.target.value })} />
-          </div>
-          <div>
-            <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>Localização</label>
-            <input className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" value={draft.location} onChange={(e) => setDraft({ ...draft, location: e.target.value })} />
-          </div>
-          <div>
-            <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>Período (ex: Jan 2023 - Presente)</label>
-            <input className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" value={draft.period} onChange={(e) => setDraft({ ...draft, period: e.target.value })} />
-          </div>
-          <div className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              id="expCurrent"
-              checked={draft.current}
-              onChange={(e) => setDraft({ ...draft, current: e.target.checked })}
-            />
-            <label htmlFor="expCurrent">Emprego atual</label>
-          </div>
-          <div>
-            <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>Descrição</label>
-            <textarea className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" rows={3} value={draft.description} onChange={(e) => setDraft({ ...draft, description: e.target.value })} />
-          </div>
-          <div>
-            <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>Principais conquistas (uma por linha)</label>
-            <textarea className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" rows={3} value={draft.achievementsText} onChange={(e) => setDraft({ ...draft, achievementsText: e.target.value })} />
-          </div>
-          <div>
-            <label className="block mb-2" style={{ fontWeight: 'var(--font-weight-medium)' }}>Tecnologias (uma por linha)</label>
-            <textarea className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border)]" rows={3} value={draft.technologiesText} onChange={(e) => setDraft({ ...draft, technologiesText: e.target.value })} />
-          </div>
-        </Modal>
       )}
     </section>
   );

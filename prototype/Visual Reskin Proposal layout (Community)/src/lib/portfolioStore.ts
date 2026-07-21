@@ -36,6 +36,7 @@ export type Profile = {
   name: string;
   title: string;
   subtitle: string;
+  accentColor: string;
   githubUrl: string;
   linkedinUrl: string;
   email: string;
@@ -43,6 +44,8 @@ export type Profile = {
   available: boolean;
   stats: [Stat, Stat, Stat];
 };
+
+export const PROFILE_ACCENT_COLORS = ['#2563eb', '#7c3aed', '#0d9488', '#db2777', '#ea580c'];
 
 const STORAGE_KEYS = {
   profile: 'portfolio_profile',
@@ -56,6 +59,7 @@ export const DEFAULT_PROFILE: Profile = {
   name: 'Davi Cezário Borges',
   title: 'Desenvolvedor Full Stack\nCriando soluções digitais',
   subtitle: 'Especializado em desenvolvimento web moderno, transformando ideias em aplicações escaláveis e performáticas com foco em experiência do usuário.',
+  accentColor: PROFILE_ACCENT_COLORS[0],
   githubUrl: 'https://github.com/seuusuario',
   linkedinUrl: 'https://linkedin.com/in/seuusuario',
   email: 'seu@email.com',

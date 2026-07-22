@@ -98,6 +98,10 @@ function renderAdminDashboard() {
           <div class="admin-header-actions">
             <button type="button" class="admin-header-icon-btn" aria-label="Notificações">${Icons.bell('icon-16')}</button>
             <button type="button" class="admin-header-icon-btn" aria-label="Ajuda">${Icons.helpCircle('icon-16')}</button>
+            <a href="../design-system/storybook.html" target="_blank" rel="noopener noreferrer" class="btn-view-portfolio is-secondary" aria-label="Storybook">
+              ${Icons.palette('icon-16')}
+              <span>Storybook</span>
+            </a>
             <a href="../index.html" target="_blank" rel="noopener noreferrer" class="btn-view-portfolio">
               ${Icons.externalLink('icon-16')}
               Ver portfólio

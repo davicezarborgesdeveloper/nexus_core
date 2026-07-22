@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus Core · Storybook</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../css/fonts.css">
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="../css/utilities.css">
+<link rel="stylesheet" href="../css/site.css">
+<link rel="stylesheet" href="../css/admin.css">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+
+body{display:flex;height:100vh;overflow:hidden;background:var(--background);color:var(--foreground)}
+
+/* SIDEBAR */
+.sidebar{width:240px;flex-shrink:0;background:var(--primary-950);border-right:1px solid var(--primary-900);display:flex;flex-direction:column;overflow:hidden}
+.sb-head{padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,.1);flex-shrink:0}
+.sb-logo{display:flex;align-items:center;gap:8px;font-family:var(--font-heading);font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--neutral-0);text-transform:uppercase;margin-bottom:10px}
+.sb-logo-dot{width:7px;height:7px;border-radius:50%;background:var(--accent-color)}
+.sb-search{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius-sm);padding:7px 10px}
+.sb-search input{background:none;border:none;outline:none;font-family:monospace;font-size:11px;color:var(--neutral-0);width:100%}
+.sb-search input::placeholder{color:rgba(255,255,255,.4)}
+.sb-search svg{width:15px;height:15px;color:rgba(255,255,255,.5);flex-shrink:0}
+
+.sb-nav{flex:1;overflow-y:auto;padding:8px 0}
+.sb-group{margin-bottom:4px}
+.sb-group-label{font-family:monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);padding:10px 16px 4px;display:block}
+.sb-story{padding:6px 16px 6px 16px;cursor:pointer;font-size:12px;color:rgba(255,255,255,.65);border:none;background:none;width:100%;text-align:left;transition:background .15s,color .15s;border-left:2px solid transparent}
+.sb-story:hover{background:rgba(255,255,255,.06);color:var(--neutral-0)}
+.sb-story.active{color:var(--neutral-0);font-weight:600;border-left-color:var(--accent-color);background:rgba(255,255,255,.08)}
+.sb-story.is-hidden{display:none}
+
+/* MAIN */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--background)}
+
+.toolbar{height:48px;flex-shrink:0;background:var(--card);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0;padding:0 16px}
+.tb-breadcrumb{flex:1;display:flex;align-items:center;gap:6px;font-size:13px;color:var(--neutral-500)}
+.tb-breadcrumb .comp{font-weight:700;color:var(--foreground)}
+.tb-breadcrumb .sep{color:var(--border-strong)}
+.tb-breadcrumb .story{color:var(--primary)}
+.tb-actions{display:flex;align-items:center;gap:8px}
+.tb-theme{display:flex;align-items:center;gap:2px;background:var(--neutral-100);border:1px solid var(--border);border-radius:var(--radius-sm);padding:2px}
+.tb-theme-opt{padding:4px 10px;border-radius:4px;border:none;cursor:pointer;font-size:11px;background:none;color:var(--neutral-600);transition:all .15s}
+.tb-theme-opt.active{background:var(--primary);color:var(--primary-foreground)}
+.tb-divider{width:1px;height:20px;background:var(--border);margin:0 6px}
+.tb-link{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--neutral-600);padding:6px 10px;border-radius:var(--radius-sm);transition:color .15s}
+.tb-link:hover{color:var(--primary)}
+
+.canvas-tabs{display:flex;gap:0;background:var(--card);border-bottom:1px solid var(--border);padding:0 16px}
+.canvas-tab{padding:10px 14px;border:none;background:none;cursor:pointer;font-size:12px;color:var(--neutral-500);border-bottom:2px solid transparent;transition:all .15s}
+.canvas-tab.active{color:var(--primary);border-bottom-color:var(--primary)}
+.action-count{font-family:monospace;font-size:9px;background:var(--neutral-100);color:var(--neutral-600);padding:1px 6px;border-radius:999px;margin-left:4px}
+.canvas-tab.active .action-count{background:rgba(6,29,56,.1);color:var(--primary)}
+
+.canvas-body{flex:1;overflow:auto;display:flex;flex-direction:column}
+
+.preview-panel{flex:1;display:flex;align-items:center;justify-content:center;padding:40px;min-height:240px;transition:background .25s}
+.preview-panel.dark-theme{background:var(--primary-950)}
+
+.controls-panel{background:var(--card);border-top:1px solid var(--border);overflow:auto;max-height:260px}
+.controls-header{padding:10px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--card);z-index:1}
+.controls-header-title{font-family:monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--neutral-500)}
+.controls-reset{font-family:monospace;font-size:10px;color:var(--primary);border:none;background:none;cursor:pointer}
+.control-row{display:flex;align-items:center;gap:12px;padding:8px 16px;border-bottom:1px solid var(--border)}
+.control-row:last-child{border-bottom:none}
+.ctrl-name{font-family:monospace;font-size:11px;color:var(--neutral-500);min-width:100px;flex-shrink:0}
+.ctrl-input,.ctrl-select{flex:1;background:var(--neutral-50);border:1px solid var(--border);border-radius:var(--radius-sm);padding:5px 8px;font-family:monospace;font-size:11px;color:var(--foreground);outline:none}
+.ctrl-input:focus-visible,.ctrl-select:focus-visible{border-color:var(--primary)}
+.ctrl-bool{display:flex;gap:4px;flex:1}
+.ctrl-bool-opt{padding:4px 12px;border-radius:var(--radius-sm);border:1px solid var(--border);font-family:monospace;font-size:10px;cursor:pointer;background:none;color:var(--neutral-600)}
+.ctrl-bool-opt.active{background:var(--primary);color:var(--primary-foreground);border-color:var(--primary)}
+
+.actions-log{padding:12px 16px;display:flex;flex-direction:column;gap:4px}
+.action-entry{display:flex;align-items:center;gap:8px;font-family:monospace;font-size:11px;color:var(--neutral-600);padding:5px 8px;background:var(--neutral-50);border-radius:var(--radius-sm)}
+.action-entry .evt{color:var(--primary);font-weight:600;min-width:110px}
+.action-entry .time{margin-left:auto;color:var(--neutral-500);font-size:10px}
+.log-empty{padding:20px;text-align:center;font-family:monospace;font-size:11px;color:var(--neutral-500)}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sb-head">
+    <div class="sb-logo"><div class="sb-logo-dot"></div>Nexus Core Stories</div>
+    <div class="sb-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search-input" placeholder="Buscar componente..." oninput="filterStories(this.value)">
+    </div>
+  </div>
+  <div class="sb-nav" id="sb-nav"></div>
+</div>
+
+<div class="main">
+  <div class="toolbar">
+    <div class="tb-breadcrumb">
+      <span id="bc-comp" class="comp">Button</span>
+      <span class="sep">/</span>
+      <span id="bc-story" class="story">Primary</span>
+    </div>
+    <div class="tb-actions">
+      <div class="tb-theme">
+        <button class="tb-theme-opt active" id="th-light" onclick="setTheme('light')">Light</button>
+        <button class="tb-theme-opt" id="th-dark" onclick="setTheme('dark')">Dark</button>
+      </div>
+      <div class="tb-divider"></div>
+      <a href="design-system.html" class="tb-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125 0-.92.754-1.663 1.668-1.663h1.977c3.082 0 5.582-2.5 5.582-5.581C22 6.02 17.5 2 12 2z"/></svg>
+        Design System
+      </a>
+    </div>
+  </div>
+
+  <div class="canvas-tabs">
+    <button class="canvas-tab active" onclick="switchTab('canvas',this)">Canvas</button>
+    <button class="canvas-tab" onclick="switchTab('actions',this)">Actions <span id="action-count" class="action-count">0</span></button>
+  </div>
+
+  <div class="canvas-body">
+    <div class="preview-panel" id="preview"></div>
+
+    <div id="actions-tab" style="display:none;flex:1;overflow:auto">
+      <div class="actions-log" id="actions-log">
+        <div class="log-empty">Nenhuma ação ainda. Interaja com o componente.</div>
+      </div>
+    </div>
+
+    <div class="controls-panel" id="controls-panel">
+      <div class="controls-header">
+        <span class="controls-header-title">Controls</span>
+        <button class="controls-reset" onclick="resetControls()">↺ Reset</button>
+      </div>
+      <div id="controls-body"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+var lockIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
+var pencilIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>';
+var trashIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>';
+var codeIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg>';
+
+function escH(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ─────────────────────────────────────────────────────────────
+// STORY DEFINITIONS
+// ─────────────────────────────────────────────────────────────
+var STORIES = [
+
+  { group:'Button', id:'btn-primary', name:'Primary (CTA)',
+    controls:[
+      {name:'variant', type:'select', default:'primary', options:['primary','secondary','ghost']},
+      {name:'label', type:'text', default:'Ver projetos'},
+    ],
+    render:function(c){
+      var cls = c.variant==='primary' ? 'btn-primary-cta' : c.variant==='secondary' ? 'btn-secondary-cta' : 'btn-ghost-cta';
+      return '<a href="#" class="'+cls+'" data-action-name="click:'+c.variant+'">'+escH(c.label)+'</a>';
+    }
+  },
+  { group:'Button', id:'btn-cv', name:'CV / Disabled',
+    controls:[
+      {name:'label', type:'text', default:'Baixar CV completo'},
+      {name:'disabled', type:'bool', default:false},
+    ],
+    render:function(c){
+      return '<button class="btn-cv" '+(c.disabled?'disabled':'')+' data-action-name="click:btn-cv">'+escH(c.label)+'</button>';
+    }
+  },
+  { group:'Button', id:'btn-enter', name:'Link utilitário (Entrar)',
+    controls:[
+      {name:'label', type:'text', default:'Entrar'},
+    ],
+    render:function(c){
+      return '<a href="#" class="btn-enter" data-action-name="click:enter">'+lockIcon+'<span>'+escH(c.label)+'</span></a>';
+    }
+  },
+  { group:'Button', id:'btn-admin', name:'Admin — Primary / Icon / Danger',
+    controls:[],
+    render:function(){
+      return '<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">'
+        +'<button class="btn-admin-primary" data-action-name="click:admin-primary">Salvar alterações</button>'
+        +'<button class="btn-icon-square" aria-label="Editar" data-action-name="click:icon-edit">'+pencilIcon+'</button>'
+        +'<button class="btn-icon-square danger" aria-label="Excluir" data-action-name="click:icon-delete">'+trashIcon+'</button>'
+        +'<button class="btn-danger-delete" data-action-name="click:danger">Excluir conta</button>'
+        +'</div>';
+    }
+  },
+
+  { group:'Badge', id:'badge-pill', name:'Pill',
+    controls:[
+      {name:'label', type:'text', default:'Tech pill'},
+    ],
+    render:function(c){ return '<span class="pill">'+escH(c.label)+'</span>'; }
+  },
+  { group:'Badge', id:'badge-security', name:'Security badge',
+    controls:[
+      {name:'status', type:'select', default:'success', options:['success','blocked']},
+      {name:'label', type:'text', default:'Sucesso'},
+    ],
+    render:function(c){ return '<span class="security-badge '+c.status+'">'+escH(c.label)+'</span>'; }
+  },
+  { group:'Badge', id:'badge-status', name:'Project status',
+    controls:[
+      {name:'status', type:'select', default:'published', options:['published','draft']},
+      {name:'label', type:'text', default:'Publicado'},
+    ],
+    render:function(c){ return '<span class="projects-status '+c.status+'"><span class="projects-status-dot"></span>'+escH(c.label)+'</span>'; }
+  },
+  { group:'Badge', id:'badge-all', name:'Todas as variantes',
+    controls:[],
+    render:function(){
+      return '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">'
+        +'<span class="pill">Tech pill</span>'
+        +'<span class="badge-current">Atual</span>'
+        +'<span class="security-badge success">Sucesso</span>'
+        +'<span class="security-badge blocked">Bloqueado</span>'
+        +'<span class="projects-category-pill">Categoria</span>'
+        +'</div>';
+    }
+  },
+
+  { group:'Card', id:'card-skill', name:'Skill Card',
+    controls:[
+      {name:'title', type:'text', default:'Front-end'},
+    ],
+    render:function(c){
+      return '<div class="skill-card" style="max-width:280px" data-action-name="click:skill-card">'
+        +'<div class="skill-icon">'+codeIcon+'</div>'
+        +'<h3>'+escH(c.title)+'</h3>'
+        +'<ul><li><span class="skill-dot"></span>HTML &amp; CSS</li><li><span class="skill-dot"></span>JavaScript</li></ul>'
+        +'</div>';
+    }
+  },
+  { group:'Card', id:'card-admin-form', name:'Admin Form Card',
+    controls:[
+      {name:'title', type:'text', default:'Informações básicas'},
+    ],
+    render:function(c){
+      return '<div class="admin-form-card" style="max-width:300px">'
+        +'<div class="admin-form-card-title"><h3>'+escH(c.title)+'</h3></div>'
+        +'<p class="admin-form-card-desc">Borda fina, sem sombra — elevação real só em elementos flutuantes.</p>'
+        +'</div>';
+    }
+  },
+  { group:'Card', id:'card-admin-list', name:'Admin List Item',
+    controls:[
+      {name:'title', type:'text', default:'Projeto exemplo'},
+    ],
+    render:function(c){
+      return '<div class="admin-list-item" style="max-width:400px" data-action-name="click:list-item">'
+        +'<div><div class="admin-list-item-title">'+escH(c.title)+'</div>'
+        +'<div class="admin-list-item-meta">Publicado em 2026 · React, Node</div></div>'
+        +'</div>';
+    }
+  },
+
+  { group:'Form', id:'form-site-input', name:'Site — Input',
+    controls:[
+      {name:'label', type:'text', default:'Nome'},
+      {name:'placeholder', type:'text', default:'Seu nome'},
+    ],
+    render:function(c){
+      return '<div class="form-field" style="width:300px">'
+        +'<label for="sb-field">'+escH(c.label)+'</label>'
+        +'<input id="sb-field" type="text" placeholder="'+escH(c.placeholder)+'">'
+        +'</div>';
+    }
+  },
+  { group:'Form', id:'form-admin-input', name:'Admin — Input',
+    controls:[
+      {name:'label', type:'text', default:'Campo admin'},
+    ],
+    render:function(c){
+      return '<div class="admin-form-field" style="width:300px">'
+        +'<label for="sb-admin-field">'+escH(c.label)+'</label>'
+        +'<input id="sb-admin-field" type="text" placeholder="Valor">'
+        +'</div>';
+    }
+  },
+  { group:'Form', id:'form-switch', name:'Switch Toggle',
+    controls:[
+      {name:'on', type:'bool', default:true},
+      {name:'label', type:'text', default:'Notificações'},
+    ],
+    render:function(c){
+      return '<div class="field-row-between" style="width:260px">'
+        +'<span>'+escH(c.label)+'</span>'
+        +'<div class="switch-toggle'+(c.on?' on':'')+'" data-action-name="click:switch"><div class="knob"></div></div>'
+        +'</div>';
+    }
+  },
+
+  { group:'Sidebar', id:'sidebar-admin', name:'Admin Nav',
+    controls:[
+      {name:'active', type:'select', default:'Perfil', options:['Perfil','Projetos','Experiências','Habilidades','Segurança']},
+    ],
+    render:function(c){
+      var items=['Perfil','Projetos','Experiências','Habilidades','Segurança'];
+      var buttons = items.map(function(label){
+        var activeClass = label===c.active ? ' class="active"' : '';
+        return '<button type="button"'+activeClass+' data-action-name="click:nav-'+label+'">'+label+'</button>';
+      }).join('');
+      return '<div style="max-width:220px"><nav class="admin-nav">'+buttons+'</nav></div>';
+    }
+  },
+];
+
+// ─────────────────────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────────────────────
+var state = { activeStory: STORIES[0], controls:{}, theme:'light', tab:'canvas', actionLog:[] };
+
+function initControls(story){
+  state.controls = {};
+  story.controls.forEach(function(c){ state.controls[c.name] = c.default; });
+}
+
+// ─────────────────────────────────────────────────────────────
+// RENDER
+// ─────────────────────────────────────────────────────────────
+function renderPreview(){
+  var preview = document.getElementById('preview');
+  preview.classList.toggle('dark-theme', state.theme === 'dark');
+  try {
+    preview.innerHTML = state.activeStory.render(state.controls);
+  } catch(e) {
+    preview.innerHTML = '<div style="color:var(--danger);font-family:monospace;font-size:12px">Erro: '+e.message+'</div>';
+  }
+}
+
+function renderControls(){
+  var body = document.getElementById('controls-body');
+  var ctrls = state.activeStory.controls;
+  if (!ctrls.length) {
+    body.innerHTML = '<div class="log-empty">Nenhum control disponível para esta story.</div>';
+    return;
+  }
+  body.innerHTML = ctrls.map(function(c){
+    var val = state.controls[c.name];
+    var input = '';
+    if (c.type === 'text') {
+      input = '<input class="ctrl-input" value="'+escH(val)+'" onchange="updateControl(\''+c.name+'\',this.value)">';
+    } else if (c.type === 'select') {
+      input = '<select class="ctrl-select" onchange="updateControl(\''+c.name+'\',this.value)">'
+        + c.options.map(function(o){ return '<option value="'+o+'"'+(o===val?' selected':'')+'>'+o+'</option>'; }).join('')
+        + '</select>';
+    } else if (c.type === 'bool') {
+      input = '<div class="ctrl-bool">'
+        + '<button class="ctrl-bool-opt'+(val===true?' active':'')+'" onclick="updateControl(\''+c.name+'\',true)">true</button>'
+        + '<button class="ctrl-bool-opt'+(val===false?' active':'')+'" onclick="updateControl(\''+c.name+'\',false)">false</button>'
+        + '</div>';
+    }
+    return '<div class="control-row"><span class="ctrl-name">'+c.name+'</span>'+input+'</div>';
+  }).join('');
+}
+
+function renderSidebar(filter){
+  var nav = document.getElementById('sb-nav');
+  var groups = {};
+  STORIES.forEach(function(s){
+    if (filter && s.group.toLowerCase().indexOf(filter.toLowerCase()) === -1 && s.name.toLowerCase().indexOf(filter.toLowerCase()) === -1) return;
+    if (!groups[s.group]) groups[s.group] = [];
+    groups[s.group].push(s);
+  });
+  nav.innerHTML = Object.keys(groups).map(function(g){
+    var stories = groups[g];
+    return '<div class="sb-group">'
+      + '<span class="sb-group-label">'+g+'</span>'
+      + stories.map(function(s){
+          return '<button class="sb-story'+(s.id===state.activeStory.id?' active':'')+'" onclick="selectStory(\''+s.id+'\')">'+s.name+'</button>';
+        }).join('')
+      + '</div>';
+  }).join('');
+}
+
+function renderBreadcrumb(){
+  document.getElementById('bc-comp').textContent = state.activeStory.group;
+  document.getElementById('bc-story').textContent = state.activeStory.name;
+}
+
+function render(){
+  renderPreview();
+  renderControls();
+  renderSidebar('');
+  renderBreadcrumb();
+}
+
+// ─────────────────────────────────────────────────────────────
+// ACTIONS
+// ─────────────────────────────────────────────────────────────
+function selectStory(id){
+  var s = STORIES.filter(function(x){ return x.id===id; })[0];
+  if (!s) return;
+  state.activeStory = s;
+  state.actionLog = [];
+  document.getElementById('actions-log').innerHTML = '<div class="log-empty">Nenhuma ação ainda. Interaja com o componente.</div>';
+  document.getElementById('action-count').textContent = '0';
+  initControls(s);
+  render();
+}
+
+function updateControl(name, value){
+  state.controls[name] = value;
+  renderPreview();
+}
+
+function resetControls(){
+  initControls(state.activeStory);
+  renderControls();
+  renderPreview();
+}
+
+function setTheme(t){
+  state.theme = t;
+  document.getElementById('th-light').classList.toggle('active', t==='light');
+  document.getElementById('th-dark').classList.toggle('active', t==='dark');
+  renderPreview();
+}
+
+function switchTab(tab, el){
+  state.tab = tab;
+  document.querySelectorAll('.canvas-tab').forEach(function(t){ t.classList.remove('active'); });
+  el.classList.add('active');
+  document.getElementById('preview').style.display = tab==='canvas' ? '' : 'none';
+  document.getElementById('actions-tab').style.display = tab==='actions' ? '' : 'none';
+  document.getElementById('controls-panel').style.display = tab==='canvas' ? '' : 'none';
+}
+
+function filterStories(q){ renderSidebar(q); }
+
+function logAction(name, detail){
+  var now = new Date();
+  var pad = function(n){ return String(n).padStart(2,'0'); };
+  var time = pad(now.getHours())+':'+pad(now.getMinutes())+':'+pad(now.getSeconds());
+  state.actionLog.unshift({name:name, detail:detail, time:time});
+  var log = document.getElementById('actions-log');
+  log.innerHTML = state.actionLog.map(function(a){
+    return '<div class="action-entry"><span class="evt">'+a.name+'</span><span>'+escH(a.detail)+'</span><span class="time">'+a.time+'</span></div>';
+  }).join('');
+  document.getElementById('action-count').textContent = state.actionLog.length;
+}
+
+document.getElementById('preview').addEventListener('click', function(e){
+  var link = e.target.closest('a[href="#"]');
+  if (link) e.preventDefault();
+  var target = e.target.closest('[data-action-name]');
+  if (!target) return;
+  logAction(target.dataset.actionName, target.textContent.trim());
+});
+
+// ─────────────────────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────────────────────
+initControls(state.activeStory);
+render();
+</script>
+</body>
+</html>

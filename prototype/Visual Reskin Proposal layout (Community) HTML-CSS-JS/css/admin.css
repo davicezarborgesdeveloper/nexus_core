@@ -266,6 +266,16 @@
   background-color: var(--neutral-50);
 }
 
+.btn-view-portfolio.is-secondary span {
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .btn-view-portfolio.is-secondary span {
+    display: inline;
+  }
+}
+
 .btn-logout {
   display: inline-flex;
   align-items: center;

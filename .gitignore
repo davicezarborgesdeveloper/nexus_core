@@ -43,7 +43,3 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-
-# Prototype: Visual Reskin Proposal layout (Community)
-prototype/Visual Reskin Proposal layout (Community)/node_modules
-prototype/Visual Reskin Proposal layout (Community)/package-lock.json

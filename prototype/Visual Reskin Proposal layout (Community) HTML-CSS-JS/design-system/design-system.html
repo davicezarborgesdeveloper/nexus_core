@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus Core · Design System</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../css/fonts.css">
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="../css/utilities.css">
+<link rel="stylesheet" href="../css/site.css">
+<link rel="stylesheet" href="../css/admin.css">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+
+body{background:var(--background);color:var(--foreground);min-height:100vh}
+
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:rgba(246,248,250,.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 32px;height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.topbar-logo{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--font-heading);font-size:14px;font-weight:700;letter-spacing:.04em;
+  color:var(--primary);text-transform:uppercase;
+}
+.topbar-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--accent-color)}
+.ver-badge{
+  font-family:monospace;font-size:10px;
+  background:var(--neutral-100);color:var(--neutral-600);
+  padding:4px 10px;border-radius:999px;letter-spacing:.06em;
+}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.tb-link{
+  display:flex;align-items:center;gap:6px;
+  font-size:13px;color:var(--neutral-600);
+  padding:6px 12px;border-radius:var(--radius-sm);border:1px solid var(--border);
+  transition:background var(--duration-normal) ease,color var(--duration-normal) ease;
+}
+.tb-link:hover{background:var(--neutral-50);color:var(--primary)}
+
+.wrap{max-width:1100px;margin:0 auto;padding:40px 32px 96px}
+
+.sec{margin-bottom:48px}
+.sec-tag{
+  font-family:monospace;font-size:10px;letter-spacing:.14em;
+  color:var(--primary);text-transform:uppercase;
+  margin-bottom:8px;display:block;
+}
+.sec-title{font-family:var(--font-heading);font-size:26px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px;line-height:1.1}
+.sec-desc{font-size:14px;color:var(--neutral-600);line-height:1.7;max-width:600px}
+.divider{height:1px;background:var(--border);margin:48px 0}
+
+/* Palette */
+.palette-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.swatch{border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border)}
+.swatch-color{height:72px;display:flex;align-items:flex-end;padding:10px 12px}
+.swatch-hex{
+  font-family:monospace;font-size:10px;font-weight:500;letter-spacing:.06em;
+  padding:3px 8px;border-radius:4px;background:rgba(0,0,0,.18);color:#fff;
+}
+.swatch-info{background:var(--card);padding:10px 12px}
+.swatch-name{font-size:12px;font-weight:600;color:var(--foreground);margin-bottom:2px}
+.swatch-token{font-family:monospace;font-size:10px;color:var(--neutral-500)}
+
+/* Typography */
+.type-rows{display:flex;flex-direction:column}
+.type-row{display:flex;align-items:baseline;gap:20px;padding:16px 0;border-bottom:1px solid var(--border)}
+.type-row:last-child{border-bottom:none}
+.type-meta{min-width:180px;flex-shrink:0}
+.type-label{font-family:monospace;font-size:10px;color:var(--primary);letter-spacing:.08em;text-transform:uppercase}
+.type-spec{font-family:monospace;font-size:10px;color:var(--neutral-500);margin-top:3px}
+.type-sample{flex:1}
+
+/* Spacing / radius */
+.tokens-grid{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+.token-item{display:flex;flex-direction:column;align-items:center;gap:6px}
+.token-box{background:var(--neutral-100);border-radius:2px}
+.token-label{font-family:monospace;font-size:9px;color:var(--neutral-500);letter-spacing:.06em}
+
+.radius-row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+.radius-item{display:flex;flex-direction:column;align-items:center;gap:8px}
+.radius-box{width:60px;height:60px;background:var(--neutral-100);border:2px solid var(--primary)}
+.radius-name{font-family:monospace;font-size:9px;color:var(--neutral-500);letter-spacing:.06em}
+.radius-val{font-family:monospace;font-size:10px;color:var(--primary);font-weight:600}
+
+/* Shadow */
+.elev-row{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end}
+.elev-item{display:flex;flex-direction:column;align-items:center;gap:10px}
+.elev-box{width:80px;height:80px;border-radius:var(--radius-lg);background:var(--card)}
+.elev-label{font-family:monospace;font-size:9px;color:var(--neutral-500);letter-spacing:.06em}
+
+/* Catalog */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.comp-card{background:var(--card);border-radius:var(--radius-lg);border:1px solid var(--border);overflow:hidden}
+.comp-header{padding:14px 18px 10px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.comp-name{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--foreground)}
+.comp-tag{font-family:monospace;font-size:9px;background:var(--neutral-100);color:var(--neutral-600);padding:3px 8px;border-radius:999px;letter-spacing:.06em}
+.comp-preview{padding:20px 18px;background:var(--background);display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;min-height:80px}
+.comp-desc{padding:12px 18px;font-size:12px;color:var(--neutral-600);line-height:1.6;border-top:1px solid var(--border)}
+.comp-props{padding:10px 18px 14px;display:flex;flex-direction:column;gap:4px}
+.prop-row{display:flex;gap:8px;align-items:center}
+.prop-key{font-family:monospace;font-size:10px;color:var(--primary);min-width:110px}
+.prop-val{font-family:monospace;font-size:10px;color:var(--neutral-500)}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:700px){.two-col{grid-template-columns:1fr}}
+.tag-inline{display:inline-flex;align-items:center;gap:4px;font-family:monospace;font-size:10px;padding:2px 8px;border-radius:4px;background:var(--neutral-100);color:var(--primary)}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo"><div class="dot"></div>Nexus Core · Design System</div>
+  <div class="topbar-right">
+    <div class="ver-badge">v1.0</div>
+    <a href="storybook.html" class="tb-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3v4M8 3v4M2 11h20"/></svg>
+      Storybook
+    </a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="sec" style="margin-bottom:32px">
+    <span class="sec-tag">Documentação</span>
+    <div class="sec-title">Nexus Core Design System</div>
+    <div class="sec-desc">Tokens, paleta de cores, tipografia, espaçamentos e catálogo de componentes do portfólio Nexus Core. Estética editorial: azul-marinho institucional como cor estrutural, dourado como acento pontual.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="sec">
+    <span class="sec-tag">Cores</span>
+    <div class="sec-title">Paleta</div>
+    <div class="sec-desc">Azul-marinho profundo como cor primária e estrutural. O dourado (<code class="tag-inline">--accent-color</code>) é usado apenas como acento pontual, nunca como cor predominante.</div>
+
+    <div style="margin-top:24px">
+      <div style="font-family:monospace;font-size:10px;color:var(--neutral-500);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">Primária</div>
+      <div class="palette-grid" id="palette-primary"></div>
+    </div>
+
+    <div style="margin-top:24px">
+      <div style="font-family:monospace;font-size:10px;color:var(--neutral-500);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">Neutros</div>
+      <div class="palette-grid" id="palette-neutral"></div>
+    </div>
+
+    <div style="margin-top:24px">
+      <div style="font-family:monospace;font-size:10px;color:var(--neutral-500);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">Acento e feedback</div>
+      <div class="palette-grid" id="palette-semantic"></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="sec">
+    <span class="sec-tag">Fundação</span>
+    <div class="sec-title">Tipografia</div>
+    <div class="sec-desc">Duas famílias — <strong>Manrope</strong> para títulos e <strong>Inter</strong> para texto corrido.</div>
+    <div style="margin-top:20px" class="type-rows">
+      <div class="type-row">
+        <div class="type-meta"><div class="type-label">4xl / Hero</div><div class="type-spec">clamp(2.75rem,6vw,5.5rem) · 700</div></div>
+        <div class="type-sample" style="font-family:var(--font-heading);font-size:clamp(2rem,5vw,3.5rem);font-weight:700;letter-spacing:-.02em">Nexus Core</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="type-label">3xl / Section title</div><div class="type-spec">2.25rem · 700</div></div>
+        <div class="type-sample" style="font-family:var(--font-heading);font-size:2.25rem;font-weight:700">Projetos</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="type-label">xl / Card title</div><div class="type-spec">1.375rem · 600</div></div>
+        <div class="type-sample" style="font-family:var(--font-heading);font-size:1.375rem;font-weight:600">Front-end</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="type-label">md / Body</div><div class="type-spec">1rem · 400</div></div>
+        <div class="type-sample" style="font-size:1rem;line-height:1.7">Texto corrido usado em parágrafos e descrições.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="type-label">sm / Caption</div><div class="type-spec">0.875rem · 400 · neutral-600</div></div>
+        <div class="type-sample" style="font-size:.875rem;color:var(--neutral-600)">Publicado em 2026 · React, Node</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta"><div class="type-label">xs / Label editorial</div><div class="type-spec">0.75rem · uppercase · +0.05em</div></div>
+        <div class="type-sample" style="font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:var(--neutral-500)">Categoria do projeto</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="sec two-col">
+    <div>
+      <span class="sec-tag">Fundação</span>
+      <div class="sec-title" style="font-size:20px">Espaçamentos</div>
+      <div class="sec-desc" style="font-size:13px;margin-bottom:20px">Escala base de 4px (<code class="tag-inline">--space-*</code>).</div>
+      <div class="tokens-grid" id="spacing-grid"></div>
+    </div>
+    <div>
+      <span class="sec-tag">Fundação</span>
+      <div class="sec-title" style="font-size:20px">Border Radius</div>
+      <div class="sec-desc" style="font-size:13px;margin-bottom:20px">Tokens <code class="tag-inline">--radius-*</code> usados em todos os componentes.</div>
+      <div class="radius-row">
+        <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-sm)"></div><div class="radius-name">--radius-sm</div><div class="radius-val">4px</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-md)"></div><div class="radius-name">--radius-md</div><div class="radius-val">6px</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-lg)"></div><div class="radius-name">--radius-lg</div><div class="radius-val">10px</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-xl)"></div><div class="radius-name">--radius-xl</div><div class="radius-val">14px</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="sec">
+    <span class="sec-tag">Fundação</span>
+    <div class="sec-title">Elevação (Shadows)</div>
+    <div class="sec-desc" style="margin-bottom:20px">Sombras usadas apenas em elementos com elevação real: modais, dropdowns e hover sutil de cards. Cards comuns dependem principalmente de borda.</div>
+    <div class="elev-row">
+      <div class="elev-item">
+        <div class="elev-box" style="box-shadow:none;border:1px solid var(--border)"></div>
+        <div class="elev-label">NENHUM</div>
+      </div>
+      <div class="elev-item">
+        <div class="elev-box" style="box-shadow:var(--shadow-sm);border:1px solid var(--border)"></div>
+        <div class="elev-label">--shadow-sm</div>
+      </div>
+      <div class="elev-item">
+        <div class="elev-box" style="box-shadow:var(--shadow-md)"></div>
+        <div class="elev-label">--shadow-md</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="sec">
+    <span class="sec-tag">Componentes</span>
+    <div class="sec-title">Catálogo</div>
+    <div class="sec-desc" style="margin-bottom:24px">Componentes renderizados com as classes reais de site.css / admin.css.</div>
+
+    <div class="comp-grid">
+
+      <div class="comp-card">
+        <div class="comp-header"><div class="comp-name">Button — Site</div><div class="comp-tag">ATOM</div></div>
+        <div class="comp-preview" style="flex-direction:column;gap:8px">
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <a href="#" class="btn-primary-cta" onclick="return false">Ver projetos</a>
+            <a href="#" class="btn-secondary-cta" onclick="return false">Baixar CV</a>
+            <a href="#" class="btn-ghost-cta" onclick="return false">Saiba mais</a>
+          </div>
+        </div>
+        <div class="comp-desc">3 variantes: <strong>Primary</strong> (.btn-primary-cta), <strong>Secondary</strong> (.btn-secondary-cta, outline), <strong>Ghost</strong> (.btn-ghost-cta). Altura 44px.</div>
+        <div class="comp-props">
+          <div class="prop-row"><span class="prop-key">background</span><span class="prop-val">--primary / transparent / none</span></div>
+          <div class="prop-row"><span class="prop-key">border-radius</span><span class="prop-val">--radius-sm (4px)</span></div>
+          <div class="prop-row"><span class="prop-key">height</span><span class="prop-val">44px</span></div>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-header"><div class="comp-name">Button — Admin</div><div class="comp-tag">ATOM</div></div>
+        <div class="comp-preview">
+          <button class="btn-admin-primary">Salvar alterações</button>
+          <button class="btn-danger-delete">Excluir conta</button>
+        </div>
+        <div class="comp-desc">Ação primária (.btn-admin-primary) e ação destrutiva (.btn-danger-delete), reservada para zona de perigo.</div>
+        <div class="comp-props">
+          <div class="prop-row"><span class="prop-key">height</span><span class="prop-val">40px</span></div>
+          <div class="prop-row"><span class="prop-key">danger bg</span><span class="prop-val">--danger</span></div>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-header"><div class="comp-name">Link utilitário</div><div class="comp-tag">ATOM</div></div>
+        <div class="comp-preview">
+          <a href="#" class="btn-enter" onclick="return false">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-16"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>Entrar</span>
+          </a>
+        </div>
+        <div class="comp-desc">Ação de acesso restrito (.btn-enter) — sem fundo sólido para não competir com CTAs de conteúdo. Usado no header do site.</div>
+        <div class="comp-props">
+          <div class="prop-row"><span class="prop-key">color</span><span class="prop-val">neutral-700 → primary no hover</span></div>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-header"><div class="comp-name">Badge · Pill</div><div class="comp-tag">ATOM</div></div>
+        <div class="comp-preview">
+          <span class="pill">Tech pill</span>
+          <span class="badge-current">Atual</span>
+          <span class="security-badge success">Sucesso</span>
+          <span class="security-badge blocked">Bloqueado</span>
+        </div>
+        <div class="comp-desc"><strong>Pill</strong> (.pill) — tags de tecnologia. <strong>Badge</strong> (.badge-current) — marcador de item atual. <strong>Security badge</strong> — estado com fundo suave.</div>
+        <div class="comp-props">
+          <div class="prop-row"><span class="prop-key">border-radius</span><span class="prop-val">--radius-sm</span></div>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-header"><div class="comp-name">Skill Card</div><div class="comp-tag">MOLECULE</div></div>
+        <div class="comp-preview">
+          <div class="skill-card" style="max-width:260px">
+            <div class="skill-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg>
+            </div>
+            <h3>Front-end</h3>
+            <ul><li><span class="skill-dot"></span>HTML &amp; CSS</li><li><span class="skill-dot"></span>JavaScript</li></ul>
+          </div>
+        </div>
+        <div class="comp-desc">Card de categoria de habilidade. Borda fina, hover sutil com --shadow-sm.</div>
+        <div class="comp-props">
+          <div class="prop-row"><span class="prop-key">border-radius</span><span class="prop-val">--radius-lg (10px)</span></div>
+          <div class="prop-row"><span class="prop-key">hover</span><span class="prop-val">translateY(-1px) + shadow-sm</span></div>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-header"><div class="comp-name">Admin Form Card</div><div class="comp-tag">MOLECULE</div></div>
+        <div class="comp-preview">
+          <div class="admin-form-card" style="max-width:280px">
+            <div class="admin-form-card-title"><h3>Informações básicas</h3></div>
+            <p class="admin-form-card-desc">Borda fina, sem sombra.</p>
+          </div>
+        </div>
+        <div class="comp-desc">Container padrão das telas de formulário do admin (perfil, projetos, experiências).</div>
+        <div class="comp-props">
+          <div class="prop-row"><span class="prop-key">background</span><span class="prop-val">--card</span></div>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-header"><div class="comp-name">Form Field</div><div class="comp-tag">ATOM</div></div>
+        <div class="comp-preview" style="flex-direction:column;gap:10px">
+          <div class="form-field" style="width:100%">
+            <label for="ds-demo-input">Nome</label>
+            <input id="ds-demo-input" type="text" placeholder="Seu nome" readonly>
+          </div>
+        </div>
+        <div class="comp-desc">Input com label sempre visível, altura 44px, foco em azul-marinho com halo suave.</div>
+        <div class="comp-props">
+          <div class="prop-row"><span class="prop-key">border</span><span class="prop-val">1px solid --border</span></div>
+          <div class="prop-row"><span class="prop-key">focus</span><span class="prop-val">border-color: --primary</span></div>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-header"><div class="comp-name">Switch Toggle</div><div class="comp-tag">ATOM</div></div>
+        <div class="comp-preview">
+          <div class="switch-toggle on"><div class="knob"></div></div>
+          <div class="switch-toggle"><div class="knob"></div></div>
+        </div>
+        <div class="comp-desc">Estado ligado usa --primary; desligado usa --switch-background.</div>
+        <div class="comp-props">
+          <div class="prop-row"><span class="prop-key">size</span><span class="prop-val">44 × 24px</span></div>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-header"><div class="comp-name">Sidebar (admin)</div><div class="comp-tag">ORGANISM</div></div>
+        <div class="comp-preview" style="background:var(--primary-950);border-radius:var(--radius-lg);padding:12px">
+          <nav class="admin-nav" style="width:100%">
+            <button type="button" class="active">Perfil</button>
+            <button type="button">Projetos</button>
+            <button type="button">Segurança</button>
+          </nav>
+        </div>
+        <div class="comp-desc">Fundo azul-marinho profundo, item ativo com indicador lateral dourado.</div>
+        <div class="comp-props">
+          <div class="prop-row"><span class="prop-key">active indicator</span><span class="prop-val">border-left: --accent-color</span></div>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-header"><div class="comp-name">Status Chip</div><div class="comp-tag">ATOM</div></div>
+        <div class="comp-preview">
+          <span class="projects-status published"><span class="projects-status-dot"></span>Publicado</span>
+          <span class="projects-status draft"><span class="projects-status-dot"></span>Rascunho</span>
+        </div>
+        <div class="comp-desc">Indicador de status de projeto com dot colorido semântico.</div>
+        <div class="comp-props">
+          <div class="prop-row"><span class="prop-key">published</span><span class="prop-val">--success</span></div>
+          <div class="prop-row"><span class="prop-key">draft</span><span class="prop-val">--accent-color</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+function isLight(hex){
+  var r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  return (r*299+g*587+b*114)/1000 > 128;
+}
+function renderSwatches(data, containerId){
+  var el=document.getElementById(containerId);
+  if(!el) return;
+  el.innerHTML=data.map(function(c){
+    return '<div class="swatch">'
+      +'<div class="swatch-color" style="background:'+c.hex+'"><span class="swatch-hex">'+c.hex+'</span></div>'
+      +'<div class="swatch-info"><div class="swatch-name">'+c.name+'</div><div class="swatch-token">'+c.token+'</div></div>'
+      +'</div>';
+  }).join('');
+}
+
+renderSwatches([
+  {name:'Primary 950',token:'--primary-950',hex:'#061d38'},
+  {name:'Primary 900',token:'--primary-900',hex:'#082746'},
+  {name:'Primary 800',token:'--primary-800',hex:'#12385d'},
+  {name:'Primary 700',token:'--primary-700',hex:'#234d73'},
+], 'palette-primary');
+
+renderSwatches([
+  {name:'Neutral 0',token:'--neutral-0',hex:'#ffffff'},
+  {name:'Neutral 50',token:'--neutral-50',hex:'#f6f8fa'},
+  {name:'Neutral 100',token:'--neutral-100',hex:'#edf1f4'},
+  {name:'Neutral 200',token:'--neutral-200',hex:'#dfe5ea'},
+  {name:'Neutral 300',token:'--neutral-300',hex:'#cbd3db'},
+  {name:'Neutral 500',token:'--neutral-500',hex:'#778491'},
+  {name:'Neutral 700',token:'--neutral-700',hex:'#42505d'},
+  {name:'Neutral 900',token:'--neutral-900',hex:'#152331'},
+], 'palette-neutral');
+
+renderSwatches([
+  {name:'Accent',token:'--accent-color',hex:'#d9a441'},
+  {name:'Success',token:'--success',hex:'#327a62'},
+  {name:'Warning',token:'--warning',hex:'#b7791f'},
+  {name:'Danger',token:'--danger',hex:'#b44343'},
+  {name:'Info',token:'--info',hex:'#376d95'},
+], 'palette-semantic');
+
+var spacing=[4,8,12,16,20,24,32,40,48,64];
+document.getElementById('spacing-grid').innerHTML=spacing.map(function(px){
+  return '<div class="token-item"><div class="token-box" style="width:'+Math.min(px,32)+'px;height:'+(16+px/2)+'px"></div><div class="token-label">'+px+'px</div></div>';
+}).join('');
+</script>
+</body>
+</html>

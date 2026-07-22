@@ -1,58 +1,102 @@
 :root {
   --font-size: 16px;
 
-  /* Paleta de cores moderna e profissional */
-  --background: #ffffff;
-  --foreground: #0f172a;
+  /* Paleta editorial: azul-marinho institucional + neutros claros + dourado como acento pontual */
+  --primary-950: #061d38;
+  --primary-900: #082746;
+  --primary-800: #12385d;
+  --primary-700: #234d73;
 
-  --card: #ffffff;
-  --card-foreground: #0f172a;
+  --neutral-0: #ffffff;
+  --neutral-25: #fbfcfd;
+  --neutral-50: #f6f8fa;
+  --neutral-100: #edf1f4;
+  --neutral-200: #dfe5ea;
+  --neutral-300: #cbd3db;
+  --neutral-400: #a7b1ba;
+  --neutral-500: #778491;
+  --neutral-600: #596773;
+  --neutral-700: #42505d;
+  --neutral-800: #293744;
+  --neutral-900: #152331;
 
-  --primary: #1e3a8a;
-  --primary-foreground: #ffffff;
-  --primary-light: #3b82f6;
+  --background: var(--neutral-50);
+  --foreground: var(--primary-950);
 
-  --secondary: #475569;
-  --secondary-foreground: #ffffff;
+  --card: var(--neutral-0);
+  --card-foreground: var(--primary-950);
 
-  --accent-color: #f97316;
-  --accent-foreground: #ffffff;
+  --primary: var(--primary-950);
+  --primary-foreground: var(--neutral-0);
+  --primary-light: var(--primary-800);
 
-  --neutral-50: #f8fafc;
-  --neutral-100: #f1f5f9;
-  --neutral-200: #e2e8f0;
-  --neutral-300: #cbd5e1;
-  --neutral-400: #94a3b8;
-  --neutral-500: #64748b;
-  --neutral-600: #475569;
-  --neutral-700: #334155;
-  --neutral-800: #1e293b;
-  --neutral-900: #0f172a;
+  --secondary: var(--neutral-700);
+  --secondary-foreground: var(--neutral-0);
 
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
+  --accent-color: #d9a441;
+  --accent-foreground: var(--primary-950);
 
-  --accent: #f1f5f9;
-  --accent-foreground-alt: #0f172a;
+  --muted: var(--neutral-100);
+  --muted-foreground: var(--neutral-500);
 
-  --destructive: #dc2626;
-  --destructive-foreground: #ffffff;
+  --accent: var(--neutral-100);
+  --accent-foreground-alt: var(--primary-950);
 
-  --border: #e2e8f0;
+  --destructive: #b44343;
+  --destructive-foreground: var(--neutral-0);
+  --danger: var(--destructive);
+  --success: #327a62;
+  --warning: #b7791f;
+  --info: #376d95;
+
+  --border: var(--neutral-200);
+  --border-strong: var(--neutral-300);
   --input: transparent;
-  --input-background: #f8fafc;
-  --switch-background: #cbd5e1;
-  --ring: #3b82f6;
+  --input-background: var(--neutral-25);
+  --switch-background: var(--neutral-300);
+  --ring: var(--primary-800);
 
-  --radius: 0.75rem;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius: var(--radius-lg);
+
+  --shadow-sm: 0 1px 2px rgba(6, 29, 56, 0.05);
+  --shadow-md: 0 8px 24px rgba(6, 29, 56, 0.08);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  --duration-fast: 120ms;
+  --duration-normal: 180ms;
+  --duration-slow: 240ms;
 
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 * {
@@ -73,8 +117,10 @@ body {
 
 h1, h2, h3, h4 {
   margin: 0;
-  font-weight: var(--font-weight-medium);
-  line-height: 1.5;
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 p, ul, ol {
@@ -107,6 +153,16 @@ input, textarea, select {
   font-size: 1rem;
   font-weight: var(--font-weight-normal);
   line-height: 1.5;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
 }
 
 img {

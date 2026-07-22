@@ -54,7 +54,7 @@ function renderHeader(profile) {
             <a href="mailto:${esc(profile.email)}" aria-label="Email">${Icons.mail('icon-20')}</a>
           </div>
 
-          <a href="#/admin" class="btn-enter">ENTRAR</a>
+          <a href="#/admin" class="btn-enter">${Icons.lock('icon-16')}<span>Entrar</span></a>
         </div>
 
         <div class="mobile-header-actions">
@@ -78,7 +78,7 @@ function renderHeader(profile) {
           <a href="${esc(profile.linkedinUrl)}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">${Icons.linkedin('icon-20')}</a>
           <a href="mailto:${esc(profile.email)}" aria-label="Email">${Icons.mail('icon-20')}</a>
         </div>
-        <a href="#/admin" class="btn-enter" data-close-mobile>ENTRAR</a>
+        <a href="#/admin" class="btn-enter" data-close-mobile>${Icons.lock('icon-16')}<span>Entrar</span></a>
       </div>
     </div>
   </header>`;
